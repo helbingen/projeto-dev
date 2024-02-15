@@ -1,0 +1,64 @@
+<div class="criar-conta">
+  <div class="centralizar ds-mb-3">
+    <img src="../../../../assets/Caminho 74.svg" />
+  </div>
+  <div class="centralizar titulo ds-mb-2">Criar conta</div>
+  <div class="centralizar">Cria sua conta e desfrute de todo o sistema!</div>
+  <div class="ds-row centralizar ds-mb-3">
+    <div class="ds-col-4">
+      <ds-input-text
+        [labelInput]="'Nome'"
+        [placeholderInputText]="'Insira seu nome'"
+        [control]="criarContaForm.controls.nome"
+      ></ds-input-text>
+    </div>
+  </div>
+  <div class="ds-row centralizar ds-mb-3">
+    <div class="ds-col-4">
+      <ds-input-text
+        [labelInput]="'E-mail'"
+        [placeholderInputText]="'Insira seu e-mail'"
+        [control]="criarContaForm.controls.email"
+      ></ds-input-text>
+    </div>
+  </div>
+  <div class="ds-row centralizar ds-mb-3">
+    <div class="ds-col-4">
+      <ds-input-text
+        [labelInput]="'Senha'"
+        [placeholderInputText]="'Insira a nova senha'"
+        [control]="criarContaForm.controls.senha"
+        (valueChangeEvento)="
+          verificarSenha($event, criarContaForm.controls.senha)
+        "
+      ></ds-input-text>
+    </div>
+  </div>
+  <div class="ds-row centralizar ds-mb-3">
+    <div class="ds-col-4">
+      <ds-input-text
+        [labelInput]="'Confirmar senha'"
+        [placeholderInputText]="'Repita a senha inserida'"
+        [control]="criarContaForm.controls.senha2"
+        (valueChangeEvento)="
+          verificarSenha($event, criarContaForm.controls.senha2)
+        "
+      ></ds-input-text>
+    </div>
+  </div>
+  <div class="ds-row centralizar ds-mb-3">
+    <div class="ds-col-4">
+      <ds-button
+        [tipoBotao]="'PRIMARY'"
+        [labelButton]="'Criar conta'"
+        [isDesabilitado]="criarContaForm.invalid"
+        class="ds-d-inline-block width-100"
+      ></ds-button>
+    </div>
+  </div>
+  <div class="centralizar">* Campos obrigatórios</div>
+  <div class="centralizar">
+    Já possui cadastro?
+    <a class="ds-ml-2" [routerLink]="'/login'">Faça Log in</a>
+  </div>
+</div>
