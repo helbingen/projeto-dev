@@ -1,0 +1,13 @@
+.header {
+  .header-layout {
+    display: flex;
+    justify-content: flex-end;
+    height: 55px;
+    border-bottom: 1px solid #2f3337;
+    width: 100%;
+    .centralizar-icone {
+      align-self: center;
+      padding-right: 43px;
+    }
+  }
+}

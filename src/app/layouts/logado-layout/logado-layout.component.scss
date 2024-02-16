@@ -1,0 +1,9 @@
+.logado-layout {
+  .position-fixed {
+    position: fixed;
+  }
+  .main-container {
+    height: calc(100vh - 55px - 32px);
+    margin-left: 52px;
+  }
+}

@@ -10,6 +10,7 @@
         [labelInput]="'Nome'"
         [placeholderInputText]="'Insira seu nome'"
         [control]="criarContaForm.controls.nome"
+        [errosCustomizados]="errosCustomizados"
       ></ds-input-text>
     </div>
   </div>
@@ -19,6 +20,7 @@
         [labelInput]="'E-mail'"
         [placeholderInputText]="'Insira seu e-mail'"
         [control]="criarContaForm.controls.email"
+        [errosCustomizados]="errosCustomizados"
       ></ds-input-text>
     </div>
   </div>
@@ -28,6 +30,7 @@
         [labelInput]="'Senha'"
         [placeholderInputText]="'Insira a nova senha'"
         [control]="criarContaForm.controls.senha"
+        [errosCustomizados]="errosCustomizados"
         (valueChangeEvento)="
           verificarSenha($event, criarContaForm.controls.senha)
         "
@@ -40,8 +43,10 @@
         [labelInput]="'Confirmar senha'"
         [placeholderInputText]="'Repita a senha inserida'"
         [control]="criarContaForm.controls.senha2"
+        [errosCustomizados]="errosCustomizados"
         (valueChangeEvento)="
-          verificarSenha($event, criarContaForm.controls.senha2)
+          verificarSenha($event, criarContaForm.controls.senha2);
+          verificarSeSenhasSaoIguais()
         "
       ></ds-input-text>
     </div>
@@ -51,7 +56,7 @@
       <ds-button
         [tipoBotao]="'PRIMARY'"
         [labelButton]="'Criar conta'"
-        [isDesabilitado]="criarContaForm.invalid"
+        [isDesabilitado]="verificarSeFormularioEInvalido()"
         class="ds-d-inline-block width-100"
       ></ds-button>
     </div>
