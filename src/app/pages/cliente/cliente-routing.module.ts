@@ -9,7 +9,7 @@ const routes: Routes = [
     component: ClienteComponent,
     children: [
       {
-        path: 'adicionar',
+        path: 'adicionar-cliente',
         component: AdicionarClienteComponent,
       }
     ]

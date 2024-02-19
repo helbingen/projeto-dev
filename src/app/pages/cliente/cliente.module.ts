@@ -5,12 +5,14 @@ import { ClienteRoutingModule } from './cliente-routing.module';
 import { ClienteComponent } from './cliente.component';
 import { ButtonModule } from '@decisaosistemas/angular-ds';
 import { AdicionarClienteComponent } from './adicionar-cliente/adicionar-cliente.component';
+import { ListarClienteComponent } from './listar-cliente/listar-cliente.component';
 
 
 @NgModule({
   declarations: [
     ClienteComponent,
-    AdicionarClienteComponent
+    AdicionarClienteComponent,
+    ListarClienteComponent
   ],
   imports: [
     CommonModule,

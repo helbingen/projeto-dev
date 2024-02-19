@@ -8,12 +8,7 @@ import { Router } from '@angular/router';
 })
 export class ClienteComponent {
 
-  constructor(private router: Router) {
-
-  }
-
-  public adicionarCliente(): void {
-    this.router.navigate(['adicionar'])
+  constructor(public router: Router) {
   }
 
 }

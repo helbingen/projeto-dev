@@ -1,14 +1,7 @@
-<div class="cliente">
-  <div class="cliente-header">
-    <div class="cliente-titulo">Clientes</div>
-    <ds-button
-      [tipoBotao]="'PRIMARY'"
-      [labelButton]="'Adicionar cliente'"
-      (click)="adicionarCliente()"
-    ></ds-button>
-  </div>
-  <div class="cliente-container">
-    <img src="../../../assets/Nada por aqui.svg" />
-    <div class="titulo-imagem ds-mt-3">Nenhum cliente cadastrado!</div>
-  </div>
+<div class="cliente" *ngIf="this.router.url === '/cliente'; else outrasRotas">
+  <app-listar-cliente></app-listar-cliente>
 </div>
+
+<ng-template #outrasRotas>
+  <router-outlet></router-outlet>
+</ng-template>

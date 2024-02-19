@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { InicioComponent } from './pages/inicio/inicio.component';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./layouts/login-layout/login-layout.module').then((m) => m.LoginLayoutModule),
+    redirectTo: 'inicio',
+    pathMatch: 'full',
+    // loadChildren: () => import('./layouts/login-layout/login-layout.module').then((m) => m.LoginLayoutModule),
   }
 ];
 
