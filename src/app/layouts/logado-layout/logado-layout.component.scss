@@ -5,8 +5,8 @@
     top: 0;
   }
   .main-container {
-    height: calc(100vh - 55px - 32px);
-    max-height: calc(100vh - 55px - 32px);
+    height: var(--main-content-height);
+    max-height: var(--main-content-height);
     margin-left: 52px;
     margin-top: 55px;
     padding: 1rem 20px;

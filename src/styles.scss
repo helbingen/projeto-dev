@@ -1,4 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "Inter";
+  src: url("../src/assets/decisao-sistemas.ttf");
+}
+
 body {
   margin: 0 !important;
+  font-family: "Inter", sans-serif;
+}
+
+:root {
+  --main-content-height: calc(100vh - 86px - 32px);
 }

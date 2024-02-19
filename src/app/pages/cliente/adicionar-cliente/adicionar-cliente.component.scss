@@ -1,0 +1,30 @@
+.adicionar-cliente {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: var(--main-content-height);
+  .dados-cadastrais-header {
+    display: flex;
+    .linha-horizontal {
+      width: 100%;
+      height: 0.5px;
+      background-color: #2f3337;
+      display: flex;
+    }
+    .texto-header-1 {
+      min-width: 137px;
+      font-weight: 700;
+    }
+    .texto-header-2 {
+      min-width: 166px;
+    }
+    .centralizar {
+      align-self: center;
+    }
+  }
+  .botoes {
+    display: flex;
+    gap: 20px;
+    align-self: flex-end;
+  }
+}

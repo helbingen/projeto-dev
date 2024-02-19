@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ClienteRoutingModule } from './cliente-routing.module';
 import { ClienteComponent } from './cliente.component';
-import { ButtonModule } from '@decisaosistemas/angular-ds';
+import { ButtonModule, DividerModule, InputModule, MascaraDiretiveModule } from '@decisaosistemas/angular-ds';
 import { AdicionarClienteComponent } from './adicionar-cliente/adicionar-cliente.component';
 import { ListarClienteComponent } from './listar-cliente/listar-cliente.component';
 
@@ -18,6 +18,8 @@ import { ListarClienteComponent } from './listar-cliente/listar-cliente.componen
     CommonModule,
     ClienteRoutingModule,
     ButtonModule,
+    InputModule,
+    MascaraDiretiveModule
   ]
 })
 export class ClienteModule { }

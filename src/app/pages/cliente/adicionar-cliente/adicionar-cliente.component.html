@@ -1,1 +1,55 @@
-<p>adicionar-cliente works!</p>
+<div class="adicionar-cliente">
+  <div>
+    <div class="dados-cadastrais-header">
+      <span class="texto-header-1">Dados cadastrais</span>
+      <div class="linha-horizontal centralizar ds-mx-2"></div>
+      <i class="ds-icon-asterisk centralizar"></i>
+      <span class="texto-header-2">Campos obrigatórios</span>
+    </div>
+    <div class="dados-cadastrais-content ds-mt-3">
+      <div class="ds-row">
+        <div class="ds-col-3">
+          <ds-input-text
+            [labelInput]="'CNPJ/CPF'"
+            [placeholderInputText]="'00.000.000/0000-00'"
+            [control]="dadosCadastraisForm.controls.cnpjCpf"
+            [ds-mascara]="cnpjCpfMascara"
+            [errosCustomizados]="errosCustomizados"
+            (valueChangeEvento)="validarCpfCnpj($event)"
+          ></ds-input-text>
+        </div>
+      </div>
+      <div class="ds-row ds-mt-3">
+        <div class="ds-col-5">
+          <ds-input-text
+            [labelInput]="'Nome'"
+            [placeholderInputText]="'Insira o nome do cliente'"
+            [control]="dadosCadastraisForm.controls.nome"
+          ></ds-input-text>
+        </div>
+        <!-- <div class="ds-col-5" *ngIf="tipoPessoa === 'CNPJ'">
+          <ds-input-text
+            [labelInput]="'Nome fantasia'"
+            [placeholderInputText]="'Insira o nome fantasia do CNPJ'"
+            [control]="dadosCadastraisForm.controls.nomeFantasia"
+          ></ds-input-text>
+        </div>
+        <div class="ds-col-5" *ngIf="tipoPessoa === 'CPF'">
+          <ds-input-text
+            [labelInput]="'Nome da mãe'"
+            [placeholderInputText]="'Insira o nome da mãe do cliente'"
+            [control]="dadosCadastraisForm.controls.nomeDaMae"
+          ></ds-input-text>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="botoes">
+    <ds-button [labelButton]="'Cancelar'" [tipoBotao]="'SYSTEM'"></ds-button>
+    <ds-button
+      [labelButton]="'Salvar cliente'"
+      [tipoBotao]="'PRIMARY'"
+      [isDesabilitado]="dadosCadastraisForm.invalid"
+    ></ds-button>
+  </div>
+</div>
