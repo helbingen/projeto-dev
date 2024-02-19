@@ -5,6 +5,9 @@
     height: 55px;
     border-bottom: 1px solid #2f3337;
     width: 100%;
+    position: fixed;
+    top: 0;
+    background-color: var(--gray-color-0);
     .centralizar-icone {
       align-self: center;
       padding-right: 43px;

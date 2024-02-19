@@ -1,0 +1,13 @@
+.inicio {
+  .alinhamento {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: calc(100vh - 86px - 32px);
+    .titulo {
+      font-weight: 700;
+      font-size: 20px;
+    }
+  }
+}

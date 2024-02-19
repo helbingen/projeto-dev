@@ -6,6 +6,9 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    background-color: var(--gray-color-0);
+    position: fixed;
+    bottom: 0;
     .nome-empresa {
       font-weight: 600;
       padding-right: 48px;

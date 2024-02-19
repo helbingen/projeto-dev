@@ -1,0 +1,24 @@
+.cliente {
+  height: calc(100vh - 86px - 32px);
+  display: flex;
+  flex-direction: column;
+  .cliente-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .cliente-titulo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+  }
+  .cliente-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .titulo-imagem {
+      font-weight: 700;
+    }
+  }
+}

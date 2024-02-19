@@ -1,9 +1,15 @@
 .logado-layout {
   .position-fixed {
     position: fixed;
+    z-index: 999;
+    top: 0;
   }
   .main-container {
     height: calc(100vh - 55px - 32px);
+    max-height: calc(100vh - 55px - 32px);
     margin-left: 52px;
+    margin-top: 55px;
+    padding: 1rem 20px;
+    padding-right: 43px;
   }
 }
