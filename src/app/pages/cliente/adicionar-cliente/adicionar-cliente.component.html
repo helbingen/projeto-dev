@@ -27,20 +27,20 @@
             [control]="dadosCadastraisForm.controls.nome"
           ></ds-input-text>
         </div>
-        <!-- <div class="ds-col-5" *ngIf="tipoPessoa === 'CNPJ'">
+        <div class="ds-col-5" *ngIf="tipoPessoa === tipoPessoaEnum.cnpj">
           <ds-input-text
             [labelInput]="'Nome fantasia'"
             [placeholderInputText]="'Insira o nome fantasia do CNPJ'"
             [control]="dadosCadastraisForm.controls.nomeFantasia"
           ></ds-input-text>
         </div>
-        <div class="ds-col-5" *ngIf="tipoPessoa === 'CPF'">
+        <div class="ds-col-5" *ngIf="tipoPessoa === tipoPessoaEnum.cpf">
           <ds-input-text
             [labelInput]="'Nome da mãe'"
             [placeholderInputText]="'Insira o nome da mãe do cliente'"
             [control]="dadosCadastraisForm.controls.nomeDaMae"
           ></ds-input-text>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
     <ds-button
       [labelButton]="'Salvar cliente'"
       [tipoBotao]="'PRIMARY'"
-      [isDesabilitado]="dadosCadastraisForm.invalid"
+      [isDesabilitado]="botaoSalvarClienteDesabilitado()"
     ></ds-button>
   </div>
 </div>

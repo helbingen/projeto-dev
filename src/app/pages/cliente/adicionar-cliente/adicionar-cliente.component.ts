@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TipoMascarasEnum } from '@decisaosistemas/angular-ds';
 import { ErrorsUtil } from '../../../shared/utils/errorsUtil';
+import cpfCnpjUtil from '../../../shared/utils/cpfCnpjUtil';
+import { TipoPessoaEnum } from '../../../shared/models/TipoPessoa.enum';
 
 @Component({
   selector: 'app-adicionar-cliente',
@@ -19,14 +21,47 @@ export class AdicionarClienteComponent {
 
   public cnpjCpfMascara = TipoMascarasEnum.cpfCnpj;
   public errosCustomizados = ErrorsUtil.getErrors;
+  public tipoPessoa!: TipoPessoaEnum | null;
+  public tipoPessoaEnum = TipoPessoaEnum;
 
-  public validarCpfCnpj(texto: string): void {
-    // Verificar se o cpfCnpj é valido
-    // this.dadosCadastraisForm.controls.cnpjCpf.setErrors({
-    //   cnpjCpfInvalido: true
-    // })
+  public validarCpfCnpj(pCpfCnpj: string): void {
+    if (!cpfCnpjUtil.validaCnpjCpf(pCpfCnpj)) {
+      this.dadosCadastraisForm.controls.cnpjCpf.setErrors({
+        cnpjCpfInvalido: true
+      });
+      return;
+    }
+    const cnpjCpfLimpo = cpfCnpjUtil.limpaCnpjCpf(pCpfCnpj);
+    this.tipoPessoa = cpfCnpjUtil.identificaTipoDePessoa(cnpjCpfLimpo);
+  }
 
-    // Se for válido, verificar se é CPF ou CNPJ
+  private formularioValido(pTipoPessoa: TipoPessoaEnum | null): boolean {
+    if (this.tipoPessoa === TipoPessoaEnum.cpf) {
+      if (
+        this.dadosCadastraisForm.controls.cnpjCpf.valid
+        && this.dadosCadastraisForm.controls.nome.valid
+        && this.dadosCadastraisForm.controls.nomeDaMae.valid
+      ) {
+        return true;
+      }
+    }
+    if (this.tipoPessoa === TipoPessoaEnum.cnpj) {
+      if (
+        this.dadosCadastraisForm.controls.cnpjCpf.valid
+        && this.dadosCadastraisForm.controls.nome.valid
+        && this.dadosCadastraisForm.controls.nomeFantasia.valid
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public botaoSalvarClienteDesabilitado(): boolean {
+    if (this.formularioValido(this.tipoPessoa)) {
+      return false;
+    }
+    return true;
   }
 
 }
