@@ -1,13 +1,16 @@
-.adicionar-cliente {
+.dadoscadastrais {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: var(--main-content-height);
-  padding-top: var(--padding-content);
+  // height: var(--main-content-height);
+  height: calc(100vh - 86px - 67px);
+  padding-right: 20px;
   .dados-cadastrais-header {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     .linha-horizontal {
-      width: 100%;
+      width: 70%;
       height: 0.5px;
       background-color: #2f3337;
       display: flex;
@@ -17,15 +20,18 @@
       font-weight: 700;
     }
     .texto-header-2 {
-      min-width: 166px;
+      font-size: 0.75rem;
+      min-width: 114px;
     }
     .centralizar {
       align-self: center;
     }
   }
-  .botoes {
-    display: flex;
-    gap: 20px;
-    align-self: flex-end;
-  }
+}
+.botoes {
+  display: flex;
+  gap: 20px;
+  align-self: flex-end;
+  justify-content: end;
+  margin-right: 20px;
 }

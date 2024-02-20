@@ -1,5 +1,6 @@
 .listar-cliente {
   height: calc(100vh - 86px - 32px);
+  padding-top: var(--padding-content);
   display: flex;
   flex-direction: column;
   .cliente-header {

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TipoMascarasEnum } from '@decisaosistemas/angular-ds';
+import { TipoMascarasEnum, ToasterTipoEnum } from '@decisaosistemas/angular-ds';
 import { ErrorsUtil } from '../../../shared/utils/errorsUtil';
 import cpfCnpjUtil from '../../../shared/utils/cpfCnpjUtil';
 import { TipoPessoaEnum } from '../../../shared/models/TipoPessoa.enum';
+import { ToasterService } from '../../../shared/components/toaster-controller/toaster.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-adicionar-cliente',
@@ -11,6 +13,14 @@ import { TipoPessoaEnum } from '../../../shared/models/TipoPessoa.enum';
   styleUrl: './adicionar-cliente.component.scss'
 })
 export class AdicionarClienteComponent {
+
+  constructor(
+    private readonly toasterService: ToasterService,
+    private readonly router: Router,
+    private readonly activeRoute: ActivatedRoute,
+  ) {
+
+  }
 
   public dadosCadastraisForm = new FormGroup({
     cnpjCpf: new FormControl<string | null>(null, Validators.required),
@@ -62,6 +72,11 @@ export class AdicionarClienteComponent {
       return false;
     }
     return true;
+  }
+
+  public salvarCliente(): void {
+    this.toasterService.showSuccess('Cliente salvo com sucesso!');
+    this.router.navigate(['../editar-cliente'], { relativeTo: this.activeRoute });
   }
 
 }

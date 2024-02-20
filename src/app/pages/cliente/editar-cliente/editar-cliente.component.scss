@@ -1,0 +1,13 @@
+.editar-cliente {
+  // padding-top: var(--padding-content);
+  display: flex;
+  .editar-cliente-content {
+    padding-top: var(--padding-content);
+    width: 100%;
+    height: calc(100vh - 86px - 32px);
+  }
+  .menu-lateral {
+    padding-top: 14px;
+    padding-right: 48px;
+  }
+}

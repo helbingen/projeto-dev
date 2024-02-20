@@ -8,6 +8,7 @@ import { FooterModule } from '../../shared/components/footer/footer.module';
 import { SideNavModule } from '@decisaosistemas/angular-ds';
 import { InicioComponent } from '../../pages/inicio/inicio.component';
 import { InicioModule } from '../../pages/inicio/inicio.module';
+import { MenuLateralDireitoModule } from '../../shared/components/menu-lateral-direito/menu-lateral-direito.module';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { InicioModule } from '../../pages/inicio/inicio.module';
     FooterModule,
     SideNavModule,
     InicioModule,
+    MenuLateralDireitoModule,
   ]
 })
 export class LogadoLayoutModule { }

@@ -1,0 +1,8 @@
+<div class="window-toaster">
+  <ng-container *ngFor="let toaster of toasters">
+    <ds-toaster
+      [toaster]="toaster"
+      (closeEvento)="this.closed($event)"
+    ></ds-toaster>
+  </ng-container>
+</div>

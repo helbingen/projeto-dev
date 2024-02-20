@@ -1,0 +1,84 @@
+<div class="dadoscadastrais">
+  <div>
+    <div class="dados-cadastrais-header">
+      <span class="texto-header-1">Dados cadastrais</span>
+      <div class="linha-horizontal centralizar ds-mx-2"></div>
+      <i class="ds-icon-asterisk centralizar"></i>
+      <span class="texto-header-2 ds-mr-2">Campos obrigatórios</span>
+      <ds-button-dropdown
+        [labelButtonDropdown]="'Situacao: ' + labelBotaoSituacao"
+        [tipoBotao]="tipoBotaoSituacao"
+      >
+        <ds-button-dropdown-item
+          [labelButtonDropdownItem]="'Inativado'"
+          (click)="mudarSituacaoPessoa(situacaoPessoaEnum.inativo)"
+        ></ds-button-dropdown-item>
+        <ds-button-dropdown-item
+          [labelButtonDropdownItem]="'Negativo'"
+          (click)="mudarSituacaoPessoa(situacaoPessoaEnum.negativado)"
+        ></ds-button-dropdown-item>
+      </ds-button-dropdown>
+    </div>
+    <div class="dados-cadastrais-content ds-mt-3">
+      <div class="ds-row">
+        <div class="ds-col-desktop-3">
+          <ds-input-text
+            [labelInput]="'CNPJ/CPF'"
+            [control]="dadosCadastraisForm.controls.cnpjCpf"
+            [ds-mascara]="cnpjCpfMascara"
+            [isDesabilitado]="true"
+          ></ds-input-text>
+        </div>
+        <div class="ds-col-desktop-2">
+          <ds-input-date [labelInput]="'Data de cadastro'"></ds-input-date>
+        </div>
+      </div>
+      <div class="ds-row ds-mt-3">
+        <div class="ds-col-5">
+          <ds-input-text
+            [labelInput]="'Nome'"
+            [placeholderInputText]="'Insira o nome do cliente'"
+            [control]="dadosCadastraisForm.controls.nome"
+          ></ds-input-text>
+        </div>
+        <div class="ds-col-5" *ngIf="tipoPessoa === tipoPessoaEnum.cnpj">
+          <ds-input-text
+            [labelInput]="'Nome fantasia'"
+            [placeholderInputText]="'Insira o nome fantasia do CNPJ'"
+            [control]="dadosCadastraisForm.controls.nomeFantasia"
+          ></ds-input-text>
+        </div>
+        <div class="ds-col-5" *ngIf="tipoPessoa === tipoPessoaEnum.cpf">
+          <ds-input-text
+            [labelInput]="'Nome da mãe'"
+            [placeholderInputText]="'Insira o nome da mãe do cliente'"
+            [control]="dadosCadastraisForm.controls.nomeDaMae"
+          ></ds-input-text>
+        </div>
+      </div>
+      <div class="ds-row ds-mt-3" *ngIf="tipoPessoa === tipoPessoaEnum.cnpj">
+        <div class="ds-col-5">
+          <ds-input-text
+            [labelInput]="'Inscrição Municipal'"
+            [control]="dadosCadastraisForm.controls.inscricaoMunicial"
+          ></ds-input-text>
+        </div>
+        <div class="ds-col-5">
+          <ds-input-text
+            [labelInput]="'Inscrição Estadual'"
+            [control]="dadosCadastraisForm.controls.inscricaoEstadual"
+          ></ds-input-text>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="botoes">
+  <ds-button [labelButton]="'Cancelar'" [tipoBotao]="'SYSTEM'"></ds-button>
+  <ds-button
+    [labelButton]="'Salvar alterações'"
+    [tipoBotao]="'PRIMARY'"
+    [isDesabilitado]="botaoSalvarAlteracoesDesabilitado()"
+    (click)="salvarAlteracoes()"
+  ></ds-button>
+</div>

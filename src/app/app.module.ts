@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginLayoutModule } from './layouts/login-layout/login-layout.module';
 import { LogadoLayoutModule } from './layouts/logado-layout/logado-layout.module';
+import { ToasterControllerModule } from './shared/components/toaster-controller/toaster-controller.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { LogadoLayoutModule } from './layouts/logado-layout/logado-layout.module
     AppRoutingModule,
     LoginLayoutModule,
     LogadoLayoutModule,
+    ToasterControllerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
