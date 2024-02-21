@@ -5,6 +5,7 @@ import { AdicionarClienteComponent } from './adicionar-cliente/adicionar-cliente
 import { Breadcrumb } from '@decisaosistemas/angular-ds';
 import { EditarClienteComponent } from './editar-cliente/editar-cliente.component';
 import { DadoscadastraisComponent } from './editar-cliente/dadoscadastrais/dadoscadastrais.component';
+import { LocalizacaoComponent } from './editar-cliente/localizacao/localizacao.component';
 
 const routes: Routes = [
   {
@@ -32,10 +33,10 @@ const routes: Routes = [
             path: 'dadoscadastrais',
             component: DadoscadastraisComponent
           },
-          // {
-          //   path: 'localizacao',
-          //   component:
-          // },
+          {
+            path: 'localizacao',
+            component: LocalizacaoComponent
+          },
           // {
           //   path: 'representantes',
           //   component:

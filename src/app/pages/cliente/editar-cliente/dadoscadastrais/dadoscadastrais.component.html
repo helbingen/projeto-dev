@@ -3,8 +3,8 @@
     <div class="dados-cadastrais-header">
       <span class="texto-header-1">Dados cadastrais</span>
       <div class="linha-horizontal centralizar ds-mx-2"></div>
-      <i class="ds-icon-asterisk centralizar"></i>
-      <span class="texto-header-2 ds-mr-2">Campos obrigatórios</span>
+      <i class="ds-icon-asterisk centralizar cor-texto"></i>
+      <span class="texto-header-2 cor-texto ds-mr-2">Campos obrigatórios</span>
       <ds-button-dropdown
         [labelButtonDropdown]="'Situacao: ' + labelBotaoSituacao"
         [tipoBotao]="tipoBotaoSituacao"
@@ -30,7 +30,11 @@
           ></ds-input-text>
         </div>
         <div class="ds-col-desktop-2">
-          <ds-input-date [labelInput]="'Data de cadastro'"></ds-input-date>
+          <ds-input-date
+            [labelInput]="'Data de cadastro'"
+            [control]="dadosCadastraisForm.controls.dataCadastro"
+            [errosCustomizados]="errosCustomizados"
+          ></ds-input-date>
         </div>
       </div>
       <div class="ds-row ds-mt-3">

@@ -6,9 +6,10 @@ export class ErrorsUtil {
     let error = '';
     pValorValidado = {
       required: `Campo inserido incorreto. Tente novamente.`,
-      email: `E-mail fora do padrão: email@email.com`,
+      email: `E-mail fora do padrão: email@email.com.`,
       senhaForaDoPadrao: `A senha deve conter 8 dígitos, e pelo menos um caractere especial, letra maiúscula ou minúscula.`,
-      cnpjCpfInvalido: `Digite um CNPJ/CPF válido`,
+      cnpjCpfInvalido: `Digite um CNPJ/CPF válido.`,
+      dataInvalida: `Insira uma data válida.`
     };
     const arrayErros = Object.keys(pValorValidado);
     for (let erro of arrayErros) {

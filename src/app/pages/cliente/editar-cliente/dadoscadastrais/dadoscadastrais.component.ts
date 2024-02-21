@@ -7,6 +7,9 @@ import { TipoMascarasEnum, TipoBotao } from '@decisaosistemas/angular-ds';
 import { ErrorsUtil } from '../../../../shared/utils/errorsUtil';
 import { SituacaoPessoaEnum } from '../../../../shared/models/SituacaoPessoa.enum';
 import { ToasterService } from '../../../../shared/components/toaster-controller/toaster.service';
+import { DataUtil } from '../../../../shared/utils/dataUtil';
+import { ValidatorsUtil } from '../../../../shared/utils/validatorsUtil';
+import { NCalendario } from '@decisaosistemas/angular-ds/components/input/input-date/calendar';
 
 @Component({
   selector: 'app-dadoscadastrais',
@@ -22,6 +25,7 @@ export class DadoscadastraisComponent {
     nomeDaMae: new FormControl<string | null>(null, Validators.required),
     inscricaoMunicial: new FormControl<string | null>(null),
     inscricaoEstadual: new FormControl<string | null>(null),
+    dataCadastro: new FormControl<string | null>(null, ValidatorsUtil.dataValida)
   })
 
   public cnpjCpfMascara = TipoMascarasEnum.cpfCnpj;
@@ -86,6 +90,5 @@ export class DadoscadastraisComponent {
       this.tipoBotaoSituacao = 'DANGER';
     }
   }
-
 
 }

@@ -1,0 +1,35 @@
+<div class="localizacao">
+  <div>
+    <div class="localizacao-header">
+      <span class="texto-header-1">Localização</span>
+      <div class="linha-horizontal centralizar ds-mx-2"></div>
+      <i class="ds-icon-asterisk centralizar cor-texto"></i>
+      <span class="texto-header-2 cor-texto">Campos obrigatórios</span>
+    </div>
+    <div class="localizacao-content ds-mt-4">
+      <ds-accordion-line [labelAccordionLine]="'Endereços'" [isOpen]="true">
+        <span class="text-link">+ Adicionar endereço</span>
+      </ds-accordion-line>
+    </div>
+    <div class="localizacao-content ds-mt-2">
+      <ds-accordion-line [labelAccordionLine]="'Telefones'" [isOpen]="true">
+        <span class="text-link">+ Adicionar telefone</span>
+      </ds-accordion-line>
+    </div>
+    <div class="localizacao-content ds-mt-2">
+      <ds-accordion-line [labelAccordionLine]="'E-mails'" [isOpen]="true">
+        <span class="text-link">+ Adicionar email</span>
+      </ds-accordion-line>
+    </div>
+  </div>
+
+  <div class="botoes">
+    <ds-button [labelButton]="'Cancelar'" [tipoBotao]="'SYSTEM'"> </ds-button>
+    <ds-button
+      [labelButton]="'Cancelar'"
+      [tipoBotao]="'PRIMARY'"
+      [isDesabilitado]="true"
+    >
+    </ds-button>
+  </div>
+</div>
