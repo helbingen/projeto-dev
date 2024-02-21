@@ -1,1 +1,84 @@
-<p>endereco-modal works!</p>
+<div class="endereco-modal p-3">
+  <div class="endereco-modal-header">
+    <ds-avatar [colorAvatar]="'SECONDARY'" [icon]="'ds-icon-add'"></ds-avatar>
+    <span class="texto-header-1">Novo endereço</span>
+    <div class="linha-horizontal"></div>
+    <div class="texto-header-2">
+      <i class="ds-icon-asterisk ds-mr-2"></i>
+      <span>Campos obrigatórios</span>
+    </div>
+    <div class="icone-fechar">
+      <i class="ds-icon-close icone" (click)="ngbActiveModal.close()"></i>
+    </div>
+  </div>
+  <div class="endereco-modal-content">
+    <div class="ds-row">
+      <div class="ds-col-4">
+        <ds-input-text
+          [labelInput]="'CEP'"
+          [placeholderInputText]="'00.000-000'"
+          [control]="enderecoForm.controls.cep"
+          [ds-mascara]="mascaraCep"
+          [errosCustomizados]="errosCustomizados"
+          (valueChangeEvento)="consultaCep()"
+        ></ds-input-text>
+      </div>
+      <div class="ds-col-8">
+        <ds-input-text
+          [labelInput]="'Logradouro'"
+          [control]="enderecoForm.controls.logradouro"
+        ></ds-input-text>
+      </div>
+    </div>
+    <div class="ds-row ds-mt-3">
+      <div class="ds-col-4">
+        <ds-input-text
+          [labelInput]="'Número'"
+          [control]="enderecoForm.controls.numero"
+        ></ds-input-text>
+      </div>
+      <div class="ds-col-8">
+        <ds-input-text
+          [labelInput]="'Complemento'"
+          [control]="enderecoForm.controls.complemento"
+        ></ds-input-text>
+      </div>
+    </div>
+    <div class="ds-row ds-mt-3">
+      <div class="ds-col-4">
+        <ds-input-text
+          [labelInput]="'Bairro'"
+          [control]="enderecoForm.controls.bairro"
+        ></ds-input-text>
+      </div>
+      <div class="ds-col-4">
+        <ds-input-text
+          [labelInput]="'Cidade'"
+          [control]="enderecoForm.controls.cidade"
+        ></ds-input-text>
+      </div>
+      <div class="ds-col-4">
+        <ds-input-text
+          [labelInput]="'Estado'"
+          [control]="enderecoForm.controls.estado"
+        ></ds-input-text>
+      </div>
+    </div>
+    <div class="ds-mt-3">
+      <ds-checkbox [labelCheckbox]="'Endereço principal'"></ds-checkbox>
+    </div>
+  </div>
+  <div class="botoes">
+    <ds-button
+      [labelButton]="'Cancelar'"
+      [tipoBotao]="'SYSTEM'"
+      (click)="ngbActiveModal.close()"
+    ></ds-button>
+    <ds-button
+      [labelButton]="'Salvar'"
+      [tipoBotao]="'PRIMARY'"
+      [isDesabilitado]="enderecoForm.invalid"
+      (click)="salvarEndereco()"
+    ></ds-button>
+  </div>
+</div>

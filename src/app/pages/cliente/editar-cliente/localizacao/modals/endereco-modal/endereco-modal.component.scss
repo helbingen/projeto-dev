@@ -1,0 +1,38 @@
+.endereco-modal {
+  .endereco-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .texto-header-1 {
+      font-weight: 700;
+    }
+    .texto-header-2 {
+      font-size: 14px;
+      color: var(--gray-color-400);
+      display: flex;
+      align-items: center;
+    }
+    .linha-horizontal {
+      height: 1px;
+      width: 46%;
+      background-color: var(--gray-color-300);
+    }
+    .icone-fechar {
+      cursor: pointer;
+      font-size: 20px;
+      color: var(--gray-color-500);
+      .icone {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+  .endereco-modal-content {
+    padding: 20px 0px 20px 0px;
+  }
+  .botoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+  }
+}

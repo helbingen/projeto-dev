@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginLayoutModule } from './layouts/login-layout/login-layout.module';
 import { LogadoLayoutModule } from './layouts/logado-layout/logado-layout.module';
 import { ToasterControllerModule } from './shared/components/toaster-controller/toaster-controller.module';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -13,12 +14,15 @@ import { ToasterControllerModule } from './shared/components/toaster-controller/
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     LoginLayoutModule,
     LogadoLayoutModule,
     ToasterControllerModule
   ],
-  providers: [],
+  providers: [
+    HttpClient,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
