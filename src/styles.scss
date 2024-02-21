@@ -1,3 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import "bootstrap/scss/bootstrap";
+
 @font-face {
   font-family: "Inter";
   src: url("../src/assets/decisao-sistemas.ttf");
@@ -9,6 +14,6 @@ body {
 }
 
 :root {
-  --main-content-height: calc(100vh - 86px - 32px);
+  --main-content-height: calc(100vh - 64px);
   --padding-content: 55px;
 }

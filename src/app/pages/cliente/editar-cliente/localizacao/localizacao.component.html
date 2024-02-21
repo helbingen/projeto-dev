@@ -8,7 +8,9 @@
     </div>
     <div class="localizacao-content ds-mt-4">
       <ds-accordion-line [labelAccordionLine]="'Endereços'" [isOpen]="true">
-        <span class="text-link">+ Adicionar endereço</span>
+        <span class="text-link" (click)="abrirModalEndereco()"
+          >+ Adicionar endereço</span
+        >
       </ds-accordion-line>
     </div>
     <div class="localizacao-content ds-mt-2">

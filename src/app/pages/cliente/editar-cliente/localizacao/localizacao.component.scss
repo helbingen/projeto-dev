@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: var(--main-content-height);
+  // height: var(--main-content-height);
+  height: 86vh;
   padding-right: 20px;
   .localizacao-header {
     display: flex;
