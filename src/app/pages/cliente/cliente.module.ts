@@ -12,6 +12,7 @@ import { DadoscadastraisComponent } from './editar-cliente/dadoscadastrais/dados
 import { LocalizacaoComponent } from './editar-cliente/localizacao/localizacao.component';
 
 
+
 @NgModule({
   declarations: [
     ClienteComponent,
