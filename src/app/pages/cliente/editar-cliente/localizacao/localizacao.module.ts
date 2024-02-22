@@ -6,11 +6,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EnderecoModalComponent } from './modals/endereco-modal/endereco-modal.component';
 import { CardEnderecoComponent } from './card-endereco/card-endereco.component';
 import { ModalDefaultModule } from '../../../../shared/modals/modal-default/modal-default.module';
+import { LinhaTelefoneEnderecoComponent } from './linha-telefone-endereco/linha-telefone-endereco.component';
 
 
 
 @NgModule({
-  declarations: [LocalizacaoComponent, EnderecoModalComponent, CardEnderecoComponent],
+  declarations: [LocalizacaoComponent, EnderecoModalComponent, CardEnderecoComponent, LinhaTelefoneEnderecoComponent],
   imports: [
     CommonModule,
     AccordionModule,

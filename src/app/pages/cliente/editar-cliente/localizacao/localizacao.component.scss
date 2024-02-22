@@ -35,6 +35,14 @@
       color: var(--secondary-color-300);
       cursor: pointer;
     }
+    .adicionar-telefone,
+    .adicionar-email {
+      flex-wrap: nowrap;
+      align-items: center;
+      .botao {
+        width: fit-content;
+      }
+    }
   }
 }
 .botoes {

@@ -20,12 +20,151 @@
     </div>
     <div class="localizacao-content ds-mt-2">
       <ds-accordion-line [labelAccordionLine]="'Telefones'" [isOpen]="true">
-        <span class="text-link">+ Adicionar telefone</span>
+        <span class="text-link" (click)="mudarEstadoInput('Telefone')"
+          >+ Adicionar telefone</span
+        >
+        <div class="row" *ngFor="let telefone of listaTelefone">
+          <div class="ds-col-12">
+            <app-linha-telefone-endereco
+              [telefoneEmail]="telefone.telefone"
+              [isPrincipal]="telefone.isPrincipal"
+              [tipoDado]="'Telefone'"
+              (edicaoEvento)="editarTelefone($event)"
+            ></app-linha-telefone-endereco>
+          </div>
+        </div>
+        <div *ngIf="isEdicaoTelefone">
+          <div class="ds-row adicionar-telefone">
+            <div class="ds-col-2">
+              <ds-input-text
+                [ds-mascara]="mascaraTelefone"
+                [control]="telefoneForm"
+                [errosCustomizados]="errosCustomizados"
+              ></ds-input-text>
+            </div>
+            <div class="botao">
+              <ds-button
+                [tipoBotao]="'SYSTEM'"
+                [labelButton]="'Cancelar'"
+                (click)="isEdicaoTelefone = false"
+              ></ds-button>
+            </div>
+            <div class="botao">
+              <ds-button
+                [tipoBotao]="'PRIMARY'"
+                [labelButton]="'Salvar edição'"
+                [isDesabilitado]="telefoneForm.invalid"
+                (click)="salvarEdicao('Telefone')"
+              ></ds-button>
+            </div>
+          </div>
+          <div class="ds-mt-2">
+            <ds-checkbox [labelCheckbox]="'Telefone principal'"></ds-checkbox>
+          </div>
+        </div>
+        <div *ngIf="mostrarInputTelefone">
+          <div class="ds-row adicionar-telefone">
+            <div class="ds-col-2">
+              <ds-input-text
+                [ds-mascara]="mascaraTelefone"
+                [control]="telefoneForm"
+                [errosCustomizados]="errosCustomizados"
+              ></ds-input-text>
+            </div>
+            <div class="botao">
+              <ds-button
+                [tipoBotao]="'SYSTEM'"
+                [labelButton]="'Cancelar'"
+                (click)="mudarEstadoInput('Telefone')"
+              ></ds-button>
+            </div>
+            <div class="botao">
+              <ds-button
+                [tipoBotao]="'PRIMARY'"
+                [labelButton]="'Adicionar telefone'"
+                [isDesabilitado]="telefoneForm.invalid"
+                (click)="adicionar('Telefone')"
+              ></ds-button>
+            </div>
+          </div>
+          <div class="ds-mt-2">
+            <ds-checkbox [labelCheckbox]="'Telefone principal'"></ds-checkbox>
+          </div>
+        </div>
       </ds-accordion-line>
     </div>
     <div class="localizacao-content ds-mt-2">
       <ds-accordion-line [labelAccordionLine]="'E-mails'" [isOpen]="true">
-        <span class="text-link">+ Adicionar email</span>
+        <span class="text-link" (click)="mudarEstadoInput('Email')"
+          >+ Adicionar email</span
+        >
+        <div class="row" *ngFor="let email of listaEmail">
+          <div class="ds-col-12">
+            <app-linha-telefone-endereco
+              [telefoneEmail]="email.email"
+              [isPrincipal]="email.isPrincipal"
+              [tipoDado]="'E-mail'"
+              (edicaoEvento)="editarEmail($event)"
+            ></app-linha-telefone-endereco>
+          </div>
+        </div>
+        <div *ngIf="isEdicaoEmail">
+          <div class="ds-row adicionar-email">
+            <div class="ds-col-2">
+              <ds-input-text
+                [control]="emailForm"
+                [errosCustomizados]="errosCustomizados"
+              ></ds-input-text>
+            </div>
+            <div class="botao">
+              <ds-button
+                [tipoBotao]="'SYSTEM'"
+                [labelButton]="'Cancelar'"
+                (click)="isEdicaoEmail = false"
+              ></ds-button>
+            </div>
+            <div class="botao">
+              <ds-button
+                [tipoBotao]="'PRIMARY'"
+                [labelButton]="'Salvar edição'"
+                [isDesabilitado]="emailForm.invalid"
+                (click)="salvarEdicao('Email')"
+              ></ds-button>
+            </div>
+          </div>
+          <div class="ds-mt-2">
+            <ds-checkbox [labelCheckbox]="'E-mail principal'"></ds-checkbox>
+          </div>
+        </div>
+
+        <div *ngIf="mostrarInputEmail">
+          <div class="ds-row adicionar-email">
+            <div class="ds-col-2">
+              <ds-input-text
+                [control]="emailForm"
+                [errosCustomizados]="errosCustomizados"
+              ></ds-input-text>
+            </div>
+            <div class="botao">
+              <ds-button
+                [tipoBotao]="'SYSTEM'"
+                [labelButton]="'Cancelar'"
+                (click)="mudarEstadoInput('Email')"
+              ></ds-button>
+            </div>
+            <div class="botao">
+              <ds-button
+                [tipoBotao]="'PRIMARY'"
+                [labelButton]="'Adicionar email'"
+                [isDesabilitado]="emailForm.invalid"
+                (click)="adicionar('Email')"
+              ></ds-button>
+            </div>
+          </div>
+          <div class="ds-mt-2">
+            <ds-checkbox [labelCheckbox]="'E-mail principal'"></ds-checkbox>
+          </div>
+        </div>
       </ds-accordion-line>
     </div>
   </div>

@@ -1,0 +1,26 @@
+<div class="app-linha-telefone-endereco">
+  <div class="ds-row">
+    <div class="ds-col-5">
+      <span class="telefoneEmail">{{ telefoneEmail }}</span>
+    </div>
+    <div class="ds-col-2">
+      <div *ngIf="isPrincipal">
+        <ds-badge
+          [tipoBadge]="'CONFIRM'"
+          [labelBadge]="''"
+          [labelBadge]="'Principal'"
+        ></ds-badge>
+      </div>
+    </div>
+    <div class="botoes ds-col">
+      <i
+        class="ds-icon-edit ds-text-primary ds-mr-3 icone"
+        (click)="editar()"
+      ></i>
+      <i
+        class="ds-icon-trash ds-text-danger icone"
+        (click)="abrirModalExcluir()"
+      ></i>
+    </div>
+  </div>
+</div>

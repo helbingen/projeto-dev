@@ -1,0 +1,9 @@
+.app-linha-telefone-endereco {
+  .botoes {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .botoes > .icone {
+    cursor: pointer;
+  }
+}
