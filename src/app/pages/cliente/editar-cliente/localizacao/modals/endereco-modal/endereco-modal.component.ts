@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TipoMascarasEnum } from '@decisaosistemas/angular-ds';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CepService } from '../../../../../../shared/services/cep.service';
 import { ICepInterface } from '../../../../../../shared/services/models/ICepInterface';
 import { ErrorsUtil } from '../../../../../../shared/utils/errorsUtil';
+import { IEnderecoInterface } from '../../models/IEnderecoInterface';
 
 @Component({
   selector: 'app-endereco-modal',
@@ -13,9 +14,18 @@ import { ErrorsUtil } from '../../../../../../shared/utils/errorsUtil';
 })
 export class EnderecoModalComponent {
 
+  @Input() tituloModal: string = '';
+  @Input() labelBotao: string = '';
+  @Input() endereco!: IEnderecoInterface;
   @Output() confirmacaoSalvarEndereco: EventEmitter<boolean> = new EventEmitter<boolean>(false)
 
   constructor(public ngbActiveModal: NgbActiveModal, private cepService: CepService) { }
+
+  public ngOnInit(): void {
+    if (this.tituloModal === 'Editar endereço') {
+      this.preencherInputsEnderecoParaEdicao(this.endereco);
+    }
+  }
 
   public mascaraCep = TipoMascarasEnum.cep;
   public errosCustomizados = ErrorsUtil.getErrors;
@@ -56,6 +66,18 @@ export class EnderecoModalComponent {
   public salvarEndereco(): void {
     this.confirmacaoSalvarEndereco.emit(true);
     this.ngbActiveModal.close();
+  }
+
+  private preencherInputsEnderecoParaEdicao(pEndereco: IEnderecoInterface) {
+    this.enderecoForm.patchValue({
+      logradouro: pEndereco.logradouro,
+      complemento: pEndereco.complemento,
+      numero: pEndereco.numero,
+      bairro: pEndereco.bairro,
+      cidade: pEndereco.cidade,
+      estado: pEndereco.estado,
+      cep: pEndereco.cep,
+    })
   }
 
 }

@@ -1,0 +1,23 @@
+<div class="modal-default">
+  <div class="modal-default-header">
+    <span class="texto-header">{{ textoHeader }}</span>
+    <i class="ds-icon-close icone" (click)="activeModal.close()"></i>
+  </div>
+  <hr />
+  <div class="modal-default-descricao">
+    <div>{{ textoDescricao }}</div>
+  </div>
+  <hr />
+  <div class="modal-default-botoes">
+    <div>
+      <span class="botao-cancelar" (click)="activeModal.close()">
+        Cancelar
+      </span>
+    </div>
+    <ds-button
+      [labelButton]="labelBotao"
+      [tipoBotao]="tipoBotaoConfirmarAcao"
+      (click)="confirmarAcaoModal()"
+    ></ds-button>
+  </div>
+</div>

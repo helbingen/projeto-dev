@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   // height: var(--main-content-height);
-  height: 86vh;
+  height: calc(100vh - 86px - 67px);
   padding-right: 20px;
   .localizacao-header {
     display: flex;
@@ -36,9 +36,11 @@
       cursor: pointer;
     }
   }
-  .botoes {
-    display: flex;
-    justify-content: flex-end;
-    gap: 20px;
-  }
+}
+.botoes {
+  display: flex;
+  gap: 20px;
+  align-self: flex-end;
+  justify-content: end;
+  margin-right: 20px;
 }

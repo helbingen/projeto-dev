@@ -1,0 +1,31 @@
+.modal-default {
+  .modal-default-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem 0 1rem;
+    .texto-header {
+      font-weight: 700;
+    }
+    .icone {
+      color: var(--gray-color-300);
+      cursor: pointer;
+    }
+  }
+  .modal-default-descricao {
+    padding: 0rem 1rem 0rem 1rem;
+    font-size: 14px;
+  }
+  .modal-default-botoes {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1rem 1rem 1rem;
+    font-size: 14px;
+    .botao-cancelar {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}

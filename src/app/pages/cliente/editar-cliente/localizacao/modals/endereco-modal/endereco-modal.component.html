@@ -1,7 +1,7 @@
 <div class="endereco-modal p-3">
   <div class="endereco-modal-header">
     <ds-avatar [colorAvatar]="'SECONDARY'" [icon]="'ds-icon-add'"></ds-avatar>
-    <span class="texto-header-1">Novo endereço</span>
+    <span class="texto-header-1">{{ tituloModal }}</span>
     <div class="linha-horizontal"></div>
     <div class="texto-header-2">
       <i class="ds-icon-asterisk ds-mr-2"></i>
@@ -75,7 +75,7 @@
       (click)="ngbActiveModal.close()"
     ></ds-button>
     <ds-button
-      [labelButton]="'Salvar'"
+      [labelButton]="labelBotao"
       [tipoBotao]="'PRIMARY'"
       [isDesabilitado]="enderecoForm.invalid"
       (click)="salvarEndereco()"

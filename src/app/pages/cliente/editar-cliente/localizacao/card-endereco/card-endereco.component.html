@@ -1,0 +1,62 @@
+<div class="card-endereco">
+  <div class="endereco-container">
+    <div class="ds-row">
+      <div class="ds-col-12">
+        <span
+          class="rua ds-text-truncate"
+          dsTooltip
+          [tooltip]="endereco.logradouro"
+          >{{ endereco.logradouro }}
+        </span>
+      </div>
+    </div>
+    <div class="ds-row">
+      <div class="ds-col-12">
+        <span
+          class="complemento ds-text-truncate"
+          dsTooltip
+          [tooltip]="endereco.complemento"
+        >
+          {{ endereco.complemento }}</span
+        >
+      </div>
+    </div>
+    <div class="ds-row">
+      <div class="ds-col-12">
+        <span
+          class="bairro ds-text-truncate"
+          dsTooltip
+          [tooltip]="endereco.bairro"
+        >
+          {{ endereco.bairro }}</span
+        >
+      </div>
+    </div>
+    <div class="ds-row">
+      <div class="ds-col-auto">
+        <span class="cidade">{{ endereco.cidade }}</span>
+      </div>
+      -
+      <div class="ds-col-auto">
+        <span class="estado">{{ endereco.estado }}</span>
+      </div>
+    </div>
+    <div class="ds-row">
+      <div class="ds-col-12">
+        <span class="cep"> {{ endereco.cep }}</span>
+      </div>
+    </div>
+    <div class="ds-mt-2">
+      <ds-badge
+        [tipoBadge]="'SECONDARY-OUTLINE'"
+        [labelBadge]="'Endereço principal'"
+        [icone]="''"
+      ></ds-badge>
+    </div>
+  </div>
+  <hr />
+  <div class="botoes-container ds-pb-2">
+    <i class="ds-icon-edit editar" (click)="abrirModalEditarEndereco()"></i>
+    <i class="ds-icon-trash excluir" (click)="abrirModalExcluirEndereco()"></i>
+  </div>
+</div>

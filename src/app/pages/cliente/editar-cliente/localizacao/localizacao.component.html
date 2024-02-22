@@ -11,6 +11,11 @@
         <span class="text-link" (click)="abrirModalEndereco()"
           >+ Adicionar endereço</span
         >
+        <div class="ds-row">
+          <div class="ds-col-2 ds-mt-3" *ngFor="let endereco of listaEndereco">
+            <app-card-endereco [endereco]="endereco"></app-card-endereco>
+          </div>
+        </div>
       </ds-accordion-line>
     </div>
     <div class="localizacao-content ds-mt-2">
@@ -24,14 +29,13 @@
       </ds-accordion-line>
     </div>
   </div>
-
-  <div class="botoes">
-    <ds-button [labelButton]="'Cancelar'" [tipoBotao]="'SYSTEM'"> </ds-button>
-    <ds-button
-      [labelButton]="'Salvar alterações'"
-      [tipoBotao]="'PRIMARY'"
-      [isDesabilitado]="true"
-    >
-    </ds-button>
-  </div>
+</div>
+<div class="botoes">
+  <ds-button [labelButton]="'Cancelar'" [tipoBotao]="'SYSTEM'"> </ds-button>
+  <ds-button
+    [labelButton]="'Salvar alterações'"
+    [tipoBotao]="'PRIMARY'"
+    [isDesabilitado]="true"
+  >
+  </ds-button>
 </div>

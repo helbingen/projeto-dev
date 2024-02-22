@@ -1,0 +1,29 @@
+.card-endereco {
+  border-left: 1px solid var(--gray-color-400);
+  border-right: 1px solid var(--gray-color-400);
+  border-radius: 0.5rem;
+  font-size: 14px;
+  .endereco-container {
+    padding: 1rem 1rem 0px 1rem;
+    border-radius: 0.5rem;
+    border-top: 1px solid var(--gray-color-400);
+    border-bottom: 0;
+  }
+  .botoes-container {
+    font-size: 20px;
+    border-radius: 0.5rem;
+    border-bottom: 1px solid var(--gray-color-400);
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    .editar {
+      color: var(--primary-color-300);
+      cursor: pointer;
+    }
+    .excluir {
+      color: var(--danger-color-300);
+      cursor: pointer;
+    }
+  }
+}
