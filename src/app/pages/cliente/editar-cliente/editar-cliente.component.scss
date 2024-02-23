@@ -1,13 +1,11 @@
 .editar-cliente {
-  // padding-top: var(--padding-content);
+  height: max-content;
   display: flex;
   .editar-cliente-content {
-    padding-top: var(--padding-content);
-    width: 100%;
-    height: calc(100vh - 86px - 32px);
-  }
-  .menu-lateral {
-    padding-top: 38px;
-    padding-right: 48px;
+    border-right: 1px solid #2f3337;
+    padding: var(--padding-content);
+    padding-right: 0;
+    padding-bottom: 46px;
+    width: calc(100% - 204px);
   }
 }

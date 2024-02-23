@@ -1,11 +1,12 @@
 .inicio {
-  padding-top: var(--padding-content);
+  // padding-top: var(--padding-content);
+  height: var(--main-content-height);
   .alinhamento {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: calc(100vh - 86px - 32px);
+    height: 100%;
     .titulo {
       font-weight: 700;
       font-size: 20px;

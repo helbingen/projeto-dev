@@ -3,7 +3,8 @@
   flex-direction: column;
   justify-content: space-between;
   height: var(--main-content-height);
-  padding-top: var(--padding-content);
+  padding: var(--padding-content);
+  padding-right: 0;
   .dados-cadastrais-header {
     display: flex;
     .linha-horizontal {
