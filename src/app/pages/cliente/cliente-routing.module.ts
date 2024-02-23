@@ -6,6 +6,7 @@ import { Breadcrumb } from '@decisaosistemas/angular-ds';
 import { EditarClienteComponent } from './editar-cliente/editar-cliente.component';
 import { DadoscadastraisComponent } from './editar-cliente/dadoscadastrais/dadoscadastrais.component';
 import { LocalizacaoComponent } from './editar-cliente/localizacao/localizacao.component';
+import { RepresentantesComponent } from './editar-cliente/representantes/representantes.component';
 
 const routes: Routes = [
   {
@@ -37,14 +38,16 @@ const routes: Routes = [
             path: 'localizacao',
             component: LocalizacaoComponent
           },
-          // {
-          //   path: 'representantes',
-          //   component:
-          // }
+          {
+            path: 'representantes',
+            loadChildren: () => import('../cliente/editar-cliente/representantes/representantes.module').then((m) => m.RepresentantesModule),
+          }
         ]
       }
     ]
   }
+
+
 ];
 
 @NgModule({

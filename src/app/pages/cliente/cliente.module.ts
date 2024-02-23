@@ -11,6 +11,7 @@ import { EditarClienteComponent } from './editar-cliente/editar-cliente.componen
 import { MenuLateralDireitoModule } from '../../shared/components/menu-lateral-direito/menu-lateral-direito.module';
 import { DadoscadastraisComponent } from './editar-cliente/dadoscadastrais/dadoscadastrais.component';
 import { LocalizacaoModule } from './editar-cliente/localizacao/localizacao.module';
+import { RepresentantesModule } from './editar-cliente/representantes/representantes.module';
 
 
 
@@ -32,6 +33,7 @@ import { LocalizacaoModule } from './editar-cliente/localizacao/localizacao.modu
     ButtonDropdownModule,
     InputDateModule,
     LocalizacaoModule,
+    RepresentantesModule,
   ],
   bootstrap: [ClienteComponent],
 })

@@ -1,0 +1,40 @@
+.dados-cadastrais-representante {
+  padding-right: 1rem;
+  .representante-header {
+    display: flex;
+    align-items: center;
+    .linha-horizontal {
+      width: 100%;
+      height: 0.5px;
+      background-color: #2f3337;
+      display: flex;
+    }
+    .texto-header-1 {
+      min-width: fit-content;
+      font-weight: 700;
+    }
+    .texto-header-2 {
+      min-width: 115px;
+      font-size: 0.75rem;
+    }
+    .cor-texto {
+      color: var(--gray-color-400);
+    }
+    .centralizar {
+      align-self: center;
+    }
+  }
+  .dados-cadastrais-representante-content {
+    height: 78vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .botoes {
+      display: flex;
+      gap: 20px;
+      align-items: flex-end;
+      justify-content: end;
+      margin-right: 20px;
+    }
+  }
+}

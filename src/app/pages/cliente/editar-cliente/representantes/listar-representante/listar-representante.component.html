@@ -1,0 +1,23 @@
+<div class="listar-representante">
+  <div class="representante-header ds-mb-3">
+    <span class="texto-header-1">Representantes</span>
+    <div class="linha-horizontal centralizar ds-mx-2"></div>
+    <i class="ds-icon-asterisk centralizar cor-texto"></i>
+    <span class="texto-header-2 cor-texto">Campos obrigatórios</span>
+  </div>
+  <div>
+    <ds-button
+      tipoBotao="PRIMARY"
+      [labelButton]="'Adicionar representante'"
+      (click)="adicionarRepresentante()"
+    ></ds-button>
+  </div>
+</div>
+
+<div class="listar-representante-content">
+  <div>
+    <app-nao-ha-dados
+      [titulo]="'Nenhum representante cadastrado!'"
+    ></app-nao-ha-dados>
+  </div>
+</div>

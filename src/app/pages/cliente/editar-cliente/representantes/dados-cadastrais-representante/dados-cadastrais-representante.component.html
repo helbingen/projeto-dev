@@ -1,0 +1,40 @@
+<div class="dados-cadastrais-representante">
+  <div class="representante-header ds-mb-3">
+    <span class="texto-header-1">Dados representante</span>
+    <div class="linha-horizontal centralizar ds-mx-2"></div>
+    <i class="ds-icon-asterisk centralizar cor-texto"></i>
+    <span class="texto-header-2 cor-texto">Campos obrigatórios</span>
+  </div>
+
+  <div class="dados-cadastrais-representante-content">
+    <div class="ds-row">
+      <div class="ds-col-3">
+        <ds-input-text
+          [labelInput]="'CNPJ/CPF'"
+          [placeholderInputText]="'00.000.000/0000-00'"
+          [control]="representanteForm.controls.cpfCnpj"
+          [ds-mascara]="cnpjCpfMascara"
+          [errosCustomizados]="errosCustomizados"
+          (valueChangeEvento)="validarCpfCnpj($event)"
+        ></ds-input-text>
+      </div>
+      <div class="ds-col-4">
+        <ds-input-text
+          [labelInput]="'Nome'"
+          [placeholderInputText]="'Insira o nome do representante'"
+          [control]="representanteForm.controls.nome"
+        ></ds-input-text>
+      </div>
+    </div>
+
+    <div class="botoes">
+      <ds-button [labelButton]="'Cancelar'" [tipoBotao]="'SYSTEM'"></ds-button>
+      <ds-button
+        [labelButton]="'Salvar representante'"
+        [tipoBotao]="'PRIMARY'"
+        [isDesabilitado]="representanteForm.invalid"
+        (click)="adicionarRepresentante()"
+      ></ds-button>
+    </div>
+  </div>
+</div>
