@@ -17,6 +17,10 @@ const routes: Routes = [
       {
         path: 'adicionar',
         component: DadosCadastraisRepresentanteComponent,
+      },
+      {
+        path: 'editar',
+        component: DadosCadastraisRepresentanteComponent,
       }
     ]
   }

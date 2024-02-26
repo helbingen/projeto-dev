@@ -12,12 +12,19 @@
       (click)="adicionarRepresentante()"
     ></ds-button>
   </div>
+  <div class="listar-representante-content ds-mt-3">
+    <span>Nome - CPF/CNPJ</span>
+    <div *ngFor="let representante of listaRepresentantes">
+      <app-linha-pessoa [pessoa]="representante"></app-linha-pessoa>
+    </div>
+  </div>
 </div>
 
-<div class="listar-representante-content">
-  <div>
-    <app-nao-ha-dados
-      [titulo]="'Nenhum representante cadastrado!'"
-    ></app-nao-ha-dados>
-  </div>
+<div
+  class="listar-representante-content-vazio"
+  *ngIf="listaRepresentantes.length === 0"
+>
+  <app-nao-ha-dados
+    [titulo]="'Nenhum representante cadastrado!'"
+  ></app-nao-ha-dados>
 </div>

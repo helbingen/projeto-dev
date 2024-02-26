@@ -28,9 +28,13 @@
     </div>
 
     <div class="botoes">
-      <ds-button [labelButton]="'Cancelar'" [tipoBotao]="'SYSTEM'"></ds-button>
       <ds-button
-        [labelButton]="'Salvar representante'"
+        [labelButton]="'Cancelar'"
+        [tipoBotao]="'SYSTEM'"
+        (click)="cancelarAcao()"
+      ></ds-button>
+      <ds-button
+        [labelButton]="labelBotao"
         [tipoBotao]="'PRIMARY'"
         [isDesabilitado]="representanteForm.invalid"
         (click)="adicionarRepresentante()"

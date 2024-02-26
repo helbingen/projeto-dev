@@ -1,0 +1,50 @@
+<div class="app-linha-representante">
+  <div class="dados-cadastrais ds-pt-3 ds-pb-2">
+    <div class="ds-row">
+      <div class="ds-col-6">
+        <span class="ds-text-truncate" dsTooltip [tooltip]="pessoa.nome">{{
+          pessoa.nome
+        }}</span>
+        <span>{{ pessoa.cpfCnpj }}</span>
+      </div>
+      <div class="ds-col-2 centralizado" *ngIf="pessoa.situacao">
+        <ds-badge
+          [labelBadge]="pessoa.situacao.toString()"
+          [icone]="''"
+          [tipoBadge]="getTipoBadge(pessoa.situacao)"
+        ></ds-badge>
+      </div>
+      <div class="ds-col-2 centralizado" *ngIf="pessoa.dataDoCadastro">
+        <span>{{ pessoa.dataDoCadastro.toLocaleDateString() }}</span>
+      </div>
+
+      <div
+        class="ds-col-2 centralizado botoes"
+        *ngIf="pessoa.situacao && pessoa.dataDoCadastro"
+      >
+        <i
+          class="ds-icon-edit ds-text-primary"
+          (click)="editarRepresentante()"
+        ></i>
+        <i
+          class="ds-icon-trash ds-text-danger"
+          (click)="abrirModalExcluirRepresentante()"
+        ></i>
+      </div>
+
+      <div
+        class="ds-col-6 centralizado botoes"
+        *ngIf="!pessoa.situacao || !pessoa.dataDoCadastro"
+      >
+        <i
+          class="ds-icon-edit ds-text-primary"
+          (click)="editarRepresentante()"
+        ></i>
+        <i
+          class="ds-icon-trash ds-text-danger"
+          (click)="abrirModalExcluirRepresentante()"
+        ></i>
+      </div>
+    </div>
+  </div>
+</div>

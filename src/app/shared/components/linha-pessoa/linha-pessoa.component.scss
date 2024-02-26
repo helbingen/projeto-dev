@@ -1,0 +1,19 @@
+.app-linha-representante {
+  max-width: 100%;
+  .dados-cadastrais {
+    width: 100%;
+    max-width: 100%;
+    border-top: 1px solid var(--gray-color-400);
+    .centralizado {
+      display: flex;
+      align-items: center;
+    }
+    .botoes {
+      justify-content: flex-end;
+      gap: 20px;
+    }
+    .botoes > i {
+      cursor: pointer;
+    }
+  }
+}

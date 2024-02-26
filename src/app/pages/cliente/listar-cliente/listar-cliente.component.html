@@ -7,8 +7,24 @@
       (click)="adicionarCliente()"
     ></ds-button>
   </div>
-  <div class="cliente-container">
+  <div class="cliente-container-vazio" *ngIf="listaCliente.length === 0">
     <img src="../../../assets/Nada por aqui.svg" />
     <div class="titulo-imagem ds-mt-3">Nenhum cliente cadastrado!</div>
+  </div>
+  <div class="cliente-container ds-mt-3">
+    <div *ngFor="let cliente of listaCliente">
+      <div class="ds-row ds-text-semi-bold">
+        <div class="ds-col-6">
+          <span>Nome - CPF/CNPJ</span>
+        </div>
+        <div class="ds-col-2">
+          <span>Situação</span>
+        </div>
+        <div class="ds-col-3">
+          <span>Data do cadastro</span>
+        </div>
+      </div>
+      <app-linha-pessoa [pessoa]="cliente"></app-linha-pessoa>
+    </div>
   </div>
 </div>

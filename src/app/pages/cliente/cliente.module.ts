@@ -12,6 +12,7 @@ import { MenuLateralDireitoModule } from '../../shared/components/menu-lateral-d
 import { DadoscadastraisComponent } from './editar-cliente/dadoscadastrais/dadoscadastrais.component';
 import { LocalizacaoModule } from './editar-cliente/localizacao/localizacao.module';
 import { RepresentantesModule } from './editar-cliente/representantes/representantes.module';
+import { LinhaPessoaModule } from '../../shared/components/linha-pessoa/linha-pessoa.module';
 
 
 
@@ -34,6 +35,7 @@ import { RepresentantesModule } from './editar-cliente/representantes/representa
     InputDateModule,
     LocalizacaoModule,
     RepresentantesModule,
+    LinhaPessoaModule,
   ],
   bootstrap: [ClienteComponent],
 })
