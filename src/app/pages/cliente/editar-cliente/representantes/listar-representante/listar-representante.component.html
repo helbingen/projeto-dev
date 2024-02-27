@@ -13,7 +13,11 @@
     ></ds-button>
   </div>
   <div class="listar-representante-content ds-mt-3">
-    <span>Nome - CPF/CNPJ</span>
+    <div class="ds-row ds-mb-2">
+      <div class="ds-col-12">
+        <span class="ds-text-semi-bold">Nome - CPF/CNPJ</span>
+      </div>
+    </div>
     <div *ngFor="let representante of listaRepresentantes">
       <app-linha-pessoa [pessoa]="representante"></app-linha-pessoa>
     </div>

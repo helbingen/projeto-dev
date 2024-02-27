@@ -12,18 +12,18 @@
     <div class="titulo-imagem ds-mt-3">Nenhum cliente cadastrado!</div>
   </div>
   <div class="cliente-container ds-mt-3">
-    <div *ngFor="let cliente of listaCliente">
-      <div class="ds-row ds-text-semi-bold">
-        <div class="ds-col-6">
-          <span>Nome - CPF/CNPJ</span>
-        </div>
-        <div class="ds-col-2">
-          <span>Situação</span>
-        </div>
-        <div class="ds-col-3">
-          <span>Data do cadastro</span>
-        </div>
+    <div class="ds-row ds-text-semi-bold ds-mb-2">
+      <div class="ds-col-6">
+        <span>Nome - CPF/CNPJ</span>
       </div>
+      <div class="ds-col-2">
+        <span>Situação</span>
+      </div>
+      <div class="ds-col-3">
+        <span>Data do cadastro</span>
+      </div>
+    </div>
+    <div *ngFor="let cliente of listaCliente">
       <app-linha-pessoa [pessoa]="cliente"></app-linha-pessoa>
     </div>
   </div>

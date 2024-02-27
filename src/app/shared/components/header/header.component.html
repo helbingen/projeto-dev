@@ -1,11 +1,22 @@
 <div class="header">
   <div class="header-layout">
-    <div class="centralizar-icone">
+    <div
+      class="centralizar-icone"
+      [ngbPopover]="popoverPerfil"
+      [popoverClass]="'perfil-container'"
+      placement="bottom-right"
+    >
       <ds-avatar
         [colorAvatar]="'PRIMARY'"
         [format]="'circle'"
         [text]="'Design System'"
+        [sizeAvatar]="'medium'"
       ></ds-avatar>
     </div>
   </div>
 </div>
+
+<ng-template #popoverPerfil>
+  <div class="item-lista" (click)="abrirModalEditarPerfil()">Editar</div>
+  <div class="item-lista" (click)="abrirModalLogout()">Sair do sistema</div>
+</ng-template>

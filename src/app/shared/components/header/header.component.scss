@@ -9,8 +9,29 @@
     top: 0;
     background-color: var(--gray-color-0);
     .centralizar-icone {
+      cursor: pointer;
       align-self: center;
-      padding-right: 43px;
+      margin-right: 43px;
     }
+  }
+}
+
+.perfil-container {
+  border-radius: 4px;
+  border: 1px solid var(--gray-color-300);
+  .popover-body {
+    padding: 0.5rem;
+  }
+  .popover-arrow {
+    display: none;
+  }
+  .item-lista {
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .item-lista:hover {
+    background-color: var(--secondary-color-100);
+    color: var(--secondary-color-300);
   }
 }

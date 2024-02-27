@@ -77,7 +77,7 @@ export class DadoscadastraisComponent {
   }
 
   public salvarAlteracoes(): void {
-    this.toasterService.showSuccess('Cliente salvo com sucesso!');
+    this.toasterService.showSuccess('Cliente editado com sucesso!');
   }
 
   public mudarSituacaoPessoa(pTipoSituacao: SituacaoPessoaEnum): void {

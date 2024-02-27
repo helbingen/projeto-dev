@@ -18,7 +18,8 @@ export class LinhaPessoaComponent {
 
   @Input() pessoa!: IPessoaInterface;
 
-  constructor(private router: Router, private ngbModal: NgbModal, private toasterService: ToasterService) { }
+  constructor(public router: Router, private ngbModal: NgbModal, private toasterService: ToasterService) {
+  }
 
   public getTipoBadge(pSituacao: SituacaoPessoaEnum | null): ColorTokens {
     if (pSituacao === SituacaoPessoaEnum.ativo) {
@@ -30,19 +31,30 @@ export class LinhaPessoaComponent {
     return 'DANGER'
   }
 
-  public editarRepresentante(): void {
-    this.router.navigate([this.router.url, 'editar'])
+  public editarRepresentante(pRotaAtiva: string): void {
+    if (pRotaAtiva === '/cliente/editar-cliente/representantes') {
+      this.router.navigate([this.router.url, 'editar'])
+    } else {
+      this.router.navigate([`${this.router.url}/editar-cliente/`, 'dadoscadastrais'])
+    }
   }
 
-  public abrirModalExcluirRepresentante(): void {
+  public abrirModalExclusao(pRotaAtiva: string): void {
+    let mensagemToaster = '';
     const modalRef = this.ngbModal.open(ModalDefaultComponent, modalConfigDefault);
-    modalRef.componentInstance.textoHeader = 'Excluir representante?'
+    if (pRotaAtiva === '/cliente/editar-cliente/representantes') {
+      modalRef.componentInstance.textoHeader = 'Excluir representante?'
+      mensagemToaster = 'Representante excluído com sucesso!'
+    } else {
+      modalRef.componentInstance.textoHeader = 'Excluir cliente?'
+      mensagemToaster = 'Cliente excluído com sucesso!'
+    }
     modalRef.componentInstance.textoDescricao = `Você tem certeza que deseja excluir?
     Os registros excluídos não poderão ser restaurados.`
     modalRef.componentInstance.labelBotao = 'Excluir'
     modalRef.componentInstance.tipoBotaoConfirmarAcao = 'DANGER'
     modalRef.componentInstance.confirmarAcao.subscribe((response: boolean) => {
-      this.toasterService.showSuccess('Representante excluído com sucesso!')
+      this.toasterService.showSuccess(mensagemToaster)
     })
   }
 

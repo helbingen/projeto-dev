@@ -1,0 +1,68 @@
+<div class="modal-editar-perfil">
+  <div class="modal-editar-perfil-header">
+    <ds-avatar [icon]="'ds-icon-edit'" [colorAvatar]="'PRIMARY'"></ds-avatar>
+    <span class="texto-header-1 ds-text-semi-bold">Editar perfil</span>
+    <div class="linha-horizontal centralizar ds-mx-2"></div>
+    <div class="ds-d-flex ds-align-items-center ds-typo-body cor-texto">
+      <i class="ds-icon-asterisk ds-mr-2"></i>
+      <span class="">Campos obrigatórios</span>
+    </div>
+    <i
+      class="ds-icon-close cor-texto icone-fechar"
+      (click)="ngbActiveModal.close()"
+    ></i>
+  </div>
+  <div class="modal-editar-perfil-content ds-mt-3">
+    <ds-input-text
+      [labelInput]="'Nome'"
+      [control]="editarPerfilForm.controls.nome"
+    ></ds-input-text>
+    <ds-input-text
+      [labelInput]="'E-mail'"
+      [control]="editarPerfilForm.controls.email"
+      [errosCustomizados]="errosCustomizados"
+    ></ds-input-text>
+    <ds-checkbox
+      [labelCheckbox]="'Alterar senha'"
+      [isChecked]="isAlterarSenhaChecked"
+      (changeEvento)="habilitarCamposSenha()"
+    ></ds-checkbox>
+    <ds-input-text
+      [labelInput]="'Senha atual'"
+      [placeholderInputText]="'Insira sua senha'"
+      [control]="editarPerfilForm.controls.senhaAtual"
+      [errosCustomizados]="errosCustomizados"
+      [isDesabilitado]="!isAlterarSenhaChecked"
+      (valueChangeEvento)="verificarSenhaAtual()"
+    ></ds-input-text>
+    <ds-input-text
+      [labelInput]="'Nova senha'"
+      [placeholderInputText]="'Insira a nova senha'"
+      [control]="editarPerfilForm.controls.novaSenha"
+      [errosCustomizados]="errosCustomizados"
+      [isDesabilitado]="!isAlterarSenhaChecked"
+      (valueChangeEvento)="verificarSenhaForte()"
+    ></ds-input-text>
+    <ds-input-text
+      [labelInput]="'Confirmar senha'"
+      [placeholderInputText]="'Confirme a nova senha'"
+      [control]="editarPerfilForm.controls.confirmarSenha"
+      [errosCustomizados]="errosCustomizados"
+      [isDesabilitado]="!isAlterarSenhaChecked"
+      (valueChangeEvento)="verificarNovaSenha()"
+    ></ds-input-text>
+  </div>
+  <div class="botoes ds-mt-3">
+    <ds-button
+      [labelButton]="'Cancelar'"
+      [tipoBotao]="'SYSTEM'"
+      (click)="ngbActiveModal.close()"
+    ></ds-button>
+    <ds-button
+      [labelButton]="'Salvar'"
+      [tipoBotao]="'PRIMARY'"
+      [isDesabilitado]="editarPerfilForm.invalid"
+      (click)="editarPerfil()"
+    ></ds-button>
+  </div>
+</div>

@@ -11,7 +11,9 @@ export class ErrorsUtil {
       cnpjCpfInvalido: `Digite um CNPJ/CPF válido.`,
       dataInvalida: `Insira uma data válida.`,
       cepInexistente: `CEP não existe, digite um CEP válido.`,
-      telefoneInvalido: `Telefone inválido.`
+      telefoneInvalido: `Telefone inválido.`,
+      senhasDiferentes: `Nova senha e confirmação de senha não conferem.`,
+      senhaIncorreta: `Senha inserida incorreta.`
     };
     const arrayErros = Object.keys(pValorValidado);
     for (let erro of arrayErros) {
