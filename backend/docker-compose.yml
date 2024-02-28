@@ -1,0 +1,24 @@
+version: '3.7'
+
+volumes:
+  projetodev-db-data:
+
+networks:
+  projetodev-network:
+    driver: bridge
+
+services:
+  projetodev-database:
+    build:
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DATABASES: projetodev
+    volumes:
+      - projetodev-db-data:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+    networks:
+      - projetodev-network

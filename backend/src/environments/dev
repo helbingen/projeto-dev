@@ -1,0 +1,15 @@
+PORT=3000
+
+NODE_ENV=DEV
+
+DB_HOST=127.0.0.1
+DB_NAME=projetoDev
+DB_USER=postgres
+DB_PASS=postgres
+DB_PORT=5432
+DB_DIALECT=postgres
+
+JWT_SECRET=Adf3kASD3f
+JWT_ALGORITHM=HS256
+
+TZ='America/Fortaleza'
