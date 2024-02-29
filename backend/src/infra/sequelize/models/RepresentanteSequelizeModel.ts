@@ -1,40 +1,35 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { IEmailModel, IEmailModelCreate } from '../../../domain/protocols/models/entity/email';
+import { IRepresentanteModel, IRepresentanteModelCreate } from '../../../domain/protocols/models/entity/representante';
 import Models from '../models';
 
-export default class EmailSequelizeModel extends Model<IEmailModel, IEmailModelCreate> implements IEmailModel {
+export default class RepresentanteSequelizeModel extends Model<IRepresentanteModel, IRepresentanteModelCreate> implements IRepresentanteModel {
+  public email!: string;
 
-  public numero!: string;
+  public nome!: string;
 
-  public is_principal!: boolean;
-
-  public identificacao!: string;
+  public senha!: string;
 
   static initialization(sequelize: Sequelize): void {
     this.init(
       {
-        email: {
-          type: DataTypes.TEXT,
-          allowNull: false,
-        },
-        is_principal: {
+        nome: {
           type: DataTypes.TEXT,
           allowNull: false,
         },
         identificacao: {
           type: DataTypes.TEXT,
-          allowNull: false,
+          primaryKey: true,
         },
       },
       {
         sequelize,
         freezeTableName: true,
-        tableName: 'email',
+        tableName: 'pessoa',
         underscored: false,
+        indexes: [{ fields: ['identificacao'] }],
       },
     );
   }
-
   static assosiation(models: Models): void {
     this.belongsTo(models.pessoa, {
       as: 'pessoa',

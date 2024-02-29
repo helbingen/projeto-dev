@@ -8,6 +8,10 @@ export interface ICliente {
    * Situação do cliente no sistema.
    */
   situacao: boolean;
+  /**
+   * CPF/CNPJ vinculado ao cliente.
+   */
+  identificacao: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

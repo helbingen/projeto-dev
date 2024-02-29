@@ -1,5 +1,6 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import { ITelefoneModel, ITelefoneModelCreate } from '../../../domain/protocols/models/entity/telefone';
+import Models from '../models';
 
 export default class TelefoneSequelizeModel extends Model<ITelefoneModel, ITelefoneModelCreate> implements ITelefoneModel {
 
@@ -10,6 +11,10 @@ export default class TelefoneSequelizeModel extends Model<ITelefoneModel, ITelef
   static initialization(sequelize: Sequelize): void {
     this.init(
       {
+        identificacao: {
+          type: DataTypes.TEXT,
+          allowNull: false,
+        },
         numero: {
           type: DataTypes.TEXT,
           allowNull: false,
@@ -26,5 +31,14 @@ export default class TelefoneSequelizeModel extends Model<ITelefoneModel, ITelef
         underscored: false,
       },
     );
+  }
+  static assosiation(models: Models): void {
+    this.belongsTo(models.pessoa, {
+      as: 'pessoa',
+      foreignKey: {
+        field: 'identificacao',
+        name: 'identificacao',
+      },
+    })
   }
 }

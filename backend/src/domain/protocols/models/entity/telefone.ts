@@ -8,6 +8,10 @@ export interface ITelefone {
    * Indicador se o endereço é principal.
    */
   is_principal: boolean;
+  /**
+ * Identificador de pessoa vinculada ao telefone.
+ */
+  identificacao: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

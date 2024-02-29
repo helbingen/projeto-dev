@@ -1,5 +1,6 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import { IEnderecoModel, IEnderecoModelCreate } from '../../../domain/protocols/models/entity/endereco';
+import Models from '../models';
 
 export default class EnderecoSequelizeModel extends Model<IEnderecoModel, IEnderecoModelCreate> implements IEnderecoModel {
 
@@ -18,6 +19,8 @@ export default class EnderecoSequelizeModel extends Model<IEnderecoModel, IEnder
   public estado!: string;
 
   public is_principal!: boolean;
+
+  public identificacao!: string;
 
   static initialization(sequelize: Sequelize): void {
     this.init(
@@ -54,6 +57,10 @@ export default class EnderecoSequelizeModel extends Model<IEnderecoModel, IEnder
           type: DataTypes.BOOLEAN,
           allowNull: false,
         },
+        identificacao: {
+          type: DataTypes.TEXT,
+          allowNull: false,
+        },
       },
       {
         sequelize,
@@ -63,5 +70,14 @@ export default class EnderecoSequelizeModel extends Model<IEnderecoModel, IEnder
         indexes: [{ fields: ['cep'] }],
       },
     );
+  }
+  static assosiation(models: Models): void {
+    this.belongsTo(models.pessoa, {
+      as: 'pessoa',
+      foreignKey: {
+        field: 'identificacao',
+        name: 'identificacao',
+      },
+    })
   }
 }

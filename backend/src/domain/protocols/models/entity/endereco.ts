@@ -32,6 +32,10 @@ export interface IEndereco {
    * Indicador se o endereço é principal.
    */
   is_principal: boolean;
+  /**
+   * Idenficador de pessoa vinculada ao endereço.
+   */
+  identificacao: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

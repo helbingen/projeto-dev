@@ -8,6 +8,11 @@ export interface IEmail {
    * Indicador se o e-mail é principal.
    */
   is_principal: boolean;
+  /**
+ * Identificação de pessoa vinculada ao email.
+ */
+  identificacao: string;
+
   createdAt?: Date;
   updatedAt?: Date;
 }
