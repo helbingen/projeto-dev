@@ -6,7 +6,7 @@ DB_HOST=127.0.0.1
 DB_NAME=projetoDev
 DB_USER=postgres
 DB_PASS=postgres
-DB_PORT=5432
+DB_PORT=5433
 DB_DIALECT=postgres
 
 JWT_SECRET=Adf3kASD3f
