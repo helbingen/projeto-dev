@@ -1,6 +1,6 @@
 import { ValidadorDados } from '@decisaosistemas/typescript-validador-dados';
-import EntrypointData from '../../../entity/EntryPointData';
-import InformacaoNaoInfomada from '../../../entity/errors/InformacaoNaoEncontrada';
+import EntrypointData from '../../entity/EntryPointData';
+import InformacaoNaoInfomada from '../../entity/errors/InformacaoNaoEncontrada';
 
 export class CriarPessoaInput {
 
@@ -27,19 +27,19 @@ export class CriarPessoaInput {
       throw new InformacaoNaoInfomada(`O atributo "identificacao": ${identificacaoValidador.getErro()}`);
     }
     if (nomeValidador.estaValido() === false) {
-      throw new InformacaoNaoInfomada(`O atributo "nome": ${identificacaoValidador.getErro()}`);
+      throw new InformacaoNaoInfomada(`O atributo "nome": ${nomeValidador.getErro()}`);
     }
     if (nomeFantasiaValidador.estaValido() === false) {
-      throw new InformacaoNaoInfomada(`O atributo "nomeFantasia": ${identificacaoValidador.getErro()}`);
+      throw new InformacaoNaoInfomada(`O atributo "nomeFantasia": ${nomeFantasiaValidador.getErro()}`);
     }
     if (nomeMaeValidador.estaValido() === false) {
-      throw new InformacaoNaoInfomada(`O atributo "nomeMae": ${identificacaoValidador.getErro()}`);
+      throw new InformacaoNaoInfomada(`O atributo "nomeMae": ${nomeMaeValidador.getErro()}`);
     }
     if (inscricaoMunicipalValidador.estaValido() === false) {
-      throw new InformacaoNaoInfomada(`O atributo "inscricaoMunicipal": ${identificacaoValidador.getErro()}`);
+      throw new InformacaoNaoInfomada(`O atributo "inscricaoMunicipal": ${inscricaoMunicipalValidador.getErro()}`);
     }
     if (inscricaoEstadualValidador.estaValido() === false) {
-      throw new InformacaoNaoInfomada(`O atributo "inscricaoEstadual": ${identificacaoValidador.getErro()}`);
+      throw new InformacaoNaoInfomada(`O atributo "inscricaoEstadual": ${inscricaoEstadualValidador.getErro()}`);
     }
 
     this.nome = pData.body.nome;

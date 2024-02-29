@@ -1,6 +1,6 @@
 import { ValidadorDados } from '@decisaosistemas/typescript-validador-dados';
-import EntrypointData from '../../../entity/EntryPointData';
-import InformacaoNaoInfomada from '../../../entity/errors/InformacaoNaoEncontrada';
+import EntrypointData from '../../entity/EntryPointData';
+import InformacaoNaoInfomada from '../../entity/errors/InformacaoNaoEncontrada';
 
 export class EditarPessoaInput {
 

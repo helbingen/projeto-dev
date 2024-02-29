@@ -1,6 +1,6 @@
 import { ValidadorDados } from '@decisaosistemas/typescript-validador-dados';
-import EntrypointData from '../../../entity/EntryPointData';
-import InformacaoNaoInfomada from '../../../entity/errors/InformacaoNaoEncontrada';
+import EntrypointData from '../../entity/EntryPointData';
+import InformacaoNaoInfomada from '../../entity/errors/InformacaoNaoEncontrada';
 
 export class EditarContaInput {
 
@@ -18,10 +18,10 @@ export class EditarContaInput {
       throw new InformacaoNaoInfomada(`O atributo "email": ${emailValidador.getErro()}`);
     }
     if (nomeValidador.estaValido() === false) {
-      throw new InformacaoNaoInfomada(`O atributo "nome": ${emailValidador.getErro()}`);
+      throw new InformacaoNaoInfomada(`O atributo "nome": ${nomeValidador.getErro()}`);
     }
     if (senhaValidador.estaValido() === false) {
-      throw new InformacaoNaoInfomada(`O atributo "senha": ${emailValidador.getErro()}`);
+      throw new InformacaoNaoInfomada(`O atributo "senha": ${senhaValidador.getErro()}`);
     }
 
     this.email = pData.body.email;

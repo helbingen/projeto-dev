@@ -15,7 +15,7 @@ export class CriarClienteInput {
       throw new InformacaoNaoInfomada(`O atributo "dataCadastro": ${dataCadastroValidador.getErro()}`);
     }
     if (situacaoValidador.estaValido() === false) {
-      throw new InformacaoNaoInfomada(`O atributo "situacao": ${dataCadastroValidador.getErro()}`);
+      throw new InformacaoNaoInfomada(`O atributo "situacao": ${situacaoValidador.getErro()}`);
     }
 
     this.dataCadastro = pData.body.dataCadastro;

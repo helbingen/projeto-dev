@@ -6,7 +6,7 @@ export default class ClienteSequelizeModel extends Model<IClienteModel, ICliente
 
   public dataCadastro!: Date;
 
-  public situacao!: boolean;
+  public situacao!: string;
 
   public identificacao!: string;
 
@@ -18,7 +18,7 @@ export default class ClienteSequelizeModel extends Model<IClienteModel, ICliente
           allowNull: false,
         },
         situacao: {
-          type: DataTypes.BOOLEAN,
+          type: DataTypes.TEXT,
           allowNull: false,
         },
         identificacao: {

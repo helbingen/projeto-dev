@@ -7,7 +7,7 @@ export interface ICliente {
   /**
    * Situação do cliente no sistema.
    */
-  situacao: boolean;
+  situacao: string;
   /**
    * CPF/CNPJ vinculado ao cliente.
    */
