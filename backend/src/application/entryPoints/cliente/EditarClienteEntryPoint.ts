@@ -8,12 +8,11 @@ export class EditarClienteEntryPoint {
 
   public httpMetodo: HttpMetodos = HttpMetodos.put;
 
-  public guards: IEntrypointGuard[];
+  // public guards: IEntrypointGuard[];
 
   public controller: IController;
 
-  constructor(pController: IController, pGuards: IEntrypointGuard[]) {
-    this.guards = pGuards;
+  constructor(pController: IController) {
     this.controller = pController;
   }
 

@@ -6,11 +6,11 @@ export class CriarClienteInput {
 
   public dataCadastro: Date;
 
-  public situacao: boolean;
+  public situacao: string;
 
   constructor(pData: EntrypointData) {
     const dataCadastroValidador = ValidadorDados.iniciar(pData.body?.dataCadastro, 'body.dataCadastro').obrigatorio().date();
-    const situacaoValidador = ValidadorDados.iniciar(pData.body?.situacao, 'body.situacao').obrigatorio().boolean();
+    const situacaoValidador = ValidadorDados.iniciar(pData.body?.situacao, 'body.situacao').obrigatorio().string();
     if (dataCadastroValidador.estaValido() === false) {
       throw new InformacaoNaoInfomada(`O atributo "dataCadastro": ${dataCadastroValidador.getErro()}`);
     }

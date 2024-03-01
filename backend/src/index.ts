@@ -7,16 +7,25 @@ import { CriarClienteEntryPoint } from './application/entryPoints/cliente/CriarC
 import { CriarClienteController } from './application/controllers/cliente/CriarClienteController';
 import { CriarCliente } from './domain/implementations/useCases/cliente/criarCliente/CriarCliente';
 import { ClienteRepository } from './infra/sequelize/repository/ClienteRepository';
+import { EditarCliente } from './domain/implementations/useCases/cliente/editarCliente/EditarCliente';
+import { EditarClienteController } from './application/controllers/cliente/EditarClienteController';
+import { EditarClienteEntryPoint } from './application/entryPoints/cliente/EditarClienteEntryPoint';
 
-
+/* Repositórios */
 const clienteRepository = new ClienteRepository()
 
+
 const criarCliente = new CriarCliente(clienteRepository);
-const criarClientecontroller = new CriarClienteController(criarCliente);
-const criarClienteEntryPoint = new CriarClienteEntryPoint(criarClientecontroller);
+const criarClienteController = new CriarClienteController(criarCliente);
+const criarClienteEntryPoint = new CriarClienteEntryPoint(criarClienteController);
+
+const editarCliente = new EditarCliente(clienteRepository);
+const editarClienteController = new EditarClienteController(editarCliente);
+const editarclienteEntryPoint = new EditarClienteEntryPoint(editarClienteController);
 
 const entryPoints: EntryPoint[] = [
   criarClienteEntryPoint,
+  editarclienteEntryPoint,
 ];
 
 const expressServer: ExpressServer = new ExpressServer();

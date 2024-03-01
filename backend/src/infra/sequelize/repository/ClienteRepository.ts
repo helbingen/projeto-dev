@@ -12,19 +12,22 @@ export class ClienteRepository {
     return Promise.resolve(new Cliente(clienteDb));
   }
 
-  public async excluir(pUnitOfWork: UnitOfWork, pIdentificacao: string): Promise<void> {
-    await db.models.cliente.destroy<ClienteSequelizeModel>({
+  public async editar(pUnitOfWork: UnitOfWork, pCliente: Cliente): Promise<void> {
+    await db.models.cliente.update<ClienteSequelizeModel>({
+      situacao: pCliente.situacao,
+      data_cadastro: pCliente.data_cadastro,
+    }, {
       where: {
-        identificacao: pIdentificacao,
+        identificacao: pCliente.identificacao
       },
       transaction: pUnitOfWork.getTransition(),
     });
   }
 
-  public async editar(pUnitOfWork: UnitOfWork, pCliente: Cliente): Promise<void> {
-    await db.models.cliente.update<ClienteSequelizeModel>(pCliente.gerarObjetoEditar(), {
+  public async excluir(pUnitOfWork: UnitOfWork, pIdentificacao: string): Promise<void> {
+    await db.models.cliente.destroy<ClienteSequelizeModel>({
       where: {
-        identificacao: pCliente.identificacao
+        identificacao: pIdentificacao,
       },
       transaction: pUnitOfWork.getTransition(),
     });

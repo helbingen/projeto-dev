@@ -26,10 +26,4 @@ export class Cliente implements ICliente {
       identificacao: this.identificacao,
     };
   }
-  public gerarObjetoEditar(): IClienteModelCreate {
-    return {
-      situacao: this.situacao,
-      data_cadastro: this.data_cadastro,
-    };
-  }
 }

@@ -22,12 +22,12 @@ export default class ExpressAdapter {
 
         const entryData = new EntrypointData(tokenAuthorizationHeader, pRequest.body, pRequest.params);
 
-        for (const guard of pEntryPoint.guards) {
-          const guardResult = await guard.execute(entryData, requestIp);
-          if (guardResult.erro !== null) {
-            throw guardResult.erro;
-          }
-        }
+        // for (const guard of pEntryPoint.guards) {
+        //   const guardResult = await guard.execute(entryData, requestIp);
+        //   if (guardResult.erro !== null) {
+        //     throw guardResult.erro;
+        //   }
+        // }
         const controllerResult = await pEntryPoint.controller.execute(entryData);
         return pResponse.status(controllerResult.codigo).json(controllerResult);
       } catch (error) {
