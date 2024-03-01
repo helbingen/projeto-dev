@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { IRepresentanteModel, IRepresentanteModelCreate } from '../../../domain/protocols/models/entity/representante';
+import { IRepresentanteModel, IRepresentanteModelCreate } from '../../../domain/protocols/models/entity/objectValues/representante';
 import Models from '../models';
 
 export default class RepresentanteSequelizeModel extends Model<IRepresentanteModel, IRepresentanteModelCreate> implements IRepresentanteModel {

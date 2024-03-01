@@ -1,6 +1,6 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { IContaModel } from '../../../domain/protocols/models/entity/conta';
-import { IPessoaModel, IPessoaModelCreate } from '../../../domain/protocols/models/entity/pessoa';
+import { IContaModel } from '../../../domain/protocols/models/entity/objectValues/conta';
+import { IPessoaModel, IPessoaModelCreate } from '../../../domain/protocols/models/entity/objectValues/pessoa';
 
 export default class PessoaSequelizeModel extends Model<IPessoaModel, IPessoaModelCreate> implements IPessoaModel {
   public email!: string;

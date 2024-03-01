@@ -1,5 +1,5 @@
 import { ValidadorDados } from '@decisaosistemas/typescript-validador-dados';
-import EntrypointData from '../../../entity/EntryPointData';
+import EntrypointData from '../../../entity/entryPoints/EntryPointData';
 import InformacaoNaoInfomada from '../../../entity/errors/InformacaoNaoEncontrada';
 
 export class EditarClienteInput {

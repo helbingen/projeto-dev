@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { ITelefoneModel, ITelefoneModelCreate } from '../../../domain/protocols/models/entity/telefone';
+import { ITelefoneModel, ITelefoneModelCreate } from '../../../domain/protocols/models/entity/objectValues/telefone';
 import Models from '../models';
 
 export default class TelefoneSequelizeModel extends Model<ITelefoneModel, ITelefoneModelCreate> implements ITelefoneModel {

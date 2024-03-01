@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { IContaModel, IContaModelCreate } from '../../../domain/protocols/models/entity/conta';
+import { IContaModel, IContaModelCreate } from '../../../domain/protocols/models/entity/objectValues/conta';
 
 export default class ContaSequelizeModel extends Model<IContaModel, IContaModelCreate> implements IContaModel {
   public email!: string;

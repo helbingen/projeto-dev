@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { IEmailModel, IEmailModelCreate } from '../../../domain/protocols/models/entity/email';
+import { IEmailModel, IEmailModelCreate } from '../../../domain/protocols/models/entity/objectValues/email';
 import Models from '../models';
 
 export default class EmailSequelizeModel extends Model<IEmailModel, IEmailModelCreate> implements IEmailModel {

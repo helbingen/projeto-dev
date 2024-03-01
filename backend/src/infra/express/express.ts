@@ -2,7 +2,8 @@ import Express from 'express';
 import * as http from 'http';
 import * as https from 'https';
 import Cors from 'cors';
-import * as Helmet from 'helmet';
+import ExpressRouterBuilder from './ExpressRouterBuilder';
+import EntryPoint from '../../domain/implementations/entity/entryPoints/EntryPoint';
 
 // import morgan from './middleware/morgan';
 // import header from './middleware/header';
@@ -20,7 +21,7 @@ export class ExpressServer implements ApplicationServerInterface {
 
   public server: http.Server;
 
-  // private builder: ExpressRouterBuilder = new ExpressRouterBuilder();
+  private builder: ExpressRouterBuilder = new ExpressRouterBuilder();
 
   constructor() {
     this.express = Express();
@@ -44,13 +45,13 @@ export class ExpressServer implements ApplicationServerInterface {
     });
   }
 
-  // public setEntryPoints(pEntryPoint: EntryPoint | EntryPoint[]): void {
-  //   if (pEntryPoint instanceof Array) {
-  //     for (const entryPoint of pEntryPoint) {
-  //       this.express.use(this.builder.build(entryPoint));
-  //     }
-  //   } else {
-  //     this.express.use(this.builder.build(pEntryPoint));
-  //   }
-  // }
+  public setEntryPoints(pEntryPoint: EntryPoint | EntryPoint[]): void {
+    if (pEntryPoint instanceof Array) {
+      for (const entryPoint of pEntryPoint) {
+        this.express.use(this.builder.build(entryPoint));
+      }
+    } else {
+      this.express.use(this.builder.build(pEntryPoint));
+    }
+  }
 }

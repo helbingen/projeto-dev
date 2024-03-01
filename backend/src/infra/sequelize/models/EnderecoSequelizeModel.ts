@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { IEnderecoModel, IEnderecoModelCreate } from '../../../domain/protocols/models/entity/endereco';
+import { IEnderecoModel, IEnderecoModelCreate } from '../../../domain/protocols/models/entity/objectValues/endereco';
 import Models from '../models';
 
 export default class EnderecoSequelizeModel extends Model<IEnderecoModel, IEnderecoModelCreate> implements IEnderecoModel {

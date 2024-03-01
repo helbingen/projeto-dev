@@ -1,4 +1,4 @@
-import { ICliente, IClienteModel, IClienteModelCreate } from '../../../protocols/models/entity/cliente';
+import { ICliente, IClienteModel, IClienteModelCreate } from '../../../protocols/models/entity/objectValues/cliente';
 import { SituacaoClienteEnum } from '../../contants/enum/situacaoClienteEnum';
 
 export class Cliente implements ICliente {
@@ -17,9 +17,6 @@ export class Cliente implements ICliente {
     this.identificacao = pValores.identificacao ?? this.identificacao;
     this.createdAt = pValores.createdAt ?? this.createdAt;
     this.updatedAt = pValores.updatedAt ?? this.updatedAt;
-
-
-    // this.dadoCadastral = pValores.dadoCadastral ? new DadoCadastral(pValores.dadoCadastral) : this.dadoCadastral;
   }
 
   public gerarObjCriar(): IClienteModelCreate {
@@ -27,6 +24,12 @@ export class Cliente implements ICliente {
       situacao: this.situacao,
       data_cadastro: this.data_cadastro,
       identificacao: this.identificacao,
+    };
+  }
+  public gerarObjetoEditar(): IClienteModelCreate {
+    return {
+      situacao: this.situacao,
+      data_cadastro: this.data_cadastro,
     };
   }
 }

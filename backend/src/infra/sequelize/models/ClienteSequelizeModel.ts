@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { IClienteModel, IClienteModelCreate } from '../../../domain/protocols/models/entity/cliente';
+import { IClienteModel, IClienteModelCreate } from '../../../domain/protocols/models/entity/objectValues/cliente';
 import Models from '../models';
 
 export default class ClienteSequelizeModel extends Model<IClienteModel, IClienteModelCreate> implements IClienteModel {
