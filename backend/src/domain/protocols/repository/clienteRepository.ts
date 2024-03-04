@@ -1,4 +1,3 @@
-import ClienteSequelizeModel from '../../../infra/sequelize/models/ClienteSequelizeModel';
 import { Cliente } from '../../implementations/entity/objectValues/Cliente';
 import UnitOfWork from '../models/entity/UnitOfWork';
 

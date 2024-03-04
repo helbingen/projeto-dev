@@ -4,21 +4,29 @@ import InformacaoNaoInfomada from '../../../entity/errors/InformacaoNaoEncontrad
 
 export class CriarClienteInput {
 
-  public dataCadastro: Date;
-
-  public situacao: string;
+  public identificacao: string;
+  public nome: string;
+  public nomeFantasia?: string;
+  public nomeMae?: string;
 
   constructor(pData: EntrypointData) {
-    const dataCadastroValidador = ValidadorDados.iniciar(pData.body?.dataCadastro, 'body.dataCadastro').obrigatorio().date();
-    const situacaoValidador = ValidadorDados.iniciar(pData.body?.situacao, 'body.situacao').obrigatorio().string();
-    if (dataCadastroValidador.estaValido() === false) {
-      throw new InformacaoNaoInfomada(`O atributo "dataCadastro": ${dataCadastroValidador.getErro()}`);
-    }
-    if (situacaoValidador.estaValido() === false) {
-      throw new InformacaoNaoInfomada(`O atributo "situacao": ${situacaoValidador.getErro()}`);
-    }
 
-    this.dataCadastro = pData.body.dataCadastro;
-    this.situacao = pData.body.situacao;
+    const validadores = [
+      ValidadorDados.iniciar(pData.body.identificacao, 'body.identificacao').obrigatorio().string(),
+      ValidadorDados.iniciar(pData.body.nome, 'body.nome').obrigatorio().string(),
+      ValidadorDados.iniciar(pData.body.nomeFantasia, 'body.nomeFantasia').string(),
+      ValidadorDados.iniciar(pData.body.nomeMae, 'body.nomeMae').string(),
+    ];
+
+    validadores.forEach((pValidador) => {
+      if (pValidador.estaValido() === false) {
+        throw new InformacaoNaoInfomada(pValidador.getErroCompleto());
+      }
+    });
+
+    this.identificacao = pData.body.identificacao;
+    this.nome = pData.body.nome;
+    this.nomeFantasia = pData.body.nomeFantasia;
+    this.nomeMae = pData.body.nomeMae;
   }
 }

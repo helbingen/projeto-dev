@@ -4,12 +4,11 @@ import * as https from 'https';
 import Cors from 'cors';
 import ExpressRouterBuilder from './ExpressRouterBuilder';
 import EntryPoint from '../../domain/implementations/entity/entryPoints/EntryPoint';
-
-// import morgan from './middleware/morgan';
-// import header from './middleware/header';
-// import { bodyParserJson, bodyParserUrlencoded } from './middleware/bodyParser';
-// import ExpressRouterBuilder from './ExpressRouterBuilder';
-// import EntryPoint from '../../domain/implementations/entity/entryPoint/EntryPoint';
+import header from './middleware/header';
+import { bodyParserJson, bodyParserUrlencoded } from './middleware/bodyParser';
+import morgan from './middleware/morgan';
+import helmet from 'helmet';
+import cors from 'cors';
 
 export interface ApplicationServerInterface {
   express: Express.Application;
@@ -31,12 +30,12 @@ export class ExpressServer implements ApplicationServerInterface {
   }
 
   private middlewares(): void {
-    // this.express.use(header());
-    // this.express.use(bodyParserJson());
-    // this.express.use(bodyParserUrlencoded());
-    // this.express.use(Helmet.default());
-    this.express.use(Cors());
-    // this.express.use(morgan());
+    this.express.use(header());
+    this.express.use(bodyParserJson());
+    this.express.use(bodyParserUrlencoded());
+    this.express.use(helmet());
+    this.express.use(cors());
+    this.express.use(morgan());
   }
 
   public start(): void {

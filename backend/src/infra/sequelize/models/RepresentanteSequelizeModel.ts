@@ -24,7 +24,7 @@ export default class RepresentanteSequelizeModel extends Model<IRepresentanteMod
       {
         sequelize,
         freezeTableName: true,
-        tableName: 'pessoa',
+        tableName: 'representante',
         underscored: false,
         indexes: [{ fields: ['identificacao'] }],
       },

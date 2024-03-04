@@ -10,12 +10,13 @@ import { ClienteRepository } from './infra/sequelize/repository/ClienteRepositor
 import { EditarCliente } from './domain/implementations/useCases/cliente/editarCliente/EditarCliente';
 import { EditarClienteController } from './application/controllers/cliente/EditarClienteController';
 import { EditarClienteEntryPoint } from './application/entryPoints/cliente/EditarClienteEntryPoint';
+import { PessoaRepository } from './infra/sequelize/repository/PessoaRepository';
 
 /* Repositórios */
-const clienteRepository = new ClienteRepository()
+const clienteRepository = new ClienteRepository();
+const pessoaRepository = new PessoaRepository();
 
-
-const criarCliente = new CriarCliente(clienteRepository);
+const criarCliente = new CriarCliente(clienteRepository, pessoaRepository);
 const criarClienteController = new CriarClienteController(criarCliente);
 const criarClienteEntryPoint = new CriarClienteEntryPoint(criarClienteController);
 
