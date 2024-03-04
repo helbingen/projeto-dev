@@ -5,5 +5,5 @@ export interface IClienteRepository {
   criar(pUnitOfWork: UnitOfWork, pCliente: Cliente): Promise<Cliente>;
   listarTodos(pUnitOfWork: UnitOfWork): Promise<Cliente[]>;
   excluir(pUnitOfWork: UnitOfWork, pIdentificacao: string): Promise<void>;
-  editar(pUnitOfWork: UnitOfWork, pCliente: Cliente): Promise<void>
+  editar(pUnitOfWork: UnitOfWork, pCliente: Cliente): Promise<boolean>
 }

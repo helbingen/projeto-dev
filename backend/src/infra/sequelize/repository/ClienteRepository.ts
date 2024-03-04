@@ -12,8 +12,8 @@ export class ClienteRepository {
     return Promise.resolve(new Cliente(clienteDb));
   }
 
-  public async editar(pUnitOfWork: UnitOfWork, pCliente: Cliente): Promise<void> {
-    await db.models.cliente.update<ClienteSequelizeModel>({
+  public async editar(pUnitOfWork: UnitOfWork, pCliente: Cliente): Promise<boolean> {
+    const result = await db.models.cliente.update<ClienteSequelizeModel>({
       situacao: pCliente.situacao,
       data_cadastro: pCliente.data_cadastro,
     }, {
@@ -22,6 +22,7 @@ export class ClienteRepository {
       },
       transaction: pUnitOfWork.getTransition(),
     });
+    return Promise.resolve(result.length > 0);
   }
 
   public async excluir(pUnitOfWork: UnitOfWork, pIdentificacao: string): Promise<void> {

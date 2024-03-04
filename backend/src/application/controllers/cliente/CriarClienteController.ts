@@ -24,7 +24,7 @@ export class CriarClienteController implements IController {
         tokenAuthorization: pData.tokenAuthorization,
       });
       await unitOfWork.init();
-      const result = await this.useCase.execute(unitOfWork, inputCliente, inputPessoa);
+      const result = await this.useCase.execute(unitOfWork, inputCliente);
       await unitOfWork.commit();
 
       return new EntryPointSuccess('Cliente criado com sucesso.', result);

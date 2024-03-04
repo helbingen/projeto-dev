@@ -20,7 +20,7 @@ const criarCliente = new CriarCliente(clienteRepository, pessoaRepository);
 const criarClienteController = new CriarClienteController(criarCliente);
 const criarClienteEntryPoint = new CriarClienteEntryPoint(criarClienteController);
 
-const editarCliente = new EditarCliente(clienteRepository);
+const editarCliente = new EditarCliente(clienteRepository, pessoaRepository);
 const editarClienteController = new EditarClienteController(editarCliente);
 const editarclienteEntryPoint = new EditarClienteEntryPoint(editarClienteController);
 

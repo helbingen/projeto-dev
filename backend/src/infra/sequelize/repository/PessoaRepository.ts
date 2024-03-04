@@ -12,8 +12,8 @@ export class PessoaRepository {
     return Promise.resolve(new Pessoa(pessoaDb));
   }
 
-  public async editar(pUnitOfWork: UnitOfWork, pPessoa: Pessoa): Promise<void> {
-    await db.models.pessoa.update<PessoaSequelizeModel>({
+  public async editar(pUnitOfWork: UnitOfWork, pPessoa: Pessoa): Promise<boolean> {
+    const result = await db.models.pessoa.update<PessoaSequelizeModel>({
       nome: pPessoa.nome,
       nome_fantasia: pPessoa.nome_fantasia,
       nome_mae: pPessoa.nome_mae,
@@ -25,6 +25,7 @@ export class PessoaRepository {
       },
       transaction: pUnitOfWork.getTransition(),
     });
+    return Promise.resolve(result.length > 0)
   }
 
   public async excluir(pUnitOfWork: UnitOfWork, pIdentificacao: string): Promise<void> {

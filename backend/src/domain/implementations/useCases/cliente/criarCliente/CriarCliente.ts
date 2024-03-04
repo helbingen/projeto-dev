@@ -11,7 +11,7 @@ import { CriarPessoaInput } from '../../pessoa/criarPessoa/CriarPessoaInput';
 export class CriarCliente {
   constructor(private clienteRepository: IClienteRepository, private pessoaRepository: IPessoaRepository) { }
 
-  public async execute(pUnitWork: UnitOfWork, pInputCliente: CriarClienteInput, pInputPessoa: CriarPessoaInput): Promise<CriarClienteOutput> {
+  public async execute(pUnitWork: UnitOfWork, pInputPessoa: CriarPessoaInput): Promise<CriarClienteOutput> {
 
     const pessoa = new Pessoa({
       identificacao: pInputPessoa.identificacao,
