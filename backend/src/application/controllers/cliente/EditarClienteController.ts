@@ -1,5 +1,8 @@
+import { ErrorCodeEnum } from '../../../domain/implementations/contants/enum/errorCodeEnum';
 import EntrypointData from '../../../domain/implementations/entity/entryPoints/EntryPointData';
 import EntryPointFail from '../../../domain/implementations/entity/entryPoints/EntryPointFail';
+import EntryPointResponse from '../../../domain/implementations/entity/entryPoints/EntryPointResponse';
+import EntryPointResponseError from '../../../domain/implementations/entity/entryPoints/EntryPointResponseError';
 import EntryPointSuccess from '../../../domain/implementations/entity/entryPoints/EntryPointSucess';
 import { IController } from '../../../domain/implementations/services/Controller';
 import { EditarCliente } from '../../../domain/implementations/useCases/cliente/editarCliente/EditarCliente';
@@ -31,7 +34,7 @@ export class EditarClienteController implements IController {
       if (result) {
         return new EntryPointSuccess('Cliente editado com sucesso.', result);
       }
-      return new EntryPointFail('Cliente não encontrado.');
+      return new EntryPointResponse(false, 404, 'Cliente não encontrado', result, null);
     } catch (error) {
       await unitOfWork.rollBack();
       return Promise.reject(error);

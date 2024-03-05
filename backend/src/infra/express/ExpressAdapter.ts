@@ -8,7 +8,6 @@ import ErroInternoServidor from '../../domain/implementations/entity/errors/Erro
 export default class ExpressAdapter {
   static handler(pEntryPoint: EntryPoint) {
     return async (pRequest: Request, pResponse: Response) => {
-      console.log(pRequest.body);
       try {
         const requestIp = pRequest.connection.remoteAddress?.split(':').pop() ?? '';
         const tokenAuthorizationHeader = pRequest.headers.authorization ?? '';

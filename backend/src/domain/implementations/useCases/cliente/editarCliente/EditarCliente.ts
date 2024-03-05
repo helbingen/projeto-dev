@@ -24,11 +24,13 @@ export class EditarCliente {
       situacao: pInputCliente.situacao,
       data_cadastro: new Date(),
     });
-    const resultEditarPessoa = await this.pessoaRepository.editar(pUnitWork, pessoa);
-    const resultEditarCliente = await this.clienteRepository.editar(pUnitWork, cliente);
-    if (!resultEditarCliente || !resultEditarPessoa) {
-      return Promise.resolve(false);
+
+    const pessoaExist = await this.pessoaRepository.buscarPessoaPorIdentificacao(pessoa.identificacao);
+    if (pessoaExist) {
+      await this.pessoaRepository.editar(pUnitWork, pessoa);
+      await this.clienteRepository.editar(pUnitWork, cliente);
+      return Promise.resolve(true);
     }
-    return Promise.resolve(true);
+    return Promise.resolve(false);
   }
 }

@@ -36,4 +36,13 @@ export class PessoaRepository {
       transaction: pUnitOfWork.getTransition(),
     });
   }
+
+  public async buscarPessoaPorIdentificacao(pIdentificacao: string): Promise<PessoaSequelizeModel | null> {
+    const pessoa = await db.models.pessoa.findOne<PessoaSequelizeModel>({
+      where: {
+        identificacao: pIdentificacao,
+      }
+    });
+    return Promise.resolve(pessoa);
+  }
 }
