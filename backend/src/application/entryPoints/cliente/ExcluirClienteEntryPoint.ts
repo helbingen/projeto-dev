@@ -8,12 +8,12 @@ export class ExcluirClienteEntryPoint {
 
   public httpMetodo: HttpMetodos = HttpMetodos.delete;
 
-  public guards: IEntrypointGuard[];
+  // public guards: IEntrypointGuard[];
 
   public controller: IController;
 
-  constructor(pController: IController, pGuards: IEntrypointGuard[]) {
-    this.guards = pGuards;
+  constructor(pController: IController) {
+    // this.guards = pGuards;
     this.controller = pController;
   }
 

@@ -25,13 +25,14 @@ export class ClienteRepository {
     return Promise.resolve(result.length > 0);
   }
 
-  public async excluir(pUnitOfWork: UnitOfWork, pIdentificacao: string): Promise<void> {
-    await db.models.cliente.destroy<ClienteSequelizeModel>({
+  public async excluir(pUnitOfWork: UnitOfWork, pIdentificacao: string): Promise<boolean> {
+    const result = await db.models.cliente.destroy<ClienteSequelizeModel>({
       where: {
         identificacao: pIdentificacao,
       },
       transaction: pUnitOfWork.getTransition(),
     });
+    return Promise.resolve(result > 0);
   }
 
   public async listarTodos(): Promise<Cliente[]> {
