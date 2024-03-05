@@ -12,8 +12,11 @@ import { EditarClienteController } from './application/controllers/cliente/Edita
 import { EditarClienteEntryPoint } from './application/entryPoints/cliente/EditarClienteEntryPoint';
 import { PessoaRepository } from './infra/sequelize/repository/PessoaRepository';
 import { ExcluirCliente } from './domain/implementations/useCases/cliente/excluirCliente/ExcluirCliente';
-import { ExcluirClienteController } from './application/controllers/cliente/ExcluirClientecontroller';
+import { ExcluirClienteController } from './application/controllers/cliente/ExcluirClienteController';
 import { ExcluirClienteEntryPoint } from './application/entryPoints/cliente/ExcluirClienteEntryPoint';
+import { ListarCliente } from './domain/implementations/useCases/cliente/listarCliente/ListarCliente';
+import { ListarClienteEntryPoint } from './application/entryPoints/cliente/ListarClienteEntryPoint';
+import { ListarClienteController } from './application/controllers/cliente/ListarClienteController';
 
 /* Repositórios */
 const clienteRepository = new ClienteRepository();
@@ -31,10 +34,15 @@ const excluirCliente = new ExcluirCliente(clienteRepository, pessoaRepository);
 const excluirClienteController = new ExcluirClienteController(excluirCliente);
 const excluirClienteEntryPoint = new ExcluirClienteEntryPoint(excluirClienteController);
 
+const listarCliente = new ListarCliente(clienteRepository, pessoaRepository);
+const listarClienteController = new ListarClienteController(listarCliente);
+const listarClienteEntryPoint = new ListarClienteEntryPoint(listarClienteController);
+
 const entryPoints: EntryPoint[] = [
   criarClienteEntryPoint,
   editarclienteEntryPoint,
   excluirClienteEntryPoint,
+  listarClienteEntryPoint,
 ];
 
 const expressServer: ExpressServer = new ExpressServer();

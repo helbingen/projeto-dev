@@ -31,12 +31,14 @@ export class ClienteRepository {
         identificacao: pIdentificacao,
       },
       transaction: pUnitOfWork.getTransition(),
+
     });
     return Promise.resolve(result > 0);
   }
 
   public async listarTodos(): Promise<Cliente[]> {
-    const clienteDb = await db.models.cliente.findAll<ClienteSequelizeModel>();
+    const clienteDb = await db.models.cliente.findAll<ClienteSequelizeModel>({
+    });
     return clienteDb.map((cliente) => new Cliente(cliente))
   }
 }

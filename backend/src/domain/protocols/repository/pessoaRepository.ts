@@ -8,4 +8,5 @@ export interface IPessoaRepository {
   excluir(pUnitOfWork: UnitOfWork, pIdentificacao: string): Promise<void>;
   editar(pUnitOfWork: UnitOfWork, pPessoa: Pessoa): Promise<boolean>;
   buscarPessoaPorIdentificacao(pIdentificacao: string): Promise<PessoaSequelizeModel | null>;
+  listarTodos(pUnitOfWork: UnitOfWork): Promise<Pessoa[]>;
 }

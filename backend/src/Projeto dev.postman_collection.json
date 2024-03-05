@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "7792f1fc-f47f-4ceb-968d-ab25eb179b48",
+		"name": "Projeto dev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23576970"
+	},
+	"item": [
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "Criar cliente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacao\": \"2507589000132\",\r\n    \"nome\": \"Nome qualquer\",\r\n    \"nomeFantasia\": \"Decisao Sistemas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/criar-cliente",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"criar-cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar cliente",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacao\": \"2507589000132\",\r\n    \"nome\": \"bbbbbbbbb\",\r\n    \"situacao\": \"Ativo\",\r\n    \"nomeFantasia\": \"Decisão Sisaaaaaaaaaaaaatemas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/editar-cliente",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"editar-cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir cliente",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Listar cliente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/listar-cliente",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"listar-cliente"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "localhost:3000",
+			"type": "string"
+		}
+	]
+}

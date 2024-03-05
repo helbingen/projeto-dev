@@ -45,4 +45,13 @@ export class PessoaRepository {
     });
     return Promise.resolve(pessoa);
   }
+  public async listarTodos(): Promise<Pessoa[]> {
+    const pessoaDb = await db.models.pessoa.findAll<PessoaSequelizeModel>({
+      include: {
+        model: db.models.cliente,
+        as: 'clientes'
+      }
+    });
+    return pessoaDb.map((pessoa) => new Pessoa(pessoa))
+  }
 }
