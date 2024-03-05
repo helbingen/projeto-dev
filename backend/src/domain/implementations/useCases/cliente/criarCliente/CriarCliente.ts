@@ -11,7 +11,7 @@ import { CriarPessoaInput } from '../../pessoa/criarPessoa/CriarPessoaInput';
 export class CriarCliente {
   constructor(private clienteRepository: IClienteRepository, private pessoaRepository: IPessoaRepository) { }
 
-  public async execute(pUnitWork: UnitOfWork, pInputPessoa: CriarPessoaInput): Promise<CriarClienteOutput> {
+  public async execute(pUnitWork: UnitOfWork, pInputPessoa: CriarPessoaInput): Promise<CriarClienteOutput | null> {
 
     const pessoa = new Pessoa({
       identificacao: pInputPessoa.identificacao,
@@ -26,8 +26,13 @@ export class CriarCliente {
       identificacao: pessoa.identificacao,
       data_cadastro: new Date(),
     });
-    await this.pessoaRepository.criar(pUnitWork, pessoa);
-    await this.clienteRepository.criar(pUnitWork, cliente);
-    return new CriarClienteOutput(cliente);
+    const pessoaExist = await this.pessoaRepository.buscarPessoaPorIdentificacao(pInputPessoa.identificacao);
+
+    if (!pessoaExist) {
+      await this.pessoaRepository.criar(pUnitWork, pessoa);
+      await this.clienteRepository.criar(pUnitWork, cliente);
+      return new CriarClienteOutput(cliente);
+    }
+    return null;
   }
 }

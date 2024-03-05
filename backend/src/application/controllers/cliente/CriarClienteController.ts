@@ -1,4 +1,5 @@
 import EntrypointData from '../../../domain/implementations/entity/entryPoints/EntryPointData';
+import EntryPointResponse from '../../../domain/implementations/entity/entryPoints/EntryPointResponse';
 import EntryPointSuccess from '../../../domain/implementations/entity/entryPoints/EntryPointSucess';
 import { IController } from '../../../domain/implementations/services/Controller';
 import { CriarCliente } from '../../../domain/implementations/useCases/cliente/criarCliente/CriarCliente';
@@ -26,8 +27,10 @@ export class CriarClienteController implements IController {
       await unitOfWork.init();
       const result = await this.useCase.execute(unitOfWork, inputCliente);
       await unitOfWork.commit();
-
-      return new EntryPointSuccess('Cliente criado com sucesso.', result);
+      if (result) {
+        return new EntryPointSuccess('Cliente criado com sucesso.', result);
+      }
+      return new EntryPointResponse(false, 400, 'Cliente já cadastrado', result, null);
     } catch (error) {
       await unitOfWork.rollBack();
       return Promise.reject(error);
