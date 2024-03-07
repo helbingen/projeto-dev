@@ -17,10 +17,27 @@ import { ExcluirClienteEntryPoint } from './application/entryPoints/cliente/Excl
 import { ListarCliente } from './domain/implementations/useCases/cliente/listarCliente/ListarCliente';
 import { ListarClienteEntryPoint } from './application/entryPoints/cliente/ListarClienteEntryPoint';
 import { ListarClienteController } from './application/controllers/cliente/ListarClienteController';
+import { CriarEndereco } from './domain/implementations/useCases/endereco/criarEndereco/CriarEndereco';
+import { EnderecoRepository } from './infra/sequelize/repository/EnderecoRepository';
+import { CriarEnderecoController } from './application/controllers/endereco/CriarEnderecoController';
+import { CriarEnderecoEntryPoint } from './application/entryPoints/endereco/CriarEnderecoEntryPoint';
+import { EditarEndereco } from './domain/implementations/useCases/endereco/editarEndereco/EditarEndereco';
+import { EditarEnderecoController } from './application/controllers/endereco/EditarEnderecoController';
+import { EditarEnderecoEntryPoint } from './application/entryPoints/endereco/EditarEnderecoEntryPoint';
+import { ExcluirEndereco } from './domain/implementations/useCases/endereco/excluirEndereco/ExcluirEndereco';
+import { ExcluirEnderecoController } from './application/controllers/endereco/ExcluirEnderecoController';
+import { ExcluirEnderecoEntryPoint } from './application/entryPoints/endereco/ExcluirEnderecoEntryPoint';
+import { ListarEndereco } from './domain/implementations/useCases/endereco/listarEndereco/ListarEndereco';
+import { ListarEnderecoController } from './application/controllers/endereco/ListarEnderecoController';
+import { ListarEnderecoEntryPoint } from './application/entryPoints/endereco/ListarEnderecoEntryPoint';
 
 /* Repositórios */
 const clienteRepository = new ClienteRepository();
 const pessoaRepository = new PessoaRepository();
+const enderecoRepository = new EnderecoRepository();
+
+
+/* Cliente */
 
 const criarCliente = new CriarCliente(clienteRepository, pessoaRepository);
 const criarClienteController = new CriarClienteController(criarCliente);
@@ -38,11 +55,35 @@ const listarCliente = new ListarCliente(clienteRepository, pessoaRepository);
 const listarClienteController = new ListarClienteController(listarCliente);
 const listarClienteEntryPoint = new ListarClienteEntryPoint(listarClienteController);
 
+/* Endereço */
+
+const criarEndereco = new CriarEndereco(pessoaRepository, enderecoRepository);
+const criarEnderecoController = new CriarEnderecoController(criarEndereco);
+const criarEnderecoEntryPoint = new CriarEnderecoEntryPoint(criarEnderecoController);
+
+const editarEndereco = new EditarEndereco(pessoaRepository, enderecoRepository);
+const editarEnderecoController = new EditarEnderecoController(editarEndereco);
+const editarEnderecoEntryPoint = new EditarEnderecoEntryPoint(editarEnderecoController);
+
+const excluirEndereco = new ExcluirEndereco(enderecoRepository);
+const excluirEnderecoController = new ExcluirEnderecoController(excluirEndereco);
+const excluirEnderecoEntryPoint = new ExcluirEnderecoEntryPoint(excluirEnderecoController);
+
+const listarEndereco = new ListarEndereco(enderecoRepository);
+const listarEnderecoController = new ListarEnderecoController(listarEndereco);
+const listarEnderecoEntryPoint = new ListarEnderecoEntryPoint(listarEnderecoController);
+
+
+
 const entryPoints: EntryPoint[] = [
   criarClienteEntryPoint,
   editarclienteEntryPoint,
   excluirClienteEntryPoint,
   listarClienteEntryPoint,
+  criarEnderecoEntryPoint,
+  editarEnderecoEntryPoint,
+  excluirEnderecoEntryPoint,
+  listarEnderecoEntryPoint,
 ];
 
 const expressServer: ExpressServer = new ExpressServer();

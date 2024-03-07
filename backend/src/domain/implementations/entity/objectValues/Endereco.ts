@@ -1,5 +1,15 @@
 import { IEndereco, IEnderecoModel, IEnderecoModelCreate } from '../../../protocols/models/entity/objectValues/endereco';
 
+interface IEnderecoModelUpdate {
+  cep: string;
+  logradouro: string;
+  numero: string;
+  complemento: string;
+  bairro: string;
+  cidade: string;
+  estado: string;
+  is_principal: boolean;
+}
 
 export class Endereco implements IEndereco {
 
@@ -29,8 +39,6 @@ export class Endereco implements IEndereco {
     this.identificacao = pValores.identificacao ?? this.identificacao;
     this.createdAt = pValores.createdAt ?? this.createdAt;
     this.updatedAt = pValores.updatedAt ?? this.updatedAt;
-
-
   }
 
 
@@ -46,5 +54,18 @@ export class Endereco implements IEndereco {
       is_principal: this.is_principal,
       identificacao: this.identificacao,
     };
+  }
+
+  public gerarObjetoAtualizar(): IEnderecoModelUpdate {
+    return {
+      cep: this.cep,
+      logradouro: this.logradouro,
+      numero: this.numero,
+      complemento: this.complemento,
+      bairro: this.bairro,
+      cidade: this.cidade,
+      estado: this.estado,
+      is_principal: this.is_principal,
+    }
   }
 }

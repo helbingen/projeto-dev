@@ -1,6 +1,6 @@
 import { ValidadorDados } from '@decisaosistemas/typescript-validador-dados';
-import EntrypointData from '../../../entity/EntryPointData';
 import InformacaoNaoInfomada from '../../../entity/errors/InformacaoNaoEncontrada';
+import EntrypointData from '../../../entity/entryPoints/EntryPointData';
 
 export class CriarEnderecoInput {
 
@@ -20,8 +20,6 @@ export class CriarEnderecoInput {
 
   public isPrincipal: boolean;
 
-  public identificacao: string;
-
   constructor(pData: EntrypointData) {
     const logradouroValidador = ValidadorDados.iniciar(pData.body?.logradouro, 'body.logradouro').obrigatorio().string();
     const cepValidador = ValidadorDados.iniciar(pData.body?.cep, 'body.cep').obrigatorio().string();
@@ -31,11 +29,6 @@ export class CriarEnderecoInput {
     const cidadeValidador = ValidadorDados.iniciar(pData.body?.cidade, 'body.cidade').obrigatorio().string();
     const estadoValidador = ValidadorDados.iniciar(pData.body?.estado, 'body.estado').obrigatorio().string();
     const isPrincipalValidador = ValidadorDados.iniciar(pData.body?.isPrincipal, 'body.isPrincipal').obrigatorio().boolean();
-    const identificacaoValidador = ValidadorDados.iniciar(pData.body?.identificacao, 'body.identificacao').obrigatorio().string();
-
-    if (identificacaoValidador.estaInvalido() === false) {
-      throw new InformacaoNaoInfomada(`O atributo "identificacao": ${identificacaoValidador.getErro()}`)
-    }
 
     if (logradouroValidador.estaValido() === false) {
       throw new InformacaoNaoInfomada(`O atributo "logradouro": ${logradouroValidador.getErro()}`);
@@ -70,6 +63,5 @@ export class CriarEnderecoInput {
     this.cidade = pData.body.cidade;
     this.estado = pData.body.estado;
     this.isPrincipal = pData.body.isPrincipal;
-    this.identificacao = pData.body.identificacao;
   }
 }
