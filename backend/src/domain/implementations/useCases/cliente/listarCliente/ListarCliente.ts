@@ -1,7 +1,6 @@
 import UnitOfWork from '../../../../protocols/models/entity/UnitOfWork';
 import { IClienteRepository } from '../../../../protocols/repository/clienteRepository';
 import { IPessoaRepository } from '../../../../protocols/repository/pessoaRepository';
-import { Cliente } from '../../../entity/objectValues/Cliente';
 import { ListarClienteOutput } from './ListarClienteOutput';
 
 export class ListarCliente {
@@ -9,7 +8,16 @@ export class ListarCliente {
 
   public async execute(pUnitWork: UnitOfWork): Promise<ListarClienteOutput[]> {
     const clienteDb = await this.clienteRepository.listarTodos(pUnitWork);
-    await this.pessoaRepository.listarTodos(pUnitWork);
-    return clienteDb;
+    const pessoaDb = await this.pessoaRepository.listarTodos(pUnitWork);
+
+    const listarClienteOutputArray: ListarClienteOutput[] = [];
+
+    for (let i = 0; i < clienteDb.length; i++) {
+      const cliente = clienteDb[i];
+      const pessoa = pessoaDb[i];
+      const output = new ListarClienteOutput(cliente, pessoa);
+      listarClienteOutputArray.push(output);
+    }
+    return listarClienteOutputArray;
   }
 }

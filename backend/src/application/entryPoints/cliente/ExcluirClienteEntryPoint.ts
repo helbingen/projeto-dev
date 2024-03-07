@@ -1,5 +1,4 @@
 import { HttpMetodos } from '../../../domain/implementations/contants/enum/httpMetodoEnum';
-import { IEntrypointGuard } from '../../../domain/implementations/entity/entryPoints/EntryPointGuard';
 import { IController } from '../../../domain/implementations/services/Controller';
 
 export class ExcluirClienteEntryPoint {
