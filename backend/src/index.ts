@@ -30,11 +30,39 @@ import { ExcluirEnderecoEntryPoint } from './application/entryPoints/endereco/Ex
 import { ListarEndereco } from './domain/implementations/useCases/endereco/listarEndereco/ListarEndereco';
 import { ListarEnderecoController } from './application/controllers/endereco/ListarEnderecoController';
 import { ListarEnderecoEntryPoint } from './application/entryPoints/endereco/ListarEnderecoEntryPoint';
+import { TelefoneRepository } from './infra/sequelize/repository/TelefoneRepository';
+import { CriarTelefone } from './domain/implementations/useCases/telefone/criarTelefone/CriarTelefone';
+import { CriarTelefoneController } from './application/controllers/telefone/CriarTelefoneController';
+import { CriarTelefoneEntryPoint } from './application/entryPoints/telefone/CriarTelefoneEntryPoint';
+import { EditarTelefoneController } from './application/controllers/telefone/EditarTelefoneController';
+import { EditarTelefoneEntryPoint } from './application/entryPoints/telefone/EditarTelefoneEntryPoint';
+import { ExcluirTelefoneEntryPoint } from './application/entryPoints/telefone/ExcluirTelefoneEntryPoint';
+import { ListarTelefoneEntryPoint } from './application/entryPoints/telefone/ListarTelefoneEntryPoint';
+import { EditarTelefone } from './domain/implementations/useCases/telefone/editarTelefone/EditarTelefone';
+import { ExcluirTelefone } from './domain/implementations/useCases/telefone/excluirTelefone/ExcluirTelefone';
+import { ListarTelefone } from './domain/implementations/useCases/telefone/listarTelefone/ListarTelefone';
+import { ExcluirTelefoneController } from './application/controllers/telefone/ExcluirTelefoneController';
+import { ListarTelefoneController } from './application/controllers/telefone/ListarTelefoneController';
+import { EmailRepository } from './infra/sequelize/repository/EmailRepository';
+import { CriarEmail } from './domain/implementations/useCases/email/criarEmail/CriarEmail';
+import { EditarEmail } from './domain/implementations/useCases/email/editarEmail/EditarEmail';
+import { ExcluirEmail } from './domain/implementations/useCases/email/excluirEmail/ExcluirTelefone';
+import { ListarEmail } from './domain/implementations/useCases/email/listarEmail/ListarEmail';
+import { CriarEmailController } from './application/controllers/email/CriarEmailController';
+import { EditarEmailController } from './application/controllers/email/EditarEmailController';
+import { ExcluirEmailController } from './application/controllers/email/ExcluirEmailController';
+import { ListarEmailController } from './application/controllers/email/ListarEmailController';
+import { CriarEmailEntryPoint } from './application/entryPoints/email/CriarEmailEntryPoint';
+import { EditarEmailEntryPoint } from './application/entryPoints/email/EditarEmailEntryPoint';
+import { ExcluirEmailEntryPoint } from './application/entryPoints/email/ExcluiremailEntryPoint';
+import { ListarEmailEntryPoint } from './application/entryPoints/email/ListarEmailEntryPoint';
 
 /* Repositórios */
 const clienteRepository = new ClienteRepository();
 const pessoaRepository = new PessoaRepository();
 const enderecoRepository = new EnderecoRepository();
+const telefoneRepository = new TelefoneRepository();
+const emailRepository = new EmailRepository();
 
 
 /* Cliente */
@@ -73,7 +101,41 @@ const listarEndereco = new ListarEndereco(enderecoRepository);
 const listarEnderecoController = new ListarEnderecoController(listarEndereco);
 const listarEnderecoEntryPoint = new ListarEnderecoEntryPoint(listarEnderecoController);
 
+/* Telefone */
 
+const criarTelefone = new CriarTelefone(pessoaRepository, telefoneRepository);
+const criarTelefoneController = new CriarTelefoneController(criarTelefone);
+const criarTelefoneEntryPoint = new CriarTelefoneEntryPoint(criarTelefoneController);
+
+const editarTelefone = new EditarTelefone(pessoaRepository, telefoneRepository);
+const editarTelefoneController = new EditarTelefoneController(editarTelefone);
+const editarTelefoneEntryPoint = new EditarTelefoneEntryPoint(editarTelefoneController);
+
+const excluirTelefone = new ExcluirTelefone(telefoneRepository);
+const excluirTelefoneController = new ExcluirTelefoneController(excluirTelefone);
+const excluirTelefoneEntryPoint = new ExcluirTelefoneEntryPoint(excluirTelefoneController);
+
+const listarTelefone = new ListarTelefone(telefoneRepository);
+const listarTelefoneController = new ListarTelefoneController(listarTelefone);
+const listarTelefoneEntryPoint = new ListarTelefoneEntryPoint(listarTelefoneController);
+
+/* Email */
+
+const criarEmail = new CriarEmail(pessoaRepository, emailRepository);
+const criarEmailController = new CriarEmailController(criarEmail);
+const criarEmailEntryPoint = new CriarEmailEntryPoint(criarEmailController);
+
+const editarEmail = new EditarEmail(pessoaRepository, emailRepository);
+const editarEmailController = new EditarEmailController(editarEmail);
+const editarEmailEntryPoint = new EditarEmailEntryPoint(editarEmailController);
+
+const excluirEmail = new ExcluirEmail(emailRepository);
+const excluirEmailController = new ExcluirEmailController(excluirEmail);
+const excluirEmailEntryPoint = new ExcluirEmailEntryPoint(excluirEmailController);
+
+const listarEmail = new ListarEmail(emailRepository);
+const listarEmailController = new ListarEmailController(listarEmail);
+const listarEmailEntryPoint = new ListarEmailEntryPoint(listarEmailController);
 
 const entryPoints: EntryPoint[] = [
   criarClienteEntryPoint,
@@ -84,6 +146,14 @@ const entryPoints: EntryPoint[] = [
   editarEnderecoEntryPoint,
   excluirEnderecoEntryPoint,
   listarEnderecoEntryPoint,
+  criarTelefoneEntryPoint,
+  editarTelefoneEntryPoint,
+  excluirTelefoneEntryPoint,
+  listarTelefoneEntryPoint,
+  criarEmailEntryPoint,
+  editarEmailEntryPoint,
+  excluirEmailEntryPoint,
+  listarEmailEntryPoint
 ];
 
 const expressServer: ExpressServer = new ExpressServer();

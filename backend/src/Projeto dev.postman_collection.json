@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7792f1fc-f47f-4ceb-968d-ab25eb179b48",
+		"_postman_id": "eb28d423-2888-4f2f-82cd-229080a54c12",
 		"name": "Projeto dev",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "23576970"
@@ -78,8 +78,26 @@
 				{
 					"name": "Excluir cliente",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacao\": \"2507589000132\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/excluir-cliente",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"excluir-cliente"
+							]
+						}
 					},
 					"response": []
 				},
@@ -95,6 +113,384 @@
 							],
 							"path": [
 								"listar-cliente"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endereço",
+			"item": [
+				{
+					"name": "Criar endereço",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identificacao\": \"55817548020\", \r\n  \"cep\": \"60350722\",\r\n  \"logradouro\": \"Rua Gonçalo Bezerra\",\r\n  \"numero\": \"10\",\r\n  \"complemento\": \"Ao lado do mercado\", \r\n  \"bairro\": \"Olavo Oliveira\",\r\n  \"cidade\": \"Fortaleza\", \r\n  \"estado\": \"CE\",\r\n  \"isPrincipal\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/criar-endereco",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"criar-endereco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar endereço",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identificacao\": \"55817548020\", \r\n  \"cep\": \"60350720\",\r\n  \"logradouro\": \"aaaaaaaaaaaaaaaaaa\",\r\n  \"numero\": \"101\",\r\n  \"bairro\": \"Olavo Oliveira\",\r\n  \"cidade\": \"Fortaleza\", \r\n  \"estado\": \"CE\",\r\n  \"isPrincipal\": true,\r\n  \"complemento\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/editar-endereco",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"editar-endereco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir endereco",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacao\": \"55817548020\",\r\n    \"cep\": \"60350720\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/excluir-endereco",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"excluir-endereco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar endereço",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"identificacao\": \"55817548020\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/listar-endereco",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"listar-endereco"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Telefone",
+			"item": [
+				{
+					"name": "Criar telefone",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identificacao\": \"2507589000132\", \r\n  \"numero\": \"111121321311111\",\r\n  \"isPrincipal\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/criar-telefone",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"criar-telefone"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar telefone",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identificacao\": \"2507589000132\", \r\n  \"numero\": \"111111111\",\r\n  \"isPrincipal\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/editar-telefone",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"editar-telefone"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir telefone",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacao\": \"2507589000132\",\r\n    \"numero\": \"111111111\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/excluir-telefone",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"excluir-telefone"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar telefone",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"identificacao\": \"2507589000132\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/listar-telefone",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"listar-telefone"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Email",
+			"item": [
+				{
+					"name": "Criar email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identificacao\": \"2507589000132\", \r\n  \"email\": \"daniel@decisaosistemas.com\",\r\n  \"isPrincipal\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/criar-email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"criar-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar email",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identificacao\": \"2507589000132\", \r\n  \"email\": \"daniel@decisaosistemas.com\",\r\n  \"isPrincipal\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/editar-email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"editar-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir email",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacao\": \"2507589000132\",\r\n    \"email\": \"daniel@decisaosistemas.com.br\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/excluir-email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"excluir-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar email",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"identificacao\": \"2507589000132\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/listar-email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"listar-email"
 							]
 						}
 					},

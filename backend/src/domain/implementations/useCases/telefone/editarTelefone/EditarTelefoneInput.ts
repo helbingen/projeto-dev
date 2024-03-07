@@ -1,12 +1,12 @@
 import { ValidadorDados } from '@decisaosistemas/typescript-validador-dados';
-import EntrypointData from '../../../entity/EntryPointData';
 import InformacaoNaoInfomada from '../../../entity/errors/InformacaoNaoEncontrada';
+import EntrypointData from '../../../entity/entryPoints/EntryPointData';
 
 export class EditarTelefoneInput {
 
   public numero: string;
 
-  public isPrincipal: string;
+  public isPrincipal: boolean;
 
   public identificacao: string;
 
@@ -15,7 +15,7 @@ export class EditarTelefoneInput {
     const isPrincipalValidador = ValidadorDados.iniciar(pData.body?.isPrincipal, 'body.isPrincipal').obrigatorio().boolean();
     const identificacaoValidador = ValidadorDados.iniciar(pData.body?.identificacao, 'body.identificacao').obrigatorio().string();
 
-    if (identificacaoValidador.estaInvalido() === false) {
+    if (identificacaoValidador.estaValido() === false) {
       throw new InformacaoNaoInfomada(`O atributo "identificacao": ${identificacaoValidador.getErro()}`)
     }
 

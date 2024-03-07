@@ -20,7 +20,7 @@ export default class TelefoneSequelizeModel extends Model<ITelefoneModel, ITelef
           allowNull: false,
         },
         is_principal: {
-          type: DataTypes.TEXT,
+          type: DataTypes.BOOLEAN,
           allowNull: false,
         },
       },
