@@ -497,6 +497,240 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Conta",
+			"item": [
+				{
+					"name": "Criar conta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Daniel\",\r\n  \"email\": \"daniel@decisaosistemas.com\",\r\n  \"senha\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/criar-conta",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"criar-conta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Editar conta",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"email@email.com\",\r\n  \"nome\": \"nome exemplo 2\",\r\n  \"senha\": \"1232321asddsx  2267\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/editar-conta",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"editar-conta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar conta",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"identificacao\": \"2507589000132\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/listar-email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"listar-email"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Representante",
+			"item": [
+				{
+					"name": "Criar representante",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacao\": \"769991670012\",\r\n    \"idCliente\": \"2507589000132\",\r\n    \"nome\": \"Nome qualquer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/criar-representante",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"criar-representante"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar representante",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacao\": \"769991670012\",\r\n    \"idCliente\": \"2507589000132\",\r\n    \"nome\": \"José\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/editar-representante",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"editar-representante"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir representante",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idCliente\": \"2507589000132\",\r\n    \"identificacao\": \"769991670012\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/excluir-representante",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"excluir-representante"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar representante",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idCliente\": \"2507589000132\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/listar-representante",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"listar-representante"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
