@@ -56,6 +56,19 @@ import { CriarEmailEntryPoint } from './application/entryPoints/email/CriarEmail
 import { EditarEmailEntryPoint } from './application/entryPoints/email/EditarEmailEntryPoint';
 import { ExcluirEmailEntryPoint } from './application/entryPoints/email/ExcluiremailEntryPoint';
 import { ListarEmailEntryPoint } from './application/entryPoints/email/ListarEmailEntryPoint';
+import { ContaRepository } from './infra/sequelize/repository/ContaRepository';
+import { CriarConta } from './domain/implementations/useCases/conta/criarConta/CriarConta';
+import { CriarContaController } from './application/controllers/conta/CriarContaController';
+import { CriarContaEntryPoint } from './application/entryPoints/conta/CriarContaEntryPoint';
+import { Login } from './domain/implementations/useCases/conta/login/Login';
+import { LoginController } from './application/controllers/conta/LoginController';
+import { LoginEntryPoint } from './application/entryPoints/conta/Login';
+import { EditarConta } from './domain/implementations/useCases/conta/editarConta/EditarConta';
+import { EditarContaController } from './application/controllers/conta/EditarContaController';
+import { EditarContaEntryPoint } from './application/entryPoints/conta/EditarContaEntryPoint';
+import { ListarContaController } from './application/controllers/conta/ListarContaController';
+import { ListarContaEntryPoint } from './application/entryPoints/conta/ListarContaEntryPoint';
+import { ListarConta } from './domain/implementations/useCases/conta/listarConta/ListarConta';
 
 /* Repositórios */
 const clienteRepository = new ClienteRepository();
@@ -63,6 +76,7 @@ const pessoaRepository = new PessoaRepository();
 const enderecoRepository = new EnderecoRepository();
 const telefoneRepository = new TelefoneRepository();
 const emailRepository = new EmailRepository();
+const contaRepository = new ContaRepository();
 
 
 /* Cliente */
@@ -137,6 +151,24 @@ const listarEmail = new ListarEmail(emailRepository);
 const listarEmailController = new ListarEmailController(listarEmail);
 const listarEmailEntryPoint = new ListarEmailEntryPoint(listarEmailController);
 
+/* Conta */
+
+const criarConta = new CriarConta(contaRepository);
+const criarContaController = new CriarContaController(criarConta);
+const criarContaEntryPoint = new CriarContaEntryPoint(criarContaController);
+
+const login = new Login(contaRepository);
+const loginController = new LoginController(login);
+const loginEntryPoint = new LoginEntryPoint(loginController);
+
+const editarConta = new EditarConta(contaRepository);
+const editarContaController = new EditarContaController(editarConta);
+const editarContaEntryPoint = new EditarContaEntryPoint(editarContaController);
+
+const listarConta = new ListarConta(contaRepository);
+const listarContaController = new ListarContaController(listarConta);
+const listarContaEntryPoint = new ListarContaEntryPoint(listarContaController);
+
 const entryPoints: EntryPoint[] = [
   criarClienteEntryPoint,
   editarclienteEntryPoint,
@@ -153,7 +185,11 @@ const entryPoints: EntryPoint[] = [
   criarEmailEntryPoint,
   editarEmailEntryPoint,
   excluirEmailEntryPoint,
-  listarEmailEntryPoint
+  listarEmailEntryPoint,
+  criarContaEntryPoint,
+  loginEntryPoint,
+  editarContaEntryPoint,
+  listarContaEntryPoint,
 ];
 
 const expressServer: ExpressServer = new ExpressServer();
