@@ -69,6 +69,19 @@ import { EditarContaEntryPoint } from './application/entryPoints/conta/EditarCon
 import { ListarContaController } from './application/controllers/conta/ListarContaController';
 import { ListarContaEntryPoint } from './application/entryPoints/conta/ListarContaEntryPoint';
 import { ListarConta } from './domain/implementations/useCases/conta/listarConta/ListarConta';
+import { RepresentanteRepository } from './infra/sequelize/repository/RepresentanteRepository';
+import { CriarRepresentante } from './domain/implementations/useCases/representante/criarRepresentante/CriarRepresentante';
+import { CriarRepresentanteController } from './application/controllers/representante/CriarRepresentanteController';
+import { CriarRepresentanteEntryPoint } from './application/entryPoints/representante/CriarRepresentanteEntryPoint';
+import { EditarRepresentante } from './domain/implementations/useCases/representante/editarRepresentante/EditarRepresentante';
+import { EditarRepresentanteController } from './application/controllers/representante/EditarRepresentanteController';
+import { EditarRepresentanteEntryPoint } from './application/entryPoints/representante/EditarRepresentanteEntryPoint';
+import { ExcluirRepresentante } from './domain/implementations/useCases/representante/excluirRepresentante/ExcluirRepresentante';
+import { ExcluirRepresentanteController } from './application/controllers/representante/ExcluirRepresentanteController';
+import { ExcluirRepresentanteEntryPoint } from './application/entryPoints/representante/ExcluirRepresentanteEntryPoint';
+import { ListarRepresentante } from './domain/implementations/useCases/representante/listarRepresentante/ListarRepresentante';
+import { ListarRepresentanteController } from './application/controllers/representante/ListarRepresentanteController';
+import { ListarRepresentanteEntryPoint } from './application/entryPoints/representante/ListarRepresentanteEntryPoint';
 
 /* Repositórios */
 const clienteRepository = new ClienteRepository();
@@ -77,6 +90,7 @@ const enderecoRepository = new EnderecoRepository();
 const telefoneRepository = new TelefoneRepository();
 const emailRepository = new EmailRepository();
 const contaRepository = new ContaRepository();
+const representanteRepository = new RepresentanteRepository();
 
 
 /* Cliente */
@@ -169,6 +183,24 @@ const listarConta = new ListarConta(contaRepository);
 const listarContaController = new ListarContaController(listarConta);
 const listarContaEntryPoint = new ListarContaEntryPoint(listarContaController);
 
+/* Representante */
+
+const criarRepresentante = new CriarRepresentante(representanteRepository, clienteRepository);
+const criarRepresentanteController = new CriarRepresentanteController(criarRepresentante);
+const criarRepresentanteEntryPoint = new CriarRepresentanteEntryPoint(criarRepresentanteController);
+
+const editarRepresentante = new EditarRepresentante(representanteRepository, clienteRepository);
+const editarRepresentanteController = new EditarRepresentanteController(editarRepresentante);
+const editarRepresentanteEntryPoint = new EditarRepresentanteEntryPoint(editarRepresentanteController);
+
+const excluirRepresentante = new ExcluirRepresentante(representanteRepository, clienteRepository);
+const excluirRepresentanteController = new ExcluirRepresentanteController(excluirRepresentante);
+const excluirRepresentanteEntryPoint = new ExcluirRepresentanteEntryPoint(excluirRepresentanteController);
+
+const listarRepresentante = new ListarRepresentante(representanteRepository);
+const listarRepresentanteController = new ListarRepresentanteController(listarRepresentante);
+const listarRepresentanteEntryPoint = new ListarRepresentanteEntryPoint(listarRepresentanteController);
+
 const entryPoints: EntryPoint[] = [
   criarClienteEntryPoint,
   editarclienteEntryPoint,
@@ -190,6 +222,10 @@ const entryPoints: EntryPoint[] = [
   loginEntryPoint,
   editarContaEntryPoint,
   listarContaEntryPoint,
+  criarRepresentanteEntryPoint,
+  editarRepresentanteEntryPoint,
+  excluirRepresentanteEntryPoint,
+  listarRepresentanteEntryPoint
 ];
 
 const expressServer: ExpressServer = new ExpressServer();

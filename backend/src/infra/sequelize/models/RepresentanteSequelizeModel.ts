@@ -20,6 +20,10 @@ export default class RepresentanteSequelizeModel extends Model<IRepresentanteMod
           type: DataTypes.TEXT,
           primaryKey: true,
         },
+        id_cliente: {
+          type: DataTypes.TEXT,
+          allowNull: false,
+        },
       },
       {
         sequelize,
@@ -31,12 +35,12 @@ export default class RepresentanteSequelizeModel extends Model<IRepresentanteMod
     );
   }
   static assosiation(models: Models): void {
-    this.belongsTo(models.pessoa, {
-      as: 'pessoa',
+    this.belongsTo(models.cliente, {
+      as: 'cliente',
       foreignKey: {
-        field: 'identificacao',
-        name: 'identificacao',
-      },
+        field: 'id',
+        name: 'id_cliente',
+      }
     })
   }
 }

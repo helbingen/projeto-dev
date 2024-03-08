@@ -42,6 +42,13 @@ export default class ClienteSequelizeModel extends Model<IClienteModel, ICliente
         field: 'identificacao',
         name: 'identificacao',
       },
-    })
+    });
+    this.hasMany(models.representante, {
+      as: 'representantes',
+      foreignKey: {
+        field: 'id',
+        name: 'id_cliente',
+      },
+    });
   }
 }

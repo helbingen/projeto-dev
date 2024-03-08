@@ -8,6 +8,10 @@ export interface IRepresentante {
    * Número de identificação do representante.(CNPJ/CPF)
    */
   identificacao: string;
+  /**
+ * Número de identificação do cliente.
+ */
+  id_cliente: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

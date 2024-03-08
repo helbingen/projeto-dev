@@ -41,4 +41,17 @@ export class ClienteRepository {
     });
     return clienteDb.map((cliente) => new Cliente(cliente))
   }
+
+  public async listarClientePorId(pIdCliente: string): Promise<Cliente | null> {
+    const clienteDb = await db.models.cliente.findOne<ClienteSequelizeModel>({
+      where: {
+        identificacao: pIdCliente,
+      }
+    });
+    if (clienteDb) {
+      return Promise.resolve(new Cliente(clienteDb));
+    }
+    return null;
+  }
+
 }

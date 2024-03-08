@@ -76,13 +76,6 @@ export default class PessoaSequelizeModel extends Model<IPessoaModel, IPessoaMod
         name: 'identificacao',
       },
     });
-    this.hasMany(models.representante, {
-      as: 'representantes',
-      foreignKey: {
-        field: 'identificacao',
-        name: 'identificacao',
-      },
-    });
     this.hasMany(models.telefone, {
       as: 'telefones',
       foreignKey: {
