@@ -2,25 +2,28 @@
   <div class="dados-cadastrais ds-pt-3 ds-pb-2">
     <div class="ds-row">
       <div class="ds-col-6">
-        <span class="ds-text-truncate" dsTooltip [tooltip]="pessoa.nome">{{
-          pessoa.nome
-        }}</span>
-        <span>{{ pessoa.cpfCnpj }}</span>
+        <span
+          class="ds-text-truncate"
+          dsTooltip
+          [tooltip]="pessoa.pessoa.nome"
+          >{{ pessoa.pessoa.nome }}</span
+        >
+        <span>{{ pessoa.pessoa.identificacao }}</span>
       </div>
-      <div class="ds-col-2 centralizado" *ngIf="pessoa.situacao">
+      <div class="ds-col-2 centralizado" *ngIf="pessoa.cliente.situacao">
         <ds-badge
-          [labelBadge]="pessoa.situacao.toString()"
+          [labelBadge]="pessoa.cliente.situacao.toString()"
           [icone]="''"
-          [tipoBadge]="getTipoBadge(pessoa.situacao)"
+          [tipoBadge]="getTipoBadge(pessoa.cliente.situacao)"
         ></ds-badge>
       </div>
-      <div class="ds-col-2 centralizado" *ngIf="pessoa.dataDoCadastro">
-        <span>{{ pessoa.dataDoCadastro.toLocaleDateString() }}</span>
+      <div class="ds-col-2 centralizado" *ngIf="pessoa.cliente.data_cadastro">
+        <span>{{ pessoa.cliente.data_cadastro | dataFormatacao }}</span>
       </div>
 
       <div
         class="ds-col-2 centralizado botoes"
-        *ngIf="pessoa.situacao && pessoa.dataDoCadastro"
+        *ngIf="pessoa.cliente.situacao && pessoa.cliente.data_cadastro"
       >
         <i
           class="ds-icon-edit ds-text-primary"
@@ -34,7 +37,7 @@
 
       <div
         class="ds-col-6 centralizado botoes"
-        *ngIf="!pessoa.situacao || !pessoa.dataDoCadastro"
+        *ngIf="!pessoa.cliente.situacao || !pessoa.cliente.data_cadastro"
       >
         <i
           class="ds-icon-edit ds-text-primary"

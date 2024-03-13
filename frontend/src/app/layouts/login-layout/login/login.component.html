@@ -32,10 +32,11 @@
       <div class="ds-row centralizar ds-mb-3 ds-mx-0">
         <div class="ds-col-4">
           <ds-button
+            class="ds-d-inline-block width-100"
             [tipoBotao]="'PRIMARY'"
             [labelButton]="'Entrar'"
             [isDesabilitado]="loginForm.invalid"
-            class="ds-d-inline-block width-100"
+            (click)="login()"
           ></ds-button>
         </div>
       </div>

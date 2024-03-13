@@ -11,7 +11,7 @@
     <img src="../../../assets/Nada por aqui.svg" />
     <div class="titulo-imagem ds-mt-3">Nenhum cliente cadastrado!</div>
   </div>
-  <div class="cliente-container ds-mt-3">
+  <div class="cliente-container ds-mt-3" *ngIf="listaCliente.length > 0">
     <div class="ds-row ds-text-semi-bold ds-mb-2">
       <div class="ds-col-6">
         <span>Nome - CPF/CNPJ</span>

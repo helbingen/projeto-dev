@@ -30,7 +30,7 @@ export class CriarClienteController implements IController {
       if (result) {
         return new EntryPointSuccess('Cliente criado com sucesso.', result);
       }
-      return new EntryPointResponse(false, 400, 'Cliente já cadastrado', result, null);
+      return new EntryPointResponse(false, 404, 'Cliente já cadastrado', result, null);
     } catch (error) {
       await unitOfWork.rollBack();
       return Promise.reject(error);

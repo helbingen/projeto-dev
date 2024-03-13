@@ -5,7 +5,7 @@ export class ListarContaEntryPoint {
 
   public path: string = '/listar-conta';
 
-  public httpMetodo: HttpMetodos = HttpMetodos.get;
+  public httpMetodo: HttpMetodos = HttpMetodos.post;
 
   // public guards: IEntrypointGuard[];
 

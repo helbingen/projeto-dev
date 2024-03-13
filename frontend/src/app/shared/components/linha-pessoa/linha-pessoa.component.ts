@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { modalConfigDefault } from '../../constants/modalConfigConstants';
 import { ModalDefaultComponent } from '../../modals/modal-default/modal-default.component';
-import { IPessoaInterface } from '../../models/IPessoaInterface';
 import { ToasterService } from '../toaster-controller/toaster.service';
 import { SituacaoPessoaEnum } from '../../models/SituacaoPessoa.enum';
 import { ColorTokens } from '@decisaosistemas/angular-ds';
+import { NClienteNamespace } from '../../models/ClienteNamespace';
 
 
 @Component({
@@ -16,7 +16,7 @@ import { ColorTokens } from '@decisaosistemas/angular-ds';
 })
 export class LinhaPessoaComponent {
 
-  @Input() pessoa!: IPessoaInterface;
+  @Input() pessoa!: NClienteNamespace.IListarClienteInterface;
 
   constructor(public router: Router, private ngbModal: NgbModal, private toasterService: ToasterService) {
   }
@@ -32,6 +32,7 @@ export class LinhaPessoaComponent {
   }
 
   public editarRepresentante(pRotaAtiva: string): void {
+    console.log(this.pessoa.cliente.identificacao);
     if (pRotaAtiva === '/cliente/editar-cliente/representantes') {
       this.router.navigate([this.router.url, 'editar'])
     } else {

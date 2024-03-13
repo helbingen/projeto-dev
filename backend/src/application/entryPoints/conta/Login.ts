@@ -5,7 +5,7 @@ export class LoginEntryPoint {
 
   public path: string = '/login';
 
-  public httpMetodo: HttpMetodos = HttpMetodos.get;
+  public httpMetodo: HttpMetodos = HttpMetodos.post;
 
   // public guards: IEntrypointGuard[];
 

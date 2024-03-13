@@ -6,6 +6,8 @@ import cpfCnpjUtil from '../../../shared/utils/cpfCnpjUtil';
 import { TipoPessoaEnum } from '../../../shared/models/TipoPessoa.enum';
 import { ToasterService } from '../../../shared/components/toaster-controller/toaster.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ClienteService } from '../../../shared/services/http/cliente.service';
+import { ICriarClienteRequest } from '../../../shared/services/models/cliente/ICriarClienteRequest';
 
 @Component({
   selector: 'app-adicionar-cliente',
@@ -18,6 +20,7 @@ export class AdicionarClienteComponent {
     private readonly toasterService: ToasterService,
     private readonly router: Router,
     private readonly activeRoute: ActivatedRoute,
+    private clienteService: ClienteService,
   ) {
 
   }
@@ -74,9 +77,25 @@ export class AdicionarClienteComponent {
     return true;
   }
 
-  public salvarCliente(): void {
-    this.toasterService.showSuccess('Cliente salvo com sucesso!');
-    this.router.navigate(['../editar-cliente'], { relativeTo: this.activeRoute });
+  private buildCriarClienteRequestObject(): ICriarClienteRequest {
+    return {
+      identificacao: this.dadosCadastraisForm.controls.cnpjCpf.value!,
+      nome: this.dadosCadastraisForm.controls.nome.value!,
+      nomeFantasia: this.dadosCadastraisForm.controls.nomeFantasia.value,
+      nomeMae: this.dadosCadastraisForm.controls.nomeDaMae.value,
+    }
+  }
+
+  public async salvarCliente(): Promise<void> {
+    try {
+      console.log(this.buildCriarClienteRequestObject());
+      await this.clienteService.criarCliente(this.buildCriarClienteRequestObject());
+      this.toasterService.showSuccess('Cliente salvo com sucesso!');
+      this.router.navigate(['../editar-cliente'], { relativeTo: this.activeRoute });
+    } catch (error) {
+      this.toasterService.showAlert('Cliente já cadastrado!');
+      throw error;
+    }
   }
 
 }

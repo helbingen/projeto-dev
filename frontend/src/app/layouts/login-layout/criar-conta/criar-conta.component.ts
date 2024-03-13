@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SenhasUtil } from '../../../shared/utils/senhasUtil';
 import { ErrorsUtil } from '../../../shared/utils/errorsUtil';
+import { ContaService } from '../../../shared/services/http/conta.service';
+import { ToasterService } from '../../../shared/components/toaster-controller/toaster.service';
+import { Router } from '@angular/router';
+import { ICriarContaRequest } from '../../../shared/services/models/conta/ICriarContaRequest';
 
 @Component({
   selector: 'app-criar-conta',
@@ -20,6 +24,8 @@ export class CriarContaComponent {
   public formularioInvalido = false;
 
   public errosCustomizados = ErrorsUtil.getErrors;
+
+  constructor(private contaService: ContaService, private toasterService: ToasterService, private router: Router) { }
 
   public verificarSenha(pSenha: string, pFormControl: FormControl): void {
     if (pSenha !== '') {
@@ -44,6 +50,29 @@ export class CriarContaComponent {
       return true;
     }
     return false;
+  }
+
+  public buildCriarContaObject(): ICriarContaRequest {
+    return {
+      email: this.criarContaForm.controls.email.value!,
+      senha: this.criarContaForm.controls.senha.value!,
+      nome: this.criarContaForm.controls.nome.value!,
+    }
+  }
+
+  public async criarConta(): Promise<void> {
+    try {
+      if (!this.verificarSeFormularioEInvalido()) {
+        const dados = await this.contaService.criarConta(this.buildCriarContaObject());
+        if (dados.sucesso) {
+          this.toasterService.showSuccess('Conta criada com sucesso!');
+          this.router.navigate(['login'])
+        }
+      }
+    } catch (error) {
+      this.toasterService.showAlert('Erro ao criar conta');
+      throw error;
+    }
   }
 
 }

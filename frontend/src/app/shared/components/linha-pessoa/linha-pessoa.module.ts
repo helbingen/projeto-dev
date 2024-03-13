@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LinhaPessoaComponent } from './linha-pessoa.component';
 import { BadgeModule, TooltipModule } from '@decisaosistemas/angular-ds';
+import { dataFormatacaoPipe } from '../../pipes/dataFormatacaoPipe';
+import { FormatacaoPipeModule } from '../../pipes/formatacaoPipe.module';
 
 
 
@@ -11,6 +13,7 @@ import { BadgeModule, TooltipModule } from '@decisaosistemas/angular-ds';
     CommonModule,
     TooltipModule,
     BadgeModule,
+    FormatacaoPipeModule
   ],
   exports: [LinhaPessoaComponent]
 })

@@ -14,7 +14,11 @@ import { ToasterService } from '../toaster-controller/toaster.service';
 })
 export class HeaderComponent {
 
-  constructor(private ngbModal: NgbModal, private router: Router, private toasterService: ToasterService) { }
+  public nomeUsuario: string = '';
+
+  constructor(private ngbModal: NgbModal, private router: Router, private toasterService: ToasterService) {
+
+  }
 
   public abrirModalLogout(): void {
     const modalRef = this.ngbModal.open(ModalDefaultComponent, modalConfigDefault);

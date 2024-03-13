@@ -7,6 +7,7 @@ import { CriarClienteOutput } from './CriarClienteOutput';
 import { IPessoaRepository } from '../../../../protocols/repository/pessoaRepository';
 import { Pessoa } from '../../../entity/objectValues/Pessoa';
 import { CriarPessoaInput } from '../../pessoa/criarPessoa/CriarPessoaInput';
+import identificacaoUtil from '../../../utils/identificacaoUtil';
 
 export class CriarCliente {
   constructor(private clienteRepository: IClienteRepository, private pessoaRepository: IPessoaRepository) { }
@@ -14,7 +15,7 @@ export class CriarCliente {
   public async execute(pUnitWork: UnitOfWork, pInputPessoa: CriarPessoaInput): Promise<CriarClienteOutput | null> {
 
     const pessoa = new Pessoa({
-      identificacao: pInputPessoa.identificacao,
+      identificacao: identificacaoUtil.limparCampoIdentificacao(pInputPessoa.identificacao),
       inscrição_estadual: pInputPessoa.inscricaoEstadual,
       inscrição_municipal: pInputPessoa.inscricaoMunicipal,
       nome: pInputPessoa.nome,
