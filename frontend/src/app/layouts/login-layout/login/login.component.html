@@ -1,49 +1,51 @@
 <div class="login">
-  <div class="centralizar ds-mb-3">
-    <img src="../../../../assets/Caminho 74.svg" />
-  </div>
-  <div class="centralizar titulo ds-mb-2">Seja bem vindo</div>
-  <div class="centralizar">Insira seus dados e acesse a plataforma</div>
-  <div class="ds-row centralizar ds-mb-3">
-    <div class="ds-row centralizar ds-mb-3">
-      <div class="ds-col-4">
-        <ds-input-text
-          [labelInput]="'E-mail'"
-          [placeholderInputText]="'Insira seu e-mail'"
-          [control]="loginForm.controls.email"
-        ></ds-input-text>
-      </div>
+  <div>
+    <div class="centralizar ds-mb-3">
+      <img src="../../../../assets/Caminho 74.svg" />
     </div>
-    <div class="ds-row centralizar ds-mb-3">
-      <div class="ds-col-4">
-        <ds-input-text
-          [labelInput]="'Senha'"
-          [placeholderInputText]="'Insira sua senha'"
-          [control]="loginForm.controls.senha"
-        ></ds-input-text>
+    <div class="centralizar titulo ds-mb-2">Seja bem vindo</div>
+    <div class="centralizar">Insira seus dados e acesse a plataforma</div>
+    <div class="ds-row centralizar ds-mb-3 ds-mx-0">
+      <div class="ds-row centralizar ds-mb-3 ds-mx-0">
+        <div class="ds-col-4">
+          <ds-input-text
+            [labelInput]="'E-mail'"
+            [placeholderInputText]="'Insira seu e-mail'"
+            [control]="loginForm.controls.email"
+          ></ds-input-text>
+        </div>
       </div>
-    </div>
-    <div class="ds-row centralizar ds-mb-3">
-      <div class="ds-col-4">
-        <ds-checkbox [labelCheckbox]="'Lembrar-me'"></ds-checkbox>
+      <div class="ds-row centralizar ds-mb-3 ds-mx-0">
+        <div class="ds-col-4">
+          <ds-input-text
+            [labelInput]="'Senha'"
+            [placeholderInputText]="'Insira sua senha'"
+            [control]="loginForm.controls.senha"
+          ></ds-input-text>
+        </div>
       </div>
-    </div>
-    <div class="ds-row centralizar ds-mb-3">
-      <div class="ds-col-4">
-        <ds-button
-          [tipoBotao]="'PRIMARY'"
-          [labelButton]="'Entrar'"
-          [isDesabilitado]="loginForm.invalid"
-          class="ds-d-inline-block width-100"
-        ></ds-button>
+      <div class="ds-row centralizar ds-mb-3 ds-mx-0">
+        <div class="ds-col-4">
+          <ds-checkbox [labelCheckbox]="'Lembrar-me'"></ds-checkbox>
+        </div>
       </div>
-    </div>
-    <div class="centralizar">* Campos obrigatórios</div>
-    <div class="centralizar">
-      Não possui cadastro?
-      <a class="ds-ml-2" [routerLink]="'/criar-conta'"
-        >Faça seu cadastro aqui!</a
-      >
+      <div class="ds-row centralizar ds-mb-3 ds-mx-0">
+        <div class="ds-col-4">
+          <ds-button
+            [tipoBotao]="'PRIMARY'"
+            [labelButton]="'Entrar'"
+            [isDesabilitado]="loginForm.invalid"
+            class="ds-d-inline-block width-100"
+          ></ds-button>
+        </div>
+      </div>
+      <div class="centralizar">* Campos obrigatórios</div>
+      <div class="centralizar">
+        Não possui cadastro?
+        <a class="ds-ml-2" [routerLink]="'/criar-conta'"
+          >Faça seu cadastro aqui!</a
+        >
+      </div>
     </div>
   </div>
 </div>
