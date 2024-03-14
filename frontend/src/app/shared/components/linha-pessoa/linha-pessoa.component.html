@@ -8,7 +8,7 @@
           [tooltip]="pessoa.pessoa.nome"
           >{{ pessoa.pessoa.nome }}</span
         >
-        <span>{{ pessoa.pessoa.identificacao }}</span>
+        <span>{{ pessoa.pessoa.identificacao | cpfCnpjFormatacao }}</span>
       </div>
       <div class="ds-col-2 centralizado" *ngIf="pessoa.cliente.situacao">
         <ds-badge
