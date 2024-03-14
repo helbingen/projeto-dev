@@ -37,13 +37,16 @@ export class PessoaRepository {
     });
   }
 
-  public async buscarPessoaPorIdentificacao(pIdentificacao: string): Promise<PessoaSequelizeModel | null> {
+  public async buscarPessoaPorIdentificacao(pIdentificacao: string): Promise<Pessoa | null> {
     const pessoa = await db.models.pessoa.findOne<PessoaSequelizeModel>({
       where: {
         identificacao: pIdentificacao,
       }
     });
-    return Promise.resolve(pessoa);
+    if (pessoa) {
+      return Promise.resolve(new Pessoa(pessoa));
+    }
+    return null;
   }
   public async listarTodos(): Promise<Pessoa[]> {
     const pessoaDb = await db.models.pessoa.findAll<PessoaSequelizeModel>({

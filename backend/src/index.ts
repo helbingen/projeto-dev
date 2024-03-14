@@ -82,6 +82,9 @@ import { ExcluirRepresentanteEntryPoint } from './application/entryPoints/repres
 import { ListarRepresentante } from './domain/implementations/useCases/representante/listarRepresentante/ListarRepresentante';
 import { ListarRepresentanteController } from './application/controllers/representante/ListarRepresentanteController';
 import { ListarRepresentanteEntryPoint } from './application/entryPoints/representante/ListarRepresentanteEntryPoint';
+import { ListarClientePorIdentificacao } from './domain/implementations/useCases/cliente/listarClientePorIdentitificacao/ListarClientePorIdentificacao';
+import { ListarClientePorIdentificacaoController } from './application/controllers/cliente/ListarClientePorIdentificacaoController';
+import { ListarClientePorIdentificacaoEntryPoint } from './application/entryPoints/cliente/ListarClientePorIdentificacaoEntryPoint';
 
 /* Repositórios */
 const clienteRepository = new ClienteRepository();
@@ -110,6 +113,10 @@ const excluirClienteEntryPoint = new ExcluirClienteEntryPoint(excluirClienteCont
 const listarCliente = new ListarCliente(clienteRepository, pessoaRepository);
 const listarClienteController = new ListarClienteController(listarCliente);
 const listarClienteEntryPoint = new ListarClienteEntryPoint(listarClienteController);
+
+const listarClientePorIdentificacao = new ListarClientePorIdentificacao(clienteRepository, pessoaRepository);
+const listarClientePorIdentificacaoController = new ListarClientePorIdentificacaoController(listarClientePorIdentificacao);
+const listarClientePorIdentificacaoEntryPoint = new ListarClientePorIdentificacaoEntryPoint(listarClientePorIdentificacaoController);
 
 /* Endereço */
 
@@ -206,6 +213,7 @@ const entryPoints: EntryPoint[] = [
   editarclienteEntryPoint,
   excluirClienteEntryPoint,
   listarClienteEntryPoint,
+  listarClientePorIdentificacaoEntryPoint,
   criarEnderecoEntryPoint,
   editarEnderecoEntryPoint,
   excluirEnderecoEntryPoint,
