@@ -3,7 +3,7 @@ import { IController } from '../../../domain/implementations/services/Controller
 
 export class ListarEnderecoEntryPoint {
 
-  public path: string = '/listar-endereco';
+  public path: string = '/listar-endereco/:identificacao';
 
   public httpMetodo: HttpMetodos = HttpMetodos.get;
 

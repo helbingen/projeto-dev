@@ -19,7 +19,6 @@ export class EnderecoRepository {
         identificacao: pIdentificacao,
       }
     });
-    console.log(enderecoDb);
     if (enderecoDb) {
       return true;
     }

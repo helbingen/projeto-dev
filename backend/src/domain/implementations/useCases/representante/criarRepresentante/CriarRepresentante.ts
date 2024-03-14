@@ -15,14 +15,12 @@ export class CriarRepresentante {
     const cliente = new Cliente({
       identificacao: pInputRepresentante.idCliente,
     });
-    console.log(cliente);
 
     const representante = new Representante({
       nome: pInputRepresentante.nome,
       identificacao: pInputRepresentante.identificacao,
       id_cliente: cliente.identificacao,
     });
-    console.log(representante);
     const clienteExist = await this.clienteRepository.listarClientePorId(cliente.identificacao);
     if (clienteExist) {
       const representanteExist = await this.representanteRepository.representanteExist(representante.identificacao, cliente.identificacao);

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TipoMascarasEnum } from '@decisaosistemas/angular-ds';
+import { CheckboxChangeEvent, TipoMascarasEnum } from '@decisaosistemas/angular-ds';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CepService } from '../../../../../../shared/services/cep.service';
 import { ICepInterface } from '../../../../../../shared/services/models/ICepInterface';
@@ -17,7 +17,8 @@ export class EnderecoModalComponent {
   @Input() tituloModal: string = '';
   @Input() labelBotao: string = '';
   @Input() endereco!: IEnderecoInterface;
-  @Output() confirmacaoSalvarEndereco: EventEmitter<boolean> = new EventEmitter<boolean>(false)
+  @Output() confirmacaoSalvarEndereco: EventEmitter<boolean> = new EventEmitter<boolean>(false);
+  @Output() enderecoOutputEvent: EventEmitter<IEnderecoInterface> = new EventEmitter();
 
   constructor(public ngbActiveModal: NgbActiveModal, private cepService: CepService) { }
 
@@ -29,11 +30,12 @@ export class EnderecoModalComponent {
 
   public mascaraCep = TipoMascarasEnum.cep;
   public errosCustomizados = ErrorsUtil.getErrors;
+  public isPrincipalChecked = false;
 
   public enderecoForm = new FormGroup({
     cep: new FormControl<string | null>(null, Validators.required),
     logradouro: new FormControl<string | null>(null, Validators.required),
-    numero: new FormControl<number | null>(null, Validators.required),
+    numero: new FormControl<string | null>(null, Validators.required),
     complemento: new FormControl<string | null>(null),
     bairro: new FormControl<string | null>(null, Validators.required),
     cidade: new FormControl<string | null>(null, Validators.required),
@@ -53,7 +55,7 @@ export class EnderecoModalComponent {
     }
   }
 
-  private preencherEnderecoViaCep(pCep: ICepInterface) {
+  private preencherEnderecoViaCep(pCep: ICepInterface): void {
     this.enderecoForm.patchValue({
       logradouro: pCep.logradouro,
       complemento: pCep.complemento,
@@ -65,10 +67,11 @@ export class EnderecoModalComponent {
 
   public salvarEndereco(): void {
     this.confirmacaoSalvarEndereco.emit(true);
+    this.buildEnderecoOutput();
     this.ngbActiveModal.close();
   }
 
-  private preencherInputsEnderecoParaEdicao(pEndereco: IEnderecoInterface) {
+  private preencherInputsEnderecoParaEdicao(pEndereco: IEnderecoInterface): void {
     this.enderecoForm.patchValue({
       logradouro: pEndereco.logradouro,
       complemento: pEndereco.complemento,
@@ -77,7 +80,25 @@ export class EnderecoModalComponent {
       cidade: pEndereco.cidade,
       estado: pEndereco.estado,
       cep: pEndereco.cep,
+    });
+    this.enderecoForm.controls.cep.disable();
+  }
+
+  private buildEnderecoOutput(): void {
+    this.enderecoOutputEvent.emit({
+      cep: this.enderecoForm.controls.cep.value!,
+      logradouro: this.enderecoForm.controls.logradouro.value!,
+      complemento: this.enderecoForm.controls.complemento.value,
+      numero: this.enderecoForm.controls.numero.value!,
+      bairro: this.enderecoForm.controls.bairro.value!,
+      cidade: this.enderecoForm.controls.cidade.value!,
+      estado: this.enderecoForm.controls.estado.value!,
+      isPrincipal: this.isPrincipalChecked,
     })
+  }
+
+  public checkIsPrincipal(event: CheckboxChangeEvent): void {
+    this.isPrincipalChecked = event.isChecked;
   }
 
 }

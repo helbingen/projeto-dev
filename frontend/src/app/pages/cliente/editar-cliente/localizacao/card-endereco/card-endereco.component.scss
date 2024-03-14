@@ -8,6 +8,9 @@
     border-radius: 0.5rem;
     border-top: 1px solid var(--gray-color-400);
     border-bottom: 0;
+    .visibility-hidden {
+      visibility: hidden;
+    }
   }
   .botoes-container {
     font-size: 20px;

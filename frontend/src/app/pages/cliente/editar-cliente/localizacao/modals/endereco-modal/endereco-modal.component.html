@@ -65,7 +65,10 @@
       </div>
     </div>
     <div class="ds-mt-3">
-      <ds-checkbox [labelCheckbox]="'Endereço principal'"></ds-checkbox>
+      <ds-checkbox
+        [labelCheckbox]="'Endereço principal'"
+        (changeEvento)="checkIsPrincipal($event)"
+      ></ds-checkbox>
     </div>
   </div>
   <div class="botoes">

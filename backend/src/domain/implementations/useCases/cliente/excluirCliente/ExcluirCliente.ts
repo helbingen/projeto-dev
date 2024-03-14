@@ -11,7 +11,6 @@ export class ExcluirCliente {
     const cliente = new Cliente({
       identificacao: pInputCliente.identificacao,
     });
-    console.log(cliente.identificacao);
     const pessoaExist = await this.pessoaRepository.buscarPessoaPorIdentificacao(cliente.identificacao);
     if (pessoaExist) {
       await this.pessoaRepository.excluir(pUnitWork, cliente.identificacao);

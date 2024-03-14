@@ -6,7 +6,6 @@ import RepresentanteSequelizeModel from '../models/RepresentanteSequelizeModel';
 export class RepresentanteRepository {
 
   public async criar(pUnitOfWork: UnitOfWork, pRepresentante: Representante): Promise<Representante> {
-    console.log(pRepresentante)
     const representanteDb = await db.models.representante.create<RepresentanteSequelizeModel>(pRepresentante.gerarObjCriar(), {
       transaction: pUnitOfWork.getTransition(),
     });

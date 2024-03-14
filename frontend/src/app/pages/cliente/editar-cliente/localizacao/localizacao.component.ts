@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { EnderecoModalComponent } from './modals/endereco-modal/endereco-modal.component';
 import { ToasterService } from '../../../../shared/components/toaster-controller/toaster.service';
-import { IEnderecoInterface } from './models/IEnderecoInterface';
+import { IEnderecoInterface, IEnderecoInterfaceOutput } from './models/IEnderecoInterface';
 import { modalConfigLarge } from '../../../../shared/constants/modalConfigConstants';
 import { TipoMascarasEnum } from '@decisaosistemas/angular-ds';
 import { FormControl, Validators } from '@angular/forms';
@@ -10,6 +10,10 @@ import { ValidatorsUtil } from '../../../../shared/utils/validatorsUtil';
 import { ErrorsUtil } from '../../../../shared/utils/errorsUtil';
 import { ITelefoneInterface } from './models/ITelefoneInterface';
 import { IEmailInterface } from './models/IEmailInterface';
+import { EnderecoService } from '../../../../shared/services/http/endereco.service';
+import { ICriarEnderecoRequest } from '../../../../shared/services/models/endereco/ICriarEnderecoRequest';
+import { Router } from '@angular/router';
+import identificacaoParamUtil from '../../../../shared/utils/identificacaoParamUtil';
 
 @Component({
   selector: 'app-localizacao',
@@ -17,9 +21,6 @@ import { IEmailInterface } from './models/IEmailInterface';
   styleUrl: './localizacao.component.scss',
 })
 export class LocalizacaoComponent {
-
-  constructor(public ngbModal: NgbModal, private toasterService: ToasterService) {
-  }
 
   public telefoneForm = new FormControl<string | null>(null, [Validators.required, ValidatorsUtil.telefoneValido]);
   public emailForm = new FormControl<string | null>(null, [Validators.required, Validators.email]);
@@ -29,79 +30,57 @@ export class LocalizacaoComponent {
   public mostrarInputEmail = false;
   public isEdicaoEmail = false;
   public isEdicaoTelefone = false;
+  private identificacao = identificacaoParamUtil.obterIdentificacaoPelaRota(this.router.url);
 
-  public listaEndereco: IEnderecoInterface[] = [
-    {
-      logradouro: 'Rua Xavier de AraújoRua Xavier de AraújoRua Xavier de AraújoRua Xavier de AraújoRua Xavier de AraújoRua Xavier de AraújoRua Xavier de AraújoRua Xavier de Araújo',
-      complemento: 'Complemento testeComplemento testeComplemento testeComplemento testeComplemento testeComplemento testeComplemento testeComplemento testeComplemento testeComplemento testeComplemento teste',
-      bairro: 'Guaxuma',
-      cidade: 'Maceió',
-      estado: 'AL',
-      cep: '57038-720',
-    },
-    {
-      logradouro: 'Rua das Violetas',
-      complemento: 'Complemento teste 2',
-      bairro: 'Altos da Glória',
-      cidade: 'Cuiabá',
-      estado: 'MT',
-      cep: '78057-316',
-    },
-    {
-      logradouro: 'Rua Pereira Barreto',
-      complemento: 'Complemento teste 3',
-      bairro: 'Setor Novo Horizonte',
-      cidade: 'Itumbiara',
-      estado: 'GO',
-      cep: '75532-210',
-    },
-    {
-      logradouro: 'Rua Pereira Barreto',
-      complemento: 'Complemento teste 3',
-      bairro: 'Setor Novo Horizonte',
-      cidade: 'Itumbiara',
-      estado: 'GO',
-      cep: '75532-210',
-    },
-    {
-      logradouro: 'Rua Pereira Barreto',
-      complemento: 'Complemento teste 3',
-      bairro: 'Setor Novo Horizonte',
-      cidade: 'Itumbiara',
-      estado: 'GO',
-      cep: '75532-210',
-    },
-  ]
+  public listaEndereco: IEnderecoInterface[] = []
 
-  public listaTelefone: ITelefoneInterface[] = [
-    {
-      telefone: '(62) 3333-3333',
-      isPrincipal: true,
-    },
-    {
-      telefone: '(62) 98745-4534',
-      isPrincipal: false,
-    },
-  ]
+  public listaTelefone: ITelefoneInterface[] = []
 
-  public listaEmail: IEmailInterface[] = [
-    {
-      email: 'daniel@decisaosistemas.com.br',
-      isPrincipal: true,
-    },
-    {
-      email: 'daniel@decisaosistemas.com.br',
-      isPrincipal: false,
-    },
-  ]
+  public listaEmail: IEmailInterface[] = []
 
-  public abrirModalEndereco(): void {
+  constructor(
+    public ngbModal: NgbModal,
+    private toasterService: ToasterService,
+    private enderecoService: EnderecoService,
+    private router: Router,
+  ) { }
+
+  public async ngOnInit(): Promise<void> {
+    await this.listarEndereco();
+  }
+
+  public async abrirModalEndereco(): Promise<void> {
     const modalRef = this.ngbModal.open(EnderecoModalComponent, modalConfigLarge);
     modalRef.componentInstance.tituloModal = 'Novo endereço';
     modalRef.componentInstance.labelBotao = 'Salvar';
     modalRef.componentInstance.confirmacaoSalvarEndereco.subscribe((response: boolean) => {
-      response ? this.toasterService.showSuccess('Endereço adicionado com sucesso!') : this.toasterService.showDanger('Erro ao adicionar endereço')
+      if (response) {
+        modalRef.componentInstance.enderecoOutputEvent.subscribe(async (enderecoEvent: IEnderecoInterface) => {
+          try {
+            await this.enderecoService.criarEndereco(this.buildCriarEnderecoRequest(enderecoEvent))
+            this.toasterService.showSuccess('Endereço adicionado com sucesso!')
+            await this.listarEndereco();
+          } catch (error) {
+            this.toasterService.showAlert('Falha ao adicionar endereço!');
+            console.error(error);
+          }
+        })
+      }
     })
+  }
+
+  private buildCriarEnderecoRequest(pEndereco: IEnderecoInterface): ICriarEnderecoRequest {
+    return {
+      identificacao: this.identificacao,
+      cep: pEndereco.cep,
+      logradouro: pEndereco.logradouro,
+      complemento: pEndereco.complemento,
+      numero: pEndereco.numero,
+      bairro: pEndereco.bairro,
+      cidade: pEndereco.cidade,
+      estado: pEndereco.estado,
+      isPrincipal: pEndereco.isPrincipal,
+    }
   }
 
   public adicionar(pInput: 'Telefone' | 'Email'): void {
@@ -141,6 +120,42 @@ export class LocalizacaoComponent {
       this.isEdicaoEmail = !this.isEdicaoEmail;
       this.emailForm.reset();
       this.toasterService.showSuccess('E-mail editado com sucesso!');
+    }
+  }
+
+  public async listarEndereco(): Promise<void> {
+    try {
+      const dados = await this.enderecoService.listarEnderecos(this.identificacao);
+      this.listaEndereco = this.buildEnderecoInterface(dados.dados);
+    } catch (error) {
+      this.toasterService.showAlert('Falha ao carregar endereço!');
+      console.error(error);
+    }
+  }
+
+  private buildEnderecoInterface(pEnderecoBackend: IEnderecoInterfaceOutput[]): IEnderecoInterface[] {
+    let enderecoInterface: IEnderecoInterface;
+    let enderecoArray: IEnderecoInterface[] = [];
+    pEnderecoBackend.forEach(endereco => {
+      enderecoInterface = {
+        cep: endereco.cep,
+        bairro: endereco.bairro,
+        cidade: endereco.cidade,
+        complemento: endereco.complemento,
+        estado: endereco.estado,
+        isPrincipal: endereco.is_principal,
+        logradouro: endereco.logradouro,
+        numero: endereco.numero,
+        identificacao: endereco.identificacao,
+      };
+      enderecoArray.push(enderecoInterface)
+    });
+    return enderecoArray;
+  }
+
+  public async recarregarEndereco(pEvent: boolean): Promise<void> {
+    if (pEvent) {
+      await this.listarEndereco();
     }
   }
 

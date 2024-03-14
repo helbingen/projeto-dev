@@ -13,7 +13,10 @@
         >
         <div class="ds-row">
           <div class="ds-col-3 ds-mt-3" *ngFor="let endereco of listaEndereco">
-            <app-card-endereco [endereco]="endereco"></app-card-endereco>
+            <app-card-endereco
+              [endereco]="endereco"
+              (confirmacaoEvent)="recarregarEndereco($event)"
+            ></app-card-endereco>
           </div>
         </div>
       </ds-accordion-line>
