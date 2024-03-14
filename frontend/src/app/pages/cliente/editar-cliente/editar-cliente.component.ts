@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import identificacaoParamUtil from '../../../shared/utils/identificacaoParamUtil';
 
 @Component({
   selector: 'app-editar-cliente',
@@ -8,8 +9,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class EditarClienteComponent {
 
+  public identificacaoPessoa: string = '';
+
   constructor(private router: Router) {
     this.router.navigate([this.router.url, 'dadoscadastrais'])
+    this.identificacaoPessoa = identificacaoParamUtil.obterIdentificacaoPelaRota(this.router.url)
   }
 
 }

@@ -9,13 +9,13 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalDefaultComponent {
 
-  constructor(public activeModal: NgbActiveModal) { }
-
   @Input() textoHeader = '';
   @Input() textoDescricao = '';
   @Input() labelBotao = '';
   @Input() tipoBotaoConfirmarAcao: TipoBotao = 'DANGER';
   @Output() confirmarAcao = new EventEmitter<boolean>();
+
+  constructor(public activeModal: NgbActiveModal) { }
 
   public confirmarAcaoModal(): void {
     this.confirmarAcao.emit(true);

@@ -24,7 +24,10 @@
       </div>
     </div>
     <div *ngFor="let cliente of listaCliente">
-      <app-linha-pessoa [pessoa]="cliente"></app-linha-pessoa>
+      <app-linha-pessoa
+        [pessoa]="cliente"
+        (exclusaoEvent)="recarregarListaClientes($event)"
+      ></app-linha-pessoa>
     </div>
   </div>
 </div>

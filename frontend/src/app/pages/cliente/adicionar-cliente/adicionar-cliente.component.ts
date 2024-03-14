@@ -88,10 +88,11 @@ export class AdicionarClienteComponent {
 
   public async salvarCliente(): Promise<void> {
     try {
-      console.log(this.buildCriarClienteRequestObject());
+      const cpfCnpjLimpo = cpfCnpjUtil.limpaCnpjCpf(this.dadosCadastraisForm.controls.cnpjCpf.value!)
       await this.clienteService.criarCliente(this.buildCriarClienteRequestObject());
       this.toasterService.showSuccess('Cliente salvo com sucesso!');
-      this.router.navigate(['../editar-cliente'], { relativeTo: this.activeRoute });
+      // this.router.navigate(['../editar-cliente'], { relativeTo: this.activeRoute });
+      this.router.navigate([`../editar-cliente/${cpfCnpjLimpo}`], { relativeTo: this.activeRoute });
     } catch (error) {
       this.toasterService.showAlert('Cliente já cadastrado!');
       throw error;

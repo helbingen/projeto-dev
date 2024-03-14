@@ -17,8 +17,21 @@ export class ClienteService {
     const dados = await lastValueFrom(retornoHttp);
     return dados;
   }
+
   public async criarCliente(pBody: ICriarClienteRequest): Promise<IHttpResponse> {
     const retornoHttp = this.http.post<IHttpResponse>(`${apiUrl}/criar-cliente`, pBody).pipe();
+    const dados = await lastValueFrom(retornoHttp);
+    return dados;
+  }
+
+  public async listarClientePorIdentificacao(pIdentificao: string): Promise<IHttpResponse> {
+    const retornoHttp = this.http.get<IHttpResponse>(`${apiUrl}/listar-cliente/${pIdentificao}`).pipe();
+    const dados = await lastValueFrom(retornoHttp);
+    return dados;
+  }
+
+  public async excluirCliente(pIdentificao: string): Promise<IHttpResponse> {
+    const retornoHttp = this.http.delete<IHttpResponse>(`${apiUrl}/excluir-cliente/${pIdentificao}`).pipe();
     const dados = await lastValueFrom(retornoHttp);
     return dados;
   }

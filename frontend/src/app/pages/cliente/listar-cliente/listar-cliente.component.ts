@@ -28,4 +28,10 @@ export class ListarClienteComponent {
     this.router.navigate([this.router.url, 'adicionar-cliente']);
   }
 
+  public async recarregarListaClientes(pExclusaoEvent: boolean): Promise<void> {
+    if (pExclusaoEvent) {
+      this.listaCliente = await this.listarCliente();
+    }
+  }
+
 }

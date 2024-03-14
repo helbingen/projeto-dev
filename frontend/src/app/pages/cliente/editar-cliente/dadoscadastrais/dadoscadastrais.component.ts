@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { TipoPessoaEnum } from '../../../../shared/models/TipoPessoa.enum';
-import cpfCnpjUtil from '../../../../shared/utils/cpfCnpjUtil';
+import cpfCnpjUtil, { CpfCnpjUtil } from '../../../../shared/utils/cpfCnpjUtil';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
 import { TipoMascarasEnum, TipoBotao } from '@decisaosistemas/angular-ds';
 import { ErrorsUtil } from '../../../../shared/utils/errorsUtil';
 import { SituacaoPessoaEnum } from '../../../../shared/models/SituacaoPessoa.enum';
 import { ToasterService } from '../../../../shared/components/toaster-controller/toaster.service';
-import { DataUtil } from '../../../../shared/utils/dataUtil';
 import { ValidatorsUtil } from '../../../../shared/utils/validatorsUtil';
-import { NCalendario } from '@decisaosistemas/angular-ds/components/input/input-date/calendar';
+import { ClienteService } from '../../../../shared/services/http/cliente.service';
+import { Router } from '@angular/router';
+import identificacaoParamUtil from '../../../../shared/utils/identificacaoParamUtil';
 
 @Component({
   selector: 'app-dadoscadastrais',
@@ -23,7 +23,7 @@ export class DadoscadastraisComponent {
     nome: new FormControl<string | null>(null, Validators.required),
     nomeFantasia: new FormControl<string | null>(null, Validators.required),
     nomeDaMae: new FormControl<string | null>(null, Validators.required),
-    inscricaoMunicial: new FormControl<string | null>(null),
+    inscricaoMunicipal: new FormControl<string | null>(null),
     inscricaoEstadual: new FormControl<string | null>(null),
     dataCadastro: new FormControl<string | null>(null, ValidatorsUtil.dataValida)
   })
@@ -38,11 +38,12 @@ export class DadoscadastraisComponent {
 
   constructor(
     private readonly toasterService: ToasterService,
+    private clienteService: ClienteService,
+    private router: Router,
   ) { }
 
-  public ngOnInit(): void {
-    this.dadosCadastraisForm.controls.cnpjCpf.setValue('13.352.165/0001-74')
-    // this.dadosCadastraisForm.controls.cnpjCpf.setValue('823.081.320-51')
+  public async ngOnInit(): Promise<void> {
+    await this.montarFormularioDadosCadastrais();
     const cnpjCpfLimpo = cpfCnpjUtil.limpaCnpjCpf(this.dadosCadastraisForm.controls.cnpjCpf.value ?? '');
     this.tipoPessoa = cpfCnpjUtil.identificaTipoDePessoa(cnpjCpfLimpo);
   }
@@ -88,6 +89,23 @@ export class DadoscadastraisComponent {
     if (pTipoSituacao === SituacaoPessoaEnum.negativado) {
       this.labelBotaoSituacao = SituacaoPessoaEnum.negativado;
       this.tipoBotaoSituacao = 'DANGER';
+    }
+  }
+
+  public async montarFormularioDadosCadastrais(): Promise<void> {
+    const identificacao = identificacaoParamUtil.obterIdentificacaoPelaRota(this.router.url);
+    const dados = await this.clienteService.listarClientePorIdentificacao(identificacao);
+    if (dados) {
+      this.dadosCadastraisForm.patchValue({
+        cnpjCpf: cpfCnpjUtil.cnpjCpfFormatado(dados.dados.cliente.identificacao),
+        dataCadastro: dados.dados.cliente.data_cadastro,
+        inscricaoEstadual: dados.dados.pessoa.inscrição_estadual,
+        inscricaoMunicipal: dados.dados.pessoa.inscrição_municipal,
+        nome: dados.dados.pessoa.nome,
+        nomeDaMae: dados.dados.pessoa.nome_mae,
+        nomeFantasia: dados.dados.pessoa.nome_fantasia,
+      });
+      this.mudarSituacaoPessoa(dados.dados.cliente.situacao);
     }
   }
 

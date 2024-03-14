@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-menu-lateral-direito',
@@ -7,5 +6,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './menu-lateral-direito.component.scss'
 })
 export class MenuLateralDireitoComponent {
+
+  @Input() identificacao: string = '';
 
 }

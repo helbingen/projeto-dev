@@ -147,6 +147,16 @@ export class CpfCnpjUtil {
     return null;
   }
 
+  public cnpjCpfFormatado(pCnpjCpf: string): string {
+    if (!pCnpjCpf || pCnpjCpf.length < 11 || pCnpjCpf.length > 14) {
+      return 'Cpf/Cnpj inválido';
+    }
+    if (pCnpjCpf.length === 11) {
+      return `${pCnpjCpf.substring(0, 3)}.${pCnpjCpf.substring(3, 6)}.${pCnpjCpf.substring(6, 9)}-${pCnpjCpf.substring(9, 11)}`
+    }
+    return `${pCnpjCpf.substring(0, 2)}.${pCnpjCpf.substring(2, 5)}.${pCnpjCpf.substring(5, 8)}/${pCnpjCpf.substring(8, 12)}-${pCnpjCpf.substring(12, 14)}`;
+
+  }
 }
 
 export default new CpfCnpjUtil();

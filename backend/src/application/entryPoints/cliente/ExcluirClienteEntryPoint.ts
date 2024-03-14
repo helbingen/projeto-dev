@@ -3,7 +3,7 @@ import { IController } from '../../../domain/implementations/services/Controller
 
 export class ExcluirClienteEntryPoint {
 
-  public path: string = '/excluir-cliente';
+  public path: string = '/excluir-cliente/:identificacao';
 
   public httpMetodo: HttpMetodos = HttpMetodos.delete;
 

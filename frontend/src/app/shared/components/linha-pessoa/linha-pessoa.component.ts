@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { modalConfigDefault } from '../../constants/modalConfigConstants';
@@ -7,6 +7,7 @@ import { ToasterService } from '../toaster-controller/toaster.service';
 import { SituacaoPessoaEnum } from '../../models/SituacaoPessoa.enum';
 import { ColorTokens } from '@decisaosistemas/angular-ds';
 import { NClienteNamespace } from '../../models/ClienteNamespace';
+import { ClienteService } from '../../services/http/cliente.service';
 
 
 @Component({
@@ -17,8 +18,14 @@ import { NClienteNamespace } from '../../models/ClienteNamespace';
 export class LinhaPessoaComponent {
 
   @Input() pessoa!: NClienteNamespace.IListarClienteInterface;
+  @Output() exclusaoEvent: EventEmitter<boolean> = new EventEmitter(false);
 
-  constructor(public router: Router, private ngbModal: NgbModal, private toasterService: ToasterService) {
+  constructor(
+    public router: Router,
+    private ngbModal: NgbModal,
+    private toasterService: ToasterService,
+    private clienteService: ClienteService,
+  ) {
   }
 
   public getTipoBadge(pSituacao: SituacaoPessoaEnum | null): ColorTokens {
@@ -31,19 +38,18 @@ export class LinhaPessoaComponent {
     return 'DANGER'
   }
 
-  public editarRepresentante(pRotaAtiva: string): void {
-    console.log(this.pessoa.cliente.identificacao);
-    if (pRotaAtiva === '/cliente/editar-cliente/representantes') {
-      this.router.navigate([this.router.url, 'editar'])
+  public editarDadoCadastral(pRotaAtiva: string, pIdentificacao: string): void {
+    if (pRotaAtiva === `/cliente/editar-cliente/${pIdentificacao}/representantes`) {
+      this.router.navigate([this.router.url, `editar/${pIdentificacao}`])
     } else {
-      this.router.navigate([`${this.router.url}/editar-cliente/`, 'dadoscadastrais'])
+      this.router.navigate([`${this.router.url}/editar-cliente/${pIdentificacao}`])
     }
   }
 
-  public abrirModalExclusao(pRotaAtiva: string): void {
+  public abrirModalExclusao(pRotaAtiva: string, pIdentificacao: string): void {
     let mensagemToaster = '';
     const modalRef = this.ngbModal.open(ModalDefaultComponent, modalConfigDefault);
-    if (pRotaAtiva === '/cliente/editar-cliente/representantes') {
+    if (pRotaAtiva === `/cliente/editar-cliente/${pIdentificacao}/representantes`) {
       modalRef.componentInstance.textoHeader = 'Excluir representante?'
       mensagemToaster = 'Representante excluído com sucesso!'
     } else {
@@ -54,8 +60,16 @@ export class LinhaPessoaComponent {
     Os registros excluídos não poderão ser restaurados.`
     modalRef.componentInstance.labelBotao = 'Excluir'
     modalRef.componentInstance.tipoBotaoConfirmarAcao = 'DANGER'
-    modalRef.componentInstance.confirmarAcao.subscribe((response: boolean) => {
-      this.toasterService.showSuccess(mensagemToaster)
+    modalRef.componentInstance.identificacao = pIdentificacao;
+    modalRef.componentInstance.confirmarAcao.subscribe(async (response: boolean) => {
+      const dados = await this.clienteService.excluirCliente(pIdentificacao);
+      if (dados.sucesso) {
+        this.toasterService.showSuccess(mensagemToaster);
+        this.exclusaoEvent.emit(true);
+      } else {
+        this.toasterService.showAlert('Falha ao excluir cliente!');
+        this.exclusaoEvent.emit(false);
+      }
     })
   }
 

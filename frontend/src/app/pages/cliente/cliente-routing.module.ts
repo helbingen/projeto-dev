@@ -31,16 +31,21 @@ const routes: Routes = [
         },
         children: [
           {
-            path: 'dadoscadastrais',
-            component: DadoscadastraisComponent
-          },
-          {
-            path: 'localizacao',
-            component: LocalizacaoComponent
-          },
-          {
-            path: 'representantes',
-            loadChildren: () => import('../cliente/editar-cliente/representantes/representantes.module').then((m) => m.RepresentantesModule),
+            path: ':idCliente',
+            children: [
+              {
+                path: 'dadoscadastrais',
+                component: DadoscadastraisComponent
+              },
+              {
+                path: 'localizacao',
+                component: LocalizacaoComponent
+              },
+              {
+                path: 'representantes',
+                loadChildren: () => import('../cliente/editar-cliente/representantes/representantes.module').then((m) => m.RepresentantesModule),
+              }
+            ]
           }
         ]
       }

@@ -27,11 +27,11 @@
       >
         <i
           class="ds-icon-edit ds-text-primary"
-          (click)="editarRepresentante(router.url)"
+          (click)="editarDadoCadastral(router.url, pessoa.pessoa.identificacao)"
         ></i>
         <i
           class="ds-icon-trash ds-text-danger"
-          (click)="abrirModalExclusao(router.url)"
+          (click)="abrirModalExclusao(router.url, pessoa.cliente.identificacao)"
         ></i>
       </div>
 
@@ -41,11 +41,11 @@
       >
         <i
           class="ds-icon-edit ds-text-primary"
-          (click)="editarRepresentante(router.url)"
+          (click)="editarDadoCadastral(router.url, pessoa.pessoa.identificacao)"
         ></i>
         <i
           class="ds-icon-trash ds-text-danger"
-          (click)="abrirModalExclusao(router.url)"
+          (click)="abrirModalExclusao(router.url, pessoa.cliente.identificacao)"
         ></i>
       </div>
     </div>
