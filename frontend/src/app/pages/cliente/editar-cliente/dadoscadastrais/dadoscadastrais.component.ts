@@ -10,6 +10,8 @@ import { ValidatorsUtil } from '../../../../shared/utils/validatorsUtil';
 import { ClienteService } from '../../../../shared/services/http/cliente.service';
 import { Router } from '@angular/router';
 import identificacaoParamUtil from '../../../../shared/utils/identificacaoParamUtil';
+import { IEditarClienteRequest } from '../../../../shared/services/models/cliente/IEditarClienteRequest';
+import { DataUtil } from '../../../../shared/utils/dataUtil';
 
 @Component({
   selector: 'app-dadoscadastrais',
@@ -77,8 +79,14 @@ export class DadoscadastraisComponent {
     return true;
   }
 
-  public salvarAlteracoes(): void {
-    this.toasterService.showSuccess('Cliente editado com sucesso!');
+  public async salvarAlteracoes(): Promise<void> {
+    try {
+      await this.clienteService.editarCliente(this.buildObjetoEditarCliente());
+      this.toasterService.showSuccess('Cliente editado com sucesso!');
+    } catch (error) {
+      this.toasterService.showAlert('Falha ao editar cliente!');
+      console.error(error);
+    }
   }
 
   public mudarSituacaoPessoa(pTipoSituacao: SituacaoPessoaEnum): void {
@@ -106,6 +114,19 @@ export class DadoscadastraisComponent {
         nomeFantasia: dados.dados.pessoa.nome_fantasia,
       });
       this.mudarSituacaoPessoa(dados.dados.cliente.situacao);
+    }
+  }
+
+  private buildObjetoEditarCliente(): IEditarClienteRequest {
+    return {
+      identificacao: this.dadosCadastraisForm.controls.cnpjCpf.value!,
+      nome: this.dadosCadastraisForm.controls.nome.value!,
+      situacao: this.labelBotaoSituacao,
+      dataCadastro: DataUtil.dataStringParaDataDate(this.dadosCadastraisForm.controls.dataCadastro.value),
+      nomeFantasia: this.dadosCadastraisForm.controls.nomeFantasia.value!,
+      nomeMae: this.dadosCadastraisForm.controls.nomeDaMae.value!,
+      inscricaoMunicipal: this.dadosCadastraisForm.controls.inscricaoMunicipal.value!,
+      inscricaoEstadual: this.dadosCadastraisForm.controls.inscricaoEstadual.value!,
     }
   }
 

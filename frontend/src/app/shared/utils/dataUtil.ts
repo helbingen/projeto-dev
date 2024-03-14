@@ -21,4 +21,14 @@ export class DataUtil {
 
     return isValidYear && isValidMonth && isValidDay && isValidDayOfMonth;
   }
+
+  static dataStringParaDataDate(pData: string | null): Date {
+    if (pData === '' || pData === null) {
+      return new Date();
+    }
+    const dia = pData.substring(0, 2);
+    const mes = pData.substring(3, 5);
+    const ano = pData.substring(6, 10);
+    return new Date(`${mes}/${dia}/${ano}`);
+  }
 }

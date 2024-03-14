@@ -4,6 +4,7 @@ import { IHttpResponse } from '../models/IHttpResponse';
 import { apiUrl } from '../../constants/environment';
 import { lastValueFrom } from 'rxjs';
 import { ICriarClienteRequest } from '../models/cliente/ICriarClienteRequest';
+import { IEditarClienteRequest } from '../models/cliente/IEditarClienteRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,12 @@ export class ClienteService {
 
   public async excluirCliente(pIdentificao: string): Promise<IHttpResponse> {
     const retornoHttp = this.http.delete<IHttpResponse>(`${apiUrl}/excluir-cliente/${pIdentificao}`).pipe();
+    const dados = await lastValueFrom(retornoHttp);
+    return dados;
+  }
+
+  public async editarCliente(pBody: IEditarClienteRequest): Promise<IHttpResponse> {
+    const retornoHttp = this.http.put<IHttpResponse>(`${apiUrl}/editar-cliente`, pBody).pipe();
     const dados = await lastValueFrom(retornoHttp);
     return dados;
   }

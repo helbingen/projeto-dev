@@ -3,6 +3,7 @@ import UnitOfWork from '../../../../protocols/models/entity/UnitOfWork';
 import { IClienteRepository } from '../../../../protocols/repository/clienteRepository';
 import { Cliente } from '../../../entity/objectValues/Cliente';
 import { Pessoa } from '../../../entity/objectValues/Pessoa';
+import identificacaoUtil from '../../../utils/identificacaoUtil';
 import { EditarPessoaInput } from '../../pessoa/editarPessoa/EditarPessoaInput';
 import { EditarClienteInput } from './EditarClienteInput';
 
@@ -11,7 +12,7 @@ export class EditarCliente {
 
   public async execute(pUnitWork: UnitOfWork, pInputCliente: EditarClienteInput, pInputPessoa: EditarPessoaInput): Promise<boolean> {
     const pessoa = new Pessoa({
-      identificacao: pInputPessoa.identificacao,
+      identificacao: identificacaoUtil.limparCampoIdentificacao(pInputPessoa.identificacao),
       inscrição_estadual: pInputPessoa.inscricaoEstadual,
       inscrição_municipal: pInputPessoa.inscricaoMunicipal,
       nome: pInputPessoa.nome,
