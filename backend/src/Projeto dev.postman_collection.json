@@ -117,6 +117,24 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Listar cliente por identificação",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/listar-cliente/47758525075",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"listar-cliente",
+								"47758525075"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -217,28 +235,17 @@
 				},
 				{
 					"name": "Listar endereço",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{ \r\n    \"identificacao\": \"55817548020\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{url}}/listar-endereco",
+							"raw": "{{url}}/listar-endereco/68212974000172",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"listar-endereco"
+								"listar-endereco",
+								"68212974000172"
 							]
 						}
 					},
@@ -537,8 +544,26 @@
 				{
 					"name": "Login",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"daniel@decisaosistemas.com.bra\",\r\n  \"senha\": \"5555@aA_\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
 					},
 					"response": []
 				},
@@ -577,15 +602,12 @@
 				},
 				{
 					"name": "Listar conta",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \r\n    \"identificacao\": \"2507589000132\"\r\n}",
+							"raw": "{\r\n    \"email\": \"daniel@decisaosistemas.com.bra\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -593,12 +615,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/listar-email",
+							"raw": "{{url}}/listar-conta",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"listar-email"
+								"listar-conta"
 							]
 						}
 					},
@@ -703,28 +725,36 @@
 				},
 				{
 					"name": "Listar representante",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idCliente\": \"2507589000132\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{url}}/listar-representante",
+							"raw": "{{url}}/listar-representante/2507589000132",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"listar-representante"
+								"listar-representante",
+								"2507589000132"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar representante por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/listar-representante/68212974000172/18681488000125",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"listar-representante",
+								"68212974000172",
+								"18681488000125"
 							]
 						}
 					},
