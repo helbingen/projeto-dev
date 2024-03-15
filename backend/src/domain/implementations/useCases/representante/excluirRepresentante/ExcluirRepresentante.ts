@@ -20,7 +20,7 @@ export class ExcluirRepresentante {
     });
     const clienteExist = await this.clienteRepository.listarClientePorId(cliente.identificacao);
     if (clienteExist) {
-      const representanteExist = await this.representanteRepository.representanteExist(representante.identificacao, cliente.identificacao);
+      const representanteExist = await this.representanteRepository.listarRepresentantePorId(representante.identificacao, cliente.identificacao);
       if (representanteExist) {
         await this.representanteRepository.excluir(pUnitWork, representante.identificacao, representante.id_cliente);
         return true;

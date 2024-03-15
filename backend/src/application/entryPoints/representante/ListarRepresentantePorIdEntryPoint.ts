@@ -1,9 +1,9 @@
 import { HttpMetodos } from '../../../domain/implementations/contants/enum/httpMetodoEnum';
 import { IController } from '../../../domain/implementations/services/Controller';
 
-export class ListarRepresentanteEntryPoint {
+export class ListarRepresentantePorIdEntryPoint {
 
-  public path: string = '/listar-representante/:idCliente';
+  public path: string = '/listar-representante/:idCliente/:identificacao';
 
   public httpMetodo: HttpMetodos = HttpMetodos.get;
 

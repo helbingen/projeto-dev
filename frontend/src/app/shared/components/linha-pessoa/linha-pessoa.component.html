@@ -1,4 +1,7 @@
-<div class="app-linha-representante">
+<div
+  class="app-linha-cliente"
+  *ngIf="rotaAtual === '/cliente'; else linhaRepresentante"
+>
   <div class="dados-cadastrais ds-pt-3 ds-pb-2">
     <div class="ds-row">
       <div class="ds-col-6">
@@ -51,3 +54,38 @@
     </div>
   </div>
 </div>
+<ng-template #linhaRepresentante>
+  <div class="app-linha-representante">
+    <div class="dados-cadastrais ds-pt-3 ds-pb-2">
+      <div class="ds-row">
+        <div class="ds-col-10">
+          <span
+            class="ds-text-truncate"
+            dsTooltip
+            [tooltip]="representante.nome"
+            >{{ representante.nome }}</span
+          >
+          <span>{{ representante.identificacao | cpfCnpjFormatacao }}</span>
+        </div>
+        <div class="ds-col-2 centralizado botoes">
+          <i
+            class="ds-icon-edit ds-text-primary"
+            (click)="
+              editarDadoCadastral(
+                router.url,
+                representante.id_cliente,
+                representante.identificacao
+              )
+            "
+          ></i>
+          <i
+            class="ds-icon-trash ds-text-danger"
+            (click)="
+              abrirModalExclusao(router.url, representante.identificacao)
+            "
+          ></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

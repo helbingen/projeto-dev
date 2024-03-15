@@ -19,8 +19,13 @@ const routes: Routes = [
         component: DadosCadastraisRepresentanteComponent,
       },
       {
-        path: 'editar',
-        component: DadosCadastraisRepresentanteComponent,
+        path: ':idRepresentante',
+        children: [
+          {
+            path: 'editar',
+            component: DadosCadastraisRepresentanteComponent,
+          }
+        ]
       }
     ]
   }

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { RepresentanteService } from '../../../../../shared/services/http/representante.service';
+import identificacaoParamUtil from '../../../../../shared/utils/identificacaoParamUtil';
+import { IRepresentanteInterface } from './models/IRepresentanteInterface';
 
 @Component({
   selector: 'app-listar-representante',
@@ -8,45 +11,32 @@ import { Router } from '@angular/router';
 })
 export class ListarRepresentanteComponent {
 
-  constructor(private router: Router) { }
+  public listaRepresentantes: IRepresentanteInterface[] = [];
+  public idCliente = identificacaoParamUtil.obterIdentificacaoPelaRota(this.router.url);
 
+  constructor(
+    private router: Router,
+    private representanteService: RepresentanteService,
+  ) { }
 
-  public listaRepresentantes = [
-    // {
-    //   nome: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also t`,
-    //   cpfCnpj: '53.486.767/0001-39',
-    //   dataDoCadastro: null,
-    //   situacao: null
-    // },
-    // {
-    //   nome: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also t`,
-    //   cpfCnpj: '53.486.767/0001-39',
-    //   dataDoCadastro: null,
-    //   situacao: null
-    // },
-    // {
-    //   nome: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also t`,
-    //   cpfCnpj: '53.486.767/0001-39',
-    //   dataDoCadastro: null,
-    //   situacao: null
-    // },
-    // {
-    //   nome: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also t`,
-    //   cpfCnpj: '53.486.767/0001-39',
-    //   dataDoCadastro: null,
-    //   situacao: null
-    // },
-    // {
-    //   nome: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also t`,
-    //   cpfCnpj: '53.486.767/0001-39',
-    //   dataDoCadastro: null,
-    //   situacao: null
-    // },
-  ]
+  public async ngOnInit(): Promise<void> {
+    await this.listarRepresentantes();
+  }
+
+  private async listarRepresentantes(): Promise<void> {
+    const dados = (await this.representanteService.listarRepresentantes(this.idCliente)).dados as IRepresentanteInterface[];
+    this.listaRepresentantes = dados;
+  }
 
 
   public adicionarRepresentante(): void {
     this.router.navigate([this.router.url, 'adicionar']);
+  }
+
+  public async regarregarRepresentantes(pExclusaoEvent: boolean): Promise<void> {
+    if (pExclusaoEvent) {
+      await this.listarRepresentantes();
+    }
   }
 
 }

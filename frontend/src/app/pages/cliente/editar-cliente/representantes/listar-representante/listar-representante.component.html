@@ -12,14 +12,20 @@
       (click)="adicionarRepresentante()"
     ></ds-button>
   </div>
-  <div class="listar-representante-content ds-mt-3">
+  <div
+    class="listar-representante-content ds-mt-3"
+    *ngIf="listaRepresentantes.length > 0"
+  >
     <div class="ds-row ds-mb-2">
       <div class="ds-col-12">
         <span class="ds-text-semi-bold">Nome - CPF/CNPJ</span>
       </div>
     </div>
     <div *ngFor="let representante of listaRepresentantes">
-      <!-- <app-linha-pessoa [pessoa]="representante"></app-linha-pessoa> -->
+      <app-linha-pessoa
+        [representante]="representante"
+        (exclusaoEvent)="regarregarRepresentantes($event)"
+      ></app-linha-pessoa>
     </div>
   </div>
 </div>

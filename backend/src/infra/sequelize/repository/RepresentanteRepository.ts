@@ -45,7 +45,7 @@ export class RepresentanteRepository {
     return representanteDb.map((representante) => new Representante(representante))
   }
 
-  public async representanteExist(pIdentificacao: string, pIdCliente: string): Promise<boolean> {
+  public async listarRepresentantePorId(pIdentificacao: string, pIdCliente: string): Promise<Representante | null> {
     const representanteDb = await db.models.representante.findOne<RepresentanteSequelizeModel>({
       where: {
         id_cliente: pIdCliente,
@@ -53,8 +53,8 @@ export class RepresentanteRepository {
       }
     });
     if (representanteDb) {
-      return true;
+      return new Representante(representanteDb);
     }
-    return false;
+    return null;
   }
 }

@@ -21,7 +21,7 @@ export class EditarRepresentante {
     });
     const clienteExist = await this.clienteRepository.listarClientePorId(cliente.identificacao);
     if (clienteExist) {
-      const representanteExist = await this.representanteRepository.representanteExist(representante.identificacao, cliente.identificacao);
+      const representanteExist = await this.representanteRepository.listarRepresentantePorId(representante.identificacao, cliente.identificacao);
       if (representanteExist) {
         await this.representanteRepository.editar(pUnitWork, representante);
         return true;

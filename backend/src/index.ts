@@ -85,6 +85,9 @@ import { ListarRepresentanteEntryPoint } from './application/entryPoints/represe
 import { ListarClientePorIdentificacao } from './domain/implementations/useCases/cliente/listarClientePorIdentitificacao/ListarClientePorIdentificacao';
 import { ListarClientePorIdentificacaoController } from './application/controllers/cliente/ListarClientePorIdentificacaoController';
 import { ListarClientePorIdentificacaoEntryPoint } from './application/entryPoints/cliente/ListarClientePorIdentificacaoEntryPoint';
+import { ListarRepresentantePorId } from './domain/implementations/useCases/representante/listarRepresentantePorId/ListarRepresentantePorId';
+import { ListarRepresentantePorIdController } from './application/controllers/representante/ListarRepresentantePorIdController';
+import { ListarRepresentantePorIdEntryPoint } from './application/entryPoints/representante/ListarRepresentantePorIdEntryPoint';
 
 /* Repositórios */
 const clienteRepository = new ClienteRepository();
@@ -208,6 +211,10 @@ const listarRepresentante = new ListarRepresentante(representanteRepository);
 const listarRepresentanteController = new ListarRepresentanteController(listarRepresentante);
 const listarRepresentanteEntryPoint = new ListarRepresentanteEntryPoint(listarRepresentanteController);
 
+const listarRepresentantePorId = new ListarRepresentantePorId(representanteRepository);
+const listarRepresentantePorIdController = new ListarRepresentantePorIdController(listarRepresentantePorId);
+const listarRepresentantePorIdEntryPoint = new ListarRepresentantePorIdEntryPoint(listarRepresentantePorIdController);
+
 const entryPoints: EntryPoint[] = [
   criarClienteEntryPoint,
   editarclienteEntryPoint,
@@ -233,7 +240,8 @@ const entryPoints: EntryPoint[] = [
   criarRepresentanteEntryPoint,
   editarRepresentanteEntryPoint,
   excluirRepresentanteEntryPoint,
-  listarRepresentanteEntryPoint
+  listarRepresentanteEntryPoint,
+  listarRepresentantePorIdEntryPoint
 ];
 
 const expressServer: ExpressServer = new ExpressServer();

@@ -6,5 +6,5 @@ export interface IRepresentanteRepository {
   editar(pUnitOfWork: UnitOfWork, pRepresentante: Representante): Promise<boolean>;
   excluir(pUnitOfWork: UnitOfWork, pIdentificacao: string, pIdCliente: string): Promise<boolean>;
   listarTodosPorCliente(pIdCliente: string): Promise<Representante[]>;
-  representanteExist(pIdentificacao: string, pIdCliente: string): Promise<boolean>;
+  listarRepresentantePorId(pIdentificacao: string, pIdCliente: string): Promise<Representante | null>
 }
