@@ -1,4 +1,4 @@
 export interface ITelefoneInterface {
-  telefone: string,
-  isPrincipal: boolean,
+  numero: string,
+  is_principal: boolean,
 }

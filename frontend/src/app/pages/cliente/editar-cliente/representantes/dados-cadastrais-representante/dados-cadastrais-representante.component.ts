@@ -47,7 +47,6 @@ export class DadosCadastraisRepresentanteComponent {
 
 
   public async ngOnInit(): Promise<void> {
-    console.log(this.idCliente);
     const dados = await this.representanteService.listarRepresentantePorIdentificacao(
       this.idCliente,
       this.idRepresentante,

@@ -19,7 +19,7 @@ export class CriarTelefone {
     })
 
     const pessoaExist = await this.pessoaRepository.buscarPessoaPorIdentificacao(pInputPessoa.identificacao);
-    const telefoneExist = await this.telefoneRepository.isTelefoneExist(telefone.identificacao, telefone.numero);
+    const telefoneExist = await this.telefoneRepository.listarTelefonePorId(telefone.identificacao, telefone.numero);
     if (pessoaExist) {
       if (!telefoneExist) {
         await this.telefoneRepository.criar(pUnitWork, telefone);

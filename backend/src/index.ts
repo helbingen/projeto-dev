@@ -88,6 +88,9 @@ import { ListarClientePorIdentificacaoEntryPoint } from './application/entryPoin
 import { ListarRepresentantePorId } from './domain/implementations/useCases/representante/listarRepresentantePorId/ListarRepresentantePorId';
 import { ListarRepresentantePorIdController } from './application/controllers/representante/ListarRepresentantePorIdController';
 import { ListarRepresentantePorIdEntryPoint } from './application/entryPoints/representante/ListarRepresentantePorIdEntryPoint';
+import { ListarTelefonePorId } from './domain/implementations/useCases/telefone/listarTelefonePorId/ListarTelefonePorId';
+import { ListarTelefonePorIdController } from './application/controllers/telefone/ListarTelefonePorIdController';
+import { ListarTelefonePorIdEntryPoint } from './application/entryPoints/telefone/ListarTelefonePorIdEntryPoint';
 
 /* Repositórios */
 const clienteRepository = new ClienteRepository();
@@ -156,6 +159,10 @@ const excluirTelefoneEntryPoint = new ExcluirTelefoneEntryPoint(excluirTelefoneC
 const listarTelefone = new ListarTelefone(telefoneRepository);
 const listarTelefoneController = new ListarTelefoneController(listarTelefone);
 const listarTelefoneEntryPoint = new ListarTelefoneEntryPoint(listarTelefoneController);
+
+const listarTelefonePorId = new ListarTelefonePorId(telefoneRepository);
+const listarTelefonePorIdController = new ListarTelefonePorIdController(listarTelefonePorId);
+const listarTelefonePorIdEntryPoint = new ListarTelefonePorIdEntryPoint(listarTelefonePorIdController);
 
 /* Email */
 
@@ -229,6 +236,7 @@ const entryPoints: EntryPoint[] = [
   editarTelefoneEntryPoint,
   excluirTelefoneEntryPoint,
   listarTelefoneEntryPoint,
+  listarTelefonePorIdEntryPoint,
   criarEmailEntryPoint,
   editarEmailEntryPoint,
   excluirEmailEntryPoint,

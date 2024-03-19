@@ -19,7 +19,7 @@ export class EditarTelefone {
     })
 
     const pessoaExist = await this.pessoaRepository.buscarPessoaPorIdentificacao(pInputPessoa.identificacao);
-    const enderecoExist = await this.telefoneRepository.isTelefoneExist(telefone.identificacao, telefone.numero);
+    const enderecoExist = await this.telefoneRepository.listarTelefonePorId(telefone.identificacao, telefone.numero);
 
     if (pessoaExist) {
       if (enderecoExist) {

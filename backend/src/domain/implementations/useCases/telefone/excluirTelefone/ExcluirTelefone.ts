@@ -13,7 +13,7 @@ export class ExcluirTelefone {
       numero: pInputTelefone.numero,
     })
 
-    const telefoneExist = await this.telefoneRepository.isTelefoneExist(telefone.identificacao, telefone.numero);
+    const telefoneExist = await this.telefoneRepository.listarTelefonePorId(telefone.identificacao, telefone.numero);
     if (telefoneExist) {
       await this.telefoneRepository.excluir(pUnitWork, telefone.identificacao, telefone.numero);
       return true

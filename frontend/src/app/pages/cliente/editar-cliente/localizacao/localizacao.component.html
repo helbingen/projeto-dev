@@ -29,10 +29,11 @@
         <div class="row" *ngFor="let telefone of listaTelefone">
           <div class="ds-col-12">
             <app-linha-telefone-endereco
-              [telefoneEmail]="telefone.telefone"
-              [isPrincipal]="telefone.isPrincipal"
+              [telefoneEmail]="telefone.numero"
+              [isPrincipal]="telefone.is_principal"
               [tipoDado]="'Telefone'"
-              (edicaoEvento)="editarTelefone($event)"
+              (exclusaoEvento)="excluirTelefoneEmail($event)"
+              (dadosTelefoneEvento)="editarTelefone($event)"
             ></app-linha-telefone-endereco>
           </div>
         </div>
@@ -62,7 +63,11 @@
             </div>
           </div>
           <div class="ds-mt-2">
-            <ds-checkbox [labelCheckbox]="'Telefone principal'"></ds-checkbox>
+            <ds-checkbox
+              [labelCheckbox]="'Telefone principal'"
+              [isChecked]="isPrincipalChecked"
+              (changeEvento)="changeCheckboxIsPrincipal($event)"
+            ></ds-checkbox>
           </div>
         </div>
         <div *ngIf="mostrarInputTelefone">
@@ -91,7 +96,11 @@
             </div>
           </div>
           <div class="ds-mt-2">
-            <ds-checkbox [labelCheckbox]="'Telefone principal'"></ds-checkbox>
+            <ds-checkbox
+              [labelCheckbox]="'Telefone principal'"
+              [isChecked]="isPrincipalChecked"
+              (changeEvento)="changeCheckboxIsPrincipal($event)"
+            ></ds-checkbox>
           </div>
         </div>
       </ds-accordion-line>
@@ -107,7 +116,7 @@
               [telefoneEmail]="email.email"
               [isPrincipal]="email.isPrincipal"
               [tipoDado]="'E-mail'"
-              (edicaoEvento)="editarEmail($event)"
+              (exclusaoEvento)="excluirTelefoneEmail($event)"
             ></app-linha-telefone-endereco>
           </div>
         </div>

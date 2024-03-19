@@ -4,7 +4,7 @@ import { EnderecoModalComponent } from './modals/endereco-modal/endereco-modal.c
 import { ToasterService } from '../../../../shared/components/toaster-controller/toaster.service';
 import { IEnderecoInterface, IEnderecoInterfaceOutput } from './models/IEnderecoInterface';
 import { modalConfigLarge } from '../../../../shared/constants/modalConfigConstants';
-import { TipoMascarasEnum } from '@decisaosistemas/angular-ds';
+import { CheckboxChangeEvent, TipoMascarasEnum } from '@decisaosistemas/angular-ds';
 import { FormControl, Validators } from '@angular/forms';
 import { ValidatorsUtil } from '../../../../shared/utils/validatorsUtil';
 import { ErrorsUtil } from '../../../../shared/utils/errorsUtil';
@@ -14,6 +14,8 @@ import { EnderecoService } from '../../../../shared/services/http/endereco.servi
 import { ICriarEnderecoRequest } from '../../../../shared/services/models/endereco/ICriarEnderecoRequest';
 import { Router } from '@angular/router';
 import identificacaoParamUtil from '../../../../shared/utils/identificacaoParamUtil';
+import { TelefoneService } from '../../../../shared/services/http/telefone.service';
+import { IListarTelefonePorIdRequest } from '../../../../shared/services/models/telefone/IListarTelefonePorIdRequest';
 
 @Component({
   selector: 'app-localizacao',
@@ -31,6 +33,7 @@ export class LocalizacaoComponent {
   public isEdicaoEmail = false;
   public isEdicaoTelefone = false;
   private identificacao = identificacaoParamUtil.obterIdentificacaoPelaRota(this.router.url);
+  public isPrincipalChecked!: boolean;
 
   public listaEndereco: IEnderecoInterface[] = []
 
@@ -43,10 +46,13 @@ export class LocalizacaoComponent {
     private toasterService: ToasterService,
     private enderecoService: EnderecoService,
     private router: Router,
+    private telefoneService: TelefoneService,
   ) { }
 
   public async ngOnInit(): Promise<void> {
+    this.isPrincipalChecked = false;
     await this.listarEndereco();
+    await this.listarTelefones();
   }
 
   public async abrirModalEndereco(): Promise<void> {
@@ -83,11 +89,22 @@ export class LocalizacaoComponent {
     }
   }
 
-  public adicionar(pInput: 'Telefone' | 'Email'): void {
+  public async adicionar(pInput: 'Telefone' | 'Email'): Promise<void> {
     if (pInput === 'Telefone') {
-      this.toasterService.showSuccess('Telefone adicionado com sucesso!');
-      this.telefoneForm.reset();
-      this.mudarEstadoInput(pInput);
+      try {
+        await this.telefoneService.criarTelefone({
+          numero: this.telefoneForm.value!,
+          identificacao: this.identificacao,
+          isPrincipal: this.isPrincipalChecked,
+        });
+        this.toasterService.showSuccess('Telefone adicionado com sucesso!');
+        this.telefoneForm.reset();
+        this.mudarEstadoInput(pInput);
+        await this.listarTelefones();
+      } catch (error) {
+        this.toasterService.showAlert('Falha ao adicionar telefone!');
+        console.log(error);
+      }
     } else {
       this.toasterService.showSuccess('E-mail adicionado com sucesso!');
       this.emailForm.reset();
@@ -103,19 +120,32 @@ export class LocalizacaoComponent {
     }
   }
 
-  public editarTelefone(pIsEdicao: boolean): void {
-    this.isEdicaoTelefone = pIsEdicao;
+  public async editarTelefone(pTelefoneEvento: IListarTelefonePorIdRequest): Promise<void> {
+    this.isEdicaoTelefone = true;
+    const dados = await this.telefoneService.listarTelefonePorId(pTelefoneEvento);
+    this.telefoneForm.setValue(dados.dados.numero);
+    this.isPrincipalChecked = dados.dados.is_principal;
   }
 
   public editarEmail(pIsEdicao: boolean): void {
     this.isEdicaoEmail = pIsEdicao;
   }
 
-  public salvarEdicao(pInput: 'Telefone' | 'Email'): void {
+  public async salvarEdicao(pInput: 'Telefone' | 'Email'): Promise<void> {
     if (pInput === 'Telefone') {
-      this.isEdicaoTelefone = !this.isEdicaoTelefone;
-      this.telefoneForm.reset();
-      this.toasterService.showSuccess('Telefone editado com sucesso!');
+      try {
+        this.isEdicaoTelefone = !this.isEdicaoTelefone;
+        await this.telefoneService.editarTelefone({
+          identificacao: this.identificacao,
+          isPrincipal: this.isPrincipalChecked,
+          numero: this.telefoneForm.value!,
+        })
+        this.telefoneForm.reset();
+        this.toasterService.showSuccess('Telefone editado com sucesso!');
+      } catch (error) {
+        this.toasterService.showAlert('Falha ao adicionar telefone');
+        console.error(error);
+      }
     } else {
       this.isEdicaoEmail = !this.isEdicaoEmail;
       this.emailForm.reset();
@@ -156,6 +186,21 @@ export class LocalizacaoComponent {
   public async recarregarEndereco(pEvent: boolean): Promise<void> {
     if (pEvent) {
       await this.listarEndereco();
+    }
+  }
+
+  public changeCheckboxIsPrincipal(pEventCheckbox: CheckboxChangeEvent): void {
+    this.isPrincipalChecked = pEventCheckbox.isChecked;
+  }
+
+  public async listarTelefones(): Promise<void> {
+    this.listaTelefone = (await this.telefoneService.listarTelefones(this.identificacao)).dados as ITelefoneInterface[];
+  }
+
+  public async excluirTelefoneEmail(pEventoConfirmacao: boolean): Promise<void> {
+    if (pEventoConfirmacao) {
+      await this.listarTelefones();
+      this.telefoneForm.reset();
     }
   }
 

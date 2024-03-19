@@ -12,7 +12,7 @@ export class TelefoneRepository {
     return Promise.resolve(new Telefone(telefoneDb));
   }
 
-  public async isTelefoneExist(pIdentificacao: string, pNumero: string): Promise<boolean> {
+  public async listarTelefonePorId(pIdentificacao: string, pNumero: string): Promise<Telefone | null> {
     const telefoneDb = await db.models.telefone.findOne<TelefoneSequelizeModel>({
       where: {
         identificacao: pIdentificacao,
@@ -20,9 +20,9 @@ export class TelefoneRepository {
       }
     });
     if (telefoneDb) {
-      return true;
+      return new Telefone(telefoneDb);
     }
-    return false;
+    return null;
   }
 
   public async editar(pUnitOfWork: UnitOfWork, pTelefone: Telefone): Promise<boolean> {
