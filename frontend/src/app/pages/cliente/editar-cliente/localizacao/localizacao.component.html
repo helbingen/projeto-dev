@@ -114,15 +114,16 @@
           <div class="ds-col-12">
             <app-linha-telefone-endereco
               [telefoneEmail]="email.email"
-              [isPrincipal]="email.isPrincipal"
+              [isPrincipal]="email.is_principal"
               [tipoDado]="'E-mail'"
               (exclusaoEvento)="excluirTelefoneEmail($event)"
+              (dadosEmailEvento)="editarEmail($event)"
             ></app-linha-telefone-endereco>
           </div>
         </div>
         <div *ngIf="isEdicaoEmail">
           <div class="ds-row adicionar-email">
-            <div class="ds-col-2">
+            <div class="ds-col-4">
               <ds-input-text
                 [control]="emailForm"
                 [errosCustomizados]="errosCustomizados"
@@ -145,13 +146,17 @@
             </div>
           </div>
           <div class="ds-mt-2">
-            <ds-checkbox [labelCheckbox]="'E-mail principal'"></ds-checkbox>
+            <ds-checkbox
+              [labelCheckbox]="'E-mail principal'"
+              [isChecked]="isPrincipalChecked"
+              (changeEvento)="changeCheckboxIsPrincipal($event)"
+            ></ds-checkbox>
           </div>
         </div>
 
         <div *ngIf="mostrarInputEmail">
           <div class="ds-row adicionar-email">
-            <div class="ds-col-2">
+            <div class="ds-col-4">
               <ds-input-text
                 [control]="emailForm"
                 [errosCustomizados]="errosCustomizados"
@@ -174,7 +179,11 @@
             </div>
           </div>
           <div class="ds-mt-2">
-            <ds-checkbox [labelCheckbox]="'E-mail principal'"></ds-checkbox>
+            <ds-checkbox
+              [labelCheckbox]="'E-mail principal'"
+              [isChecked]="isPrincipalChecked"
+              (changeEvento)="changeCheckboxIsPrincipal($event)"
+            ></ds-checkbox>
           </div>
         </div>
       </ds-accordion-line>

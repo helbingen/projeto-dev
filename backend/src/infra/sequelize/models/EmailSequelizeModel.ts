@@ -18,7 +18,7 @@ export default class EmailSequelizeModel extends Model<IEmailModel, IEmailModelC
           allowNull: false,
         },
         is_principal: {
-          type: DataTypes.TEXT,
+          type: DataTypes.BOOLEAN,
           allowNull: false,
         },
         identificacao: {

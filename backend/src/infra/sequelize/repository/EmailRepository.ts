@@ -12,7 +12,7 @@ export class EmailRepository {
     return Promise.resolve(new Email(emailDb));
   }
 
-  public async isEmailExist(pIdentificacao: string, pEmail: string): Promise<boolean> {
+  public async listarEmailPorId(pIdentificacao: string, pEmail: string): Promise<Email | null> {
     const emailDb = await db.models.email.findOne<EmailSequelizeModel>({
       where: {
         identificacao: pIdentificacao,
@@ -20,9 +20,9 @@ export class EmailRepository {
       }
     });
     if (emailDb) {
-      return true;
+      return new Email(emailDb);
     }
-    return false;
+    return null;
   }
 
   public async editar(pUnitOfWork: UnitOfWork, pEmail: Email): Promise<boolean> {

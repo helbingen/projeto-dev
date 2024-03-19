@@ -7,11 +7,11 @@ export class ListarEmailInput {
   public identificacao: string;
 
   constructor(pData: EntrypointData) {
-    const identificacaoValidador = ValidadorDados.iniciar(pData.body?.identificacao, 'body.identificacao').obrigatorio().string();
+    const identificacaoValidador = ValidadorDados.iniciar(pData.parametros?.identificacao, 'parametros.identificacao').obrigatorio().string();
     if (identificacaoValidador.estaValido() === false) {
       throw new InformacaoNaoInfomada(`O atributo "identificacao": ${identificacaoValidador.getErro()}`);
     }
 
-    this.identificacao = pData.body.identificacao;
+    this.identificacao = pData.parametros.identificacao;
   }
 }

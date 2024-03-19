@@ -30,5 +30,11 @@ export class ContaService {
     return dados;
   }
 
+  public async editarConta(pBody: ICriarContaRequest): Promise<IHttpResponse> {
+    const retornoHttp = this.http.put<IHttpResponse>(`${apiUrl}/editar-conta`, pBody).pipe();
+    const dados = await lastValueFrom(retornoHttp);
+    return dados;
+  }
+
 
 }

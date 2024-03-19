@@ -4,6 +4,7 @@ import { ContaService } from '../../../shared/services/http/conta.service';
 import { ToasterService } from '../../../shared/components/toaster-controller/toaster.service';
 import { Router } from '@angular/router';
 import { ILoginRequest } from '../../../shared/services/models/conta/ILoginRequest';
+import { CryptoService } from '../../../shared/services/crypto.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,12 @@ export class LoginComponent {
     lembrarMeCheckbox: new FormControl<boolean | null>(false),
   });
 
-  constructor(private contaService: ContaService, private toasterService: ToasterService, private router: Router) { }
+  constructor(
+    private contaService: ContaService,
+    private toasterService: ToasterService,
+    private router: Router,
+    private cryptoService: CryptoService
+  ) { }
 
   private buildLoginObject(): ILoginRequest {
     return {
@@ -32,7 +38,9 @@ export class LoginComponent {
       if (this.loginForm.valid) {
         const dados = await this.contaService.login(this.buildLoginObject());
         if (dados.sucesso) {
-          this.router.navigate(['inicio'])
+          const emailCriptografado = this.cryptoService.encrypt(this.loginForm.controls.email.value!);
+          localStorage.setItem('emailAutenticado', emailCriptografado);
+          this.router.navigate(['inicio']);
         }
       }
     } catch (error) {

@@ -91,6 +91,9 @@ import { ListarRepresentantePorIdEntryPoint } from './application/entryPoints/re
 import { ListarTelefonePorId } from './domain/implementations/useCases/telefone/listarTelefonePorId/ListarTelefonePorId';
 import { ListarTelefonePorIdController } from './application/controllers/telefone/ListarTelefonePorIdController';
 import { ListarTelefonePorIdEntryPoint } from './application/entryPoints/telefone/ListarTelefonePorIdEntryPoint';
+import { ListarEmailPorId } from './domain/implementations/useCases/email/listarEmailPorId/ListarEmailPorId';
+import { ListarEmailPorIdController } from './application/controllers/email/ListarEmailPorIdController';
+import { ListarEmailPorIdEntryPoint } from './application/entryPoints/email/ListarEmailPorIdEntryPoint';
 
 /* Repositórios */
 const clienteRepository = new ClienteRepository();
@@ -182,6 +185,10 @@ const listarEmail = new ListarEmail(emailRepository);
 const listarEmailController = new ListarEmailController(listarEmail);
 const listarEmailEntryPoint = new ListarEmailEntryPoint(listarEmailController);
 
+const listarEmailPorId = new ListarEmailPorId(emailRepository);
+const listarEmailPorIdController = new ListarEmailPorIdController(listarEmailPorId);
+const listarEmailPorIdEntryPoint = new ListarEmailPorIdEntryPoint(listarEmailPorIdController);
+
 /* Conta */
 
 const criarConta = new CriarConta(contaRepository);
@@ -241,6 +248,7 @@ const entryPoints: EntryPoint[] = [
   editarEmailEntryPoint,
   excluirEmailEntryPoint,
   listarEmailEntryPoint,
+  listarEmailPorIdEntryPoint,
   criarContaEntryPoint,
   loginEntryPoint,
   editarContaEntryPoint,

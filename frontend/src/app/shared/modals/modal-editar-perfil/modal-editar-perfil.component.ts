@@ -4,6 +4,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ErrorsUtil } from '../../utils/errorsUtil';
 import { ToasterService } from '../../components/toaster-controller/toaster.service';
 import { SenhasUtil } from '../../utils/senhasUtil';
+import { CryptoService } from '../../services/crypto.service';
+import { ContaService } from '../../services/http/conta.service';
 
 @Component({
   selector: 'app-modal-editar-perfil',
@@ -12,9 +14,17 @@ import { SenhasUtil } from '../../utils/senhasUtil';
 })
 export class ModalEditarPerfilComponent {
 
-  constructor(public ngbActiveModal: NgbActiveModal, private toasterService: ToasterService) { }
-
   @Output() eventoConfirmarAcao = new EventEmitter<boolean>(false);
+
+  constructor(
+    public ngbActiveModal: NgbActiveModal,
+    private cryptoService: CryptoService,
+    private contaService: ContaService,
+  ) { }
+
+  public ngOnInit(): void {
+    this.obterDadosDoUsuarioLogado();
+  }
 
   public editarPerfilForm = new FormGroup({
     nome: new FormControl<string | null>(null, Validators.required),
@@ -63,12 +73,28 @@ export class ModalEditarPerfilComponent {
 
   }
 
-  public editarPerfil(): void {
+  public async editarPerfil(): Promise<void> {
+    await this.contaService.editarConta({
+      email: this.editarPerfilForm.controls.email.value!,
+      nome: this.editarPerfilForm.controls.nome.value!,
+      senha: this.editarPerfilForm.controls.novaSenha.value!,
+    })
     this.eventoConfirmarAcao.emit(true);
     this.ngbActiveModal.close();
   }
 
   public habilitarCamposSenha(): void {
     this.isAlterarSenhaChecked = !this.isAlterarSenhaChecked;
+  }
+
+  private obterDadosDoUsuarioLogado(): void {
+    const emailLocalStorage = localStorage.getItem('emailAutenticado') ?? '';
+    const nomeLocalStorage = localStorage.getItem('nomeUsuario') ?? '';
+    const emailDescriptografado = this.cryptoService.decrypt(emailLocalStorage);
+    this.editarPerfilForm.patchValue({
+      email: emailDescriptografado,
+      nome: nomeLocalStorage,
+    });
+    this.editarPerfilForm.controls.email.disable();
   }
 }

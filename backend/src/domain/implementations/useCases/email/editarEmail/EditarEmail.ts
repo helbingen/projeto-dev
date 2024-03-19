@@ -19,7 +19,7 @@ export class EditarEmail {
     })
 
     const pessoaExist = await this.pessoaRepository.buscarPessoaPorIdentificacao(pInputPessoa.identificacao);
-    const emailExist = await this.emailRepository.isEmailExist(email.identificacao, email.email);
+    const emailExist = await this.emailRepository.listarEmailPorId(email.identificacao, email.email);
     if (pessoaExist) {
       if (emailExist) {
         await this.emailRepository.editar(pUnitWork, email);

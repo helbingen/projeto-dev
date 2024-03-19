@@ -13,7 +13,7 @@ export class ExcluirEmail {
       email: pInputEmail.email,
     })
 
-    const emailExist = await this.emailRepository.isEmailExist(email.identificacao, email.email);
+    const emailExist = await this.emailRepository.listarEmailPorId(email.identificacao, email.email);
     if (emailExist) {
       await this.emailRepository.excluir(pUnitWork, email.identificacao, email.email);
       return true

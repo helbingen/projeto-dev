@@ -17,7 +17,7 @@ export class HeaderComponent {
   public nomeUsuario: string = '';
 
   constructor(private ngbModal: NgbModal, private router: Router, private toasterService: ToasterService) {
-
+    this.obterDadosUsuarioLogado();
   }
 
   public abrirModalLogout(): void {
@@ -27,6 +27,8 @@ export class HeaderComponent {
     modalRef.componentInstance.labelBotao = 'Sim, sair';
     modalRef.componentInstance.tipoBotaoConfirmarAcao = 'PRIMARY'
     modalRef.componentInstance.confirmarAcao.subscribe((response: boolean) => {
+      localStorage.removeItem('nomeUsuario');
+      localStorage.removeItem('emailAutenticado');
       this.router.navigate(['../login'])
     })
   }
@@ -36,6 +38,10 @@ export class HeaderComponent {
     modalRef.componentInstance.eventoConfirmarAcao.subscribe((response: boolean) => {
       this.toasterService.showSuccess('Perfil editado com sucesso!')
     })
+  }
+
+  private obterDadosUsuarioLogado(): void {
+    this.nomeUsuario = localStorage.getItem('nomeUsuario') ?? '';
   }
 
 }

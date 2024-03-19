@@ -7,6 +7,8 @@ import identificacaoParamUtil from '../../../../../shared/utils/identificacaoPar
 import { Router } from '@angular/router';
 import { TelefoneService } from '../../../../../shared/services/http/telefone.service';
 import { IListarTelefonePorIdRequest } from '../../../../../shared/services/models/telefone/IListarTelefonePorIdRequest';
+import { EmailService } from '../../../../../shared/services/http/email.service';
+import { IListarEmailPorIdRequest } from '../../../../../shared/services/models/email/IListarEmailPorIdRequest';
 
 @Component({
   selector: 'app-linha-telefone-endereco',
@@ -20,6 +22,7 @@ export class LinhaTelefoneEnderecoComponent {
   @Input() tipoDado!: 'Telefone' | 'E-mail';
   @Output() exclusaoEvento: EventEmitter<boolean> = new EventEmitter(false);
   @Output() dadosTelefoneEvento: EventEmitter<IListarTelefonePorIdRequest> = new EventEmitter();
+  @Output() dadosEmailEvento: EventEmitter<IListarEmailPorIdRequest> = new EventEmitter();
   private identificacaoPessoa = identificacaoParamUtil.obterIdentificacaoPelaRota(this.router.url)
 
   constructor(
@@ -27,6 +30,7 @@ export class LinhaTelefoneEnderecoComponent {
     private toasterService: ToasterService,
     private router: Router,
     private telefoneService: TelefoneService,
+    private emailService: EmailService,
   ) { }
 
   public ngOnInit(): void {
@@ -36,6 +40,10 @@ export class LinhaTelefoneEnderecoComponent {
     this.dadosTelefoneEvento.emit({
       identificacao: this.identificacaoPessoa,
       numero: this.telefoneEmail,
+    });
+    this.dadosEmailEvento.emit({
+      identificacao: this.identificacaoPessoa,
+      email: this.telefoneEmail,
     })
   }
 
@@ -47,6 +55,16 @@ export class LinhaTelefoneEnderecoComponent {
     modalRef.componentInstance.tipoBotaoConfirmarAcao = 'DANGER';
     if (this.tipoDado === 'E-mail') {
       modalRef.componentInstance.textoHeader = 'Excluir e-mail?';
+      modalRef.componentInstance.confirmarAcao.subscribe(async (response: boolean) => {
+        try {
+          await this.emailService.excluirEmail(this.identificacaoPessoa, this.telefoneEmail);
+          this.toasterService.showSuccess(`${this.tipoDado} excluído com sucesso!`);
+          this.exclusaoEvento.emit(true);
+        } catch (error) {
+          this.toasterService.showAlert(`Falha ao excluir ${this.tipoDado}!`);
+          console.error(error);
+        }
+      })
     } else {
       modalRef.componentInstance.textoHeader = 'Excluir telefone?';
       modalRef.componentInstance.confirmarAcao.subscribe(async (response: boolean) => {

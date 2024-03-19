@@ -25,7 +25,11 @@ export class CriarContaComponent {
 
   public errosCustomizados = ErrorsUtil.getErrors;
 
-  constructor(private contaService: ContaService, private toasterService: ToasterService, private router: Router) { }
+  constructor(
+    private contaService: ContaService,
+    private toasterService: ToasterService,
+    private router: Router
+  ) { }
 
   public verificarSenha(pSenha: string, pFormControl: FormControl): void {
     if (pSenha !== '') {
@@ -65,6 +69,7 @@ export class CriarContaComponent {
       if (!this.verificarSeFormularioEInvalido()) {
         const dados = await this.contaService.criarConta(this.buildCriarContaObject());
         if (dados.sucesso) {
+          localStorage.setItem('nomeUsuario', this.criarContaForm.controls.nome.value!);
           this.toasterService.showSuccess('Conta criada com sucesso!');
           this.router.navigate(['login'])
         }

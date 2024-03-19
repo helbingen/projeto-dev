@@ -16,6 +16,8 @@ import { Router } from '@angular/router';
 import identificacaoParamUtil from '../../../../shared/utils/identificacaoParamUtil';
 import { TelefoneService } from '../../../../shared/services/http/telefone.service';
 import { IListarTelefonePorIdRequest } from '../../../../shared/services/models/telefone/IListarTelefonePorIdRequest';
+import { EmailService } from '../../../../shared/services/http/email.service';
+import { IListarEmailPorIdRequest } from '../../../../shared/services/models/email/IListarEmailPorIdRequest';
 
 @Component({
   selector: 'app-localizacao',
@@ -47,12 +49,14 @@ export class LocalizacaoComponent {
     private enderecoService: EnderecoService,
     private router: Router,
     private telefoneService: TelefoneService,
+    private emailService: EmailService,
   ) { }
 
   public async ngOnInit(): Promise<void> {
     this.isPrincipalChecked = false;
     await this.listarEndereco();
     await this.listarTelefones();
+    await this.listarEmails();
   }
 
   public async abrirModalEndereco(): Promise<void> {
@@ -106,9 +110,20 @@ export class LocalizacaoComponent {
         console.log(error);
       }
     } else {
-      this.toasterService.showSuccess('E-mail adicionado com sucesso!');
-      this.emailForm.reset();
-      this.mudarEstadoInput(pInput);
+      try {
+        await this.emailService.criarEmail({
+          email: this.emailForm.value!,
+          identificacao: this.identificacao,
+          isPrincipal: this.isPrincipalChecked,
+        });
+        await this.listarEmails();
+        this.toasterService.showSuccess('E-mail adicionado com sucesso!');
+        this.emailForm.reset();
+        this.mudarEstadoInput(pInput);
+      } catch (error) {
+        this.toasterService.showAlert('Falha ao adicionar e-mail!');
+        console.error(error);
+      }
     }
   }
 
@@ -127,8 +142,11 @@ export class LocalizacaoComponent {
     this.isPrincipalChecked = dados.dados.is_principal;
   }
 
-  public editarEmail(pIsEdicao: boolean): void {
-    this.isEdicaoEmail = pIsEdicao;
+  public async editarEmail(pEmailEvento: IListarEmailPorIdRequest): Promise<void> {
+    this.isEdicaoEmail = true;
+    const dados = await this.emailService.listarEmailPorId(pEmailEvento);
+    this.emailForm.setValue(dados.dados.email);
+    this.isPrincipalChecked = dados.dados.is_principal;
   }
 
   public async salvarEdicao(pInput: 'Telefone' | 'Email'): Promise<void> {
@@ -142,14 +160,26 @@ export class LocalizacaoComponent {
         })
         this.telefoneForm.reset();
         this.toasterService.showSuccess('Telefone editado com sucesso!');
+        await this.listarTelefones();
       } catch (error) {
         this.toasterService.showAlert('Falha ao adicionar telefone');
         console.error(error);
       }
     } else {
-      this.isEdicaoEmail = !this.isEdicaoEmail;
-      this.emailForm.reset();
-      this.toasterService.showSuccess('E-mail editado com sucesso!');
+      try {
+        this.isEdicaoEmail = !this.isEdicaoEmail;
+        await this.emailService.editarEmail({
+          email: this.emailForm.value!,
+          identificacao: this.identificacao,
+          isPrincipal: this.isPrincipalChecked,
+        })
+        this.emailForm.reset();
+        this.toasterService.showSuccess('E-mail editado com sucesso!');
+        await this.listarEmails();
+      } catch (error) {
+        this.toasterService.showAlert('Falha ao adicionar e-mail');
+        console.error(error);
+      }
     }
   }
 
@@ -197,9 +227,14 @@ export class LocalizacaoComponent {
     this.listaTelefone = (await this.telefoneService.listarTelefones(this.identificacao)).dados as ITelefoneInterface[];
   }
 
+  public async listarEmails(): Promise<void> {
+    this.listaEmail = (await this.emailService.listarEmails(this.identificacao)).dados as IEmailInterface[];
+  }
+
   public async excluirTelefoneEmail(pEventoConfirmacao: boolean): Promise<void> {
     if (pEventoConfirmacao) {
       await this.listarTelefones();
+      await this.listarEmails();
       this.telefoneForm.reset();
     }
   }

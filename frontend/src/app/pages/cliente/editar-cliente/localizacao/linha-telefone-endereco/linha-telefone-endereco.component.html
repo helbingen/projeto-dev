@@ -4,7 +4,7 @@
       <span class="telefoneEmail">{{ telefoneEmail }}</span>
     </div>
     <div class="ds-col-2">
-      <div *ngIf="isPrincipal">
+      <div *ngIf="isPrincipal === true">
         <ds-badge
           [tipoBadge]="'CONFIRM'"
           [labelBadge]="''"
