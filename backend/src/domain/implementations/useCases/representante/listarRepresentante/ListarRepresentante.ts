@@ -1,8 +1,6 @@
-import UnitOfWork from '../../../../protocols/models/entity/UnitOfWork';
 import { IRepresentanteRepository } from '../../../../protocols/repository/representanteRepository';
 import { Representante } from '../../../entity/objectValues/Representante';
 import { ListarRepresentanteInput } from '../../representante/listarRepresentante/ListarRepresentanteInput';
-import { IClienteRepository } from '../../../../protocols/repository/clienteRepository';
 import { Cliente } from '../../../entity/objectValues/Cliente';
 import { ListarRepresentanteOutput } from './ListarRepresentanteOutput';
 
