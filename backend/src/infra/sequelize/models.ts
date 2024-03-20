@@ -6,6 +6,7 @@ import EnderecoSequelizeModel from './models/EnderecoSequelizeModel';
 import PessoaSequelizeModel from './models/PessoaSequelizeModel';
 import TelefoneSequelizeModel from './models/TelefoneSequelizeModel';
 import RepresentanteSequelizeModel from './models/RepresentanteSequelizeModel';
+import TipoContatoSequelizeModel from './models/TipoContatoSequelizeModel';
 
 export default class Models {
   public cliente: typeof ClienteSequelizeModel = ClienteSequelizeModel;
@@ -21,6 +22,8 @@ export default class Models {
   public telefone: typeof TelefoneSequelizeModel = TelefoneSequelizeModel;
 
   public representante: typeof RepresentanteSequelizeModel = RepresentanteSequelizeModel;
+
+  public tipoContato: typeof TipoContatoSequelizeModel = TipoContatoSequelizeModel;
 
   constructor(sequelize: Sequelize) {
     Object.keys(this).forEach((pModel: string) => {

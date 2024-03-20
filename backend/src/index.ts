@@ -94,6 +94,22 @@ import { ListarTelefonePorIdEntryPoint } from './application/entryPoints/telefon
 import { ListarEmailPorId } from './domain/implementations/useCases/email/listarEmailPorId/ListarEmailPorId';
 import { ListarEmailPorIdController } from './application/controllers/email/ListarEmailPorIdController';
 import { ListarEmailPorIdEntryPoint } from './application/entryPoints/email/ListarEmailPorIdEntryPoint';
+import { TipoContatoRepository } from './infra/sequelize/repository/TipoContatoRepository';
+import { ListarContatoPorId } from './domain/implementations/useCases/tipoContato/listarContatoPorId/ListarContatoPorId';
+import { ListarContatoPorIdController } from './application/controllers/contato/ListarContatoPorIdController';
+import { ListarContatoPorIdEntryPoint } from './application/entryPoints/contato/ListarContatoPorIdEntryPoint';
+import { CriarContato } from './domain/implementations/useCases/tipoContato/criarContato/CriarContato';
+import { CriarContatoController } from './application/controllers/contato/CriarContatoController';
+import { CriarContatoEntryPoint } from './application/entryPoints/contato/CriarContatoEntryPoint';
+import { EditarContato } from './domain/implementations/useCases/tipoContato/editarContato/EditarContato';
+import { EditarContatoController } from './application/controllers/contato/EditarContatoController';
+import { ExcluirContato } from './domain/implementations/useCases/tipoContato/excluirContato/ExcluirContato';
+import { ExcluirContatoController } from './application/controllers/contato/ExcluirContatoController';
+import { EditarContatoEntryPoint } from './application/entryPoints/contato/EditarContatoEntryPoint';
+import { ExcluirContatoEntryPoint } from './application/entryPoints/contato/ExcluirContatoEntryPoint';
+import { ListarContato } from './domain/implementations/useCases/tipoContato/listarContato/ListarContato';
+import { ListarContatoController } from './application/controllers/contato/ListarContatoController';
+import { ListarContatoEntryPoint } from './application/entryPoints/contato/ListarContatoEntryPoint';
 
 /* Repositórios */
 const clienteRepository = new ClienteRepository();
@@ -103,6 +119,7 @@ const telefoneRepository = new TelefoneRepository();
 const emailRepository = new EmailRepository();
 const contaRepository = new ContaRepository();
 const representanteRepository = new RepresentanteRepository();
+const tipoContatoRepository = new TipoContatoRepository();
 
 
 /* Cliente */
@@ -229,6 +246,28 @@ const listarRepresentantePorId = new ListarRepresentantePorId(representanteRepos
 const listarRepresentantePorIdController = new ListarRepresentantePorIdController(listarRepresentantePorId);
 const listarRepresentantePorIdEntryPoint = new ListarRepresentantePorIdEntryPoint(listarRepresentantePorIdController);
 
+// Contatos
+
+const criarContato = new CriarContato(tipoContatoRepository);
+const criarContatoController = new CriarContatoController(criarContato);
+const criarContatoEntryPoint = new CriarContatoEntryPoint(criarContatoController);
+
+const listarContatoPorId = new ListarContatoPorId(tipoContatoRepository);
+const listarContatoPorIdController = new ListarContatoPorIdController(listarContatoPorId);
+const listarContatoPorIdEntryPoint = new ListarContatoPorIdEntryPoint(listarContatoPorIdController);
+
+const editarContato = new EditarContato(tipoContatoRepository);
+const editarContatoController = new EditarContatoController(editarContato);
+const editarContatoEntryPoint = new EditarContatoEntryPoint(editarContatoController);
+
+const excluirContato = new ExcluirContato(tipoContatoRepository);
+const excluirContatoController = new ExcluirContatoController(excluirContato);
+const excluirContatoEntryPoint = new ExcluirContatoEntryPoint(excluirContatoController);
+
+const listarContato = new ListarContato(tipoContatoRepository);
+const listarContatoController = new ListarContatoController(listarContato);
+const listarContatoEntryPoint = new ListarContatoEntryPoint(listarContatoController);
+
 const entryPoints: EntryPoint[] = [
   criarClienteEntryPoint,
   editarclienteEntryPoint,
@@ -257,7 +296,12 @@ const entryPoints: EntryPoint[] = [
   editarRepresentanteEntryPoint,
   excluirRepresentanteEntryPoint,
   listarRepresentanteEntryPoint,
-  listarRepresentantePorIdEntryPoint
+  listarRepresentantePorIdEntryPoint,
+  listarContatoPorIdEntryPoint,
+  criarContatoEntryPoint,
+  editarContatoEntryPoint,
+  excluirContatoEntryPoint,
+  listarContatoEntryPoint
 ];
 
 const expressServer: ExpressServer = new ExpressServer();

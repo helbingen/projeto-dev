@@ -12,6 +12,7 @@ export interface ITelefone {
  * Identificador de pessoa vinculada ao telefone.
  */
   identificacao: string;
+  idContato: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

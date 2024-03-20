@@ -8,6 +8,10 @@ export default class TelefoneSequelizeModel extends Model<ITelefoneModel, ITelef
 
   is_principal!: boolean;
 
+  tipoContato!: string;
+
+  idContato!: string;
+
   static initialization(sequelize: Sequelize): void {
     this.init(
       {
@@ -23,6 +27,10 @@ export default class TelefoneSequelizeModel extends Model<ITelefoneModel, ITelef
           type: DataTypes.BOOLEAN,
           allowNull: false,
         },
+        idContato: {
+          type: DataTypes.UUID,
+          allowNull: false,
+        }
       },
       {
         sequelize,
@@ -39,6 +47,13 @@ export default class TelefoneSequelizeModel extends Model<ITelefoneModel, ITelef
         field: 'identificacao',
         name: 'identificacao',
       },
-    })
+    });
+    this.belongsTo(models.tipoContato, {
+      as: 'tipo_contato',
+      foreignKey: {
+        field: 'idContato',
+        name: 'idContato',
+      },
+    });
   }
 }
