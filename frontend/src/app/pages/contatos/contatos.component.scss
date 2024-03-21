@@ -1,0 +1,16 @@
+.contatos {
+  .botoes {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    .editar {
+      color: var(--secondary-color-300);
+      cursor: pointer;
+    }
+    .excluir {
+      color: var(--danger-color-300);
+      cursor: pointer;
+    }
+  }
+}

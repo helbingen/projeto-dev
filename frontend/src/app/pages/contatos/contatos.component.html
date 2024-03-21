@@ -1,0 +1,69 @@
+<div class="contatos ds-m-3 ds-pt-3">
+  <ds-button
+    [labelButton]="'Adicionar Contato'"
+    [tipoBotao]="'PRIMARY'"
+    (click)="this.isCriacao = !this.isCriacao"
+  ></ds-button>
+  <div class="ds-row ds-align-items-end ds-mt-2" *ngIf="isCriacao === true">
+    <div class="ds-col-8">
+      <ds-input-text
+        [labelInput]="'Descrição do contato'"
+        [control]="descricaoContatoForm"
+      ></ds-input-text>
+    </div>
+    <div class="ds-col-4 ds-d-flex ds-justify-content-end">
+      <ds-button
+        [labelButton]="'Salvar'"
+        [tipoBotao]="'PRIMARY'"
+        [isDesabilitado]="descricaoContatoForm.invalid"
+        (click)="adicionarContato()"
+      ></ds-button>
+    </div>
+  </div>
+
+  <div class="listagem-contatos ds-mt-2">
+    <h3>Contatos cadastrados</h3>
+    <div *ngFor="let contato of arrayContatos">
+      <div class="ds-row">
+        <div class="ds-col-8 ds-text-truncate">
+          {{ contato.descricaoContato }}
+        </div>
+        <div class="ds-col-4">
+          <div class="botoes">
+            <i class="ds-icon-edit editar" (click)="editarContato(contato)"></i>
+            <i
+              class="ds-icon-trash excluir"
+              (click)="excluirContato(contato.idContato)"
+            ></i>
+          </div>
+        </div>
+        <hr />
+      </div>
+      <div *ngIf="contato.idContato === idContatoEdicao">
+        <div class="ds-row ds-align-items-end ds-mt-2">
+          <div class="ds-col-8">
+            <ds-input-text
+              [labelInput]="'Descrição do contato'"
+              [control]="descricaoContatoForm"
+            ></ds-input-text>
+          </div>
+          <div class="ds-col-4 ds-d-flex ds-justify-content-end">
+            <div class="ds-mr-2">
+              <ds-button
+                [labelButton]="'Cancelar'"
+                [tipoBotao]="'SYSTEM'"
+                (click)="idContatoEdicao = ''"
+              ></ds-button>
+            </div>
+            <ds-button
+              [labelButton]="'Salvar'"
+              [tipoBotao]="'PRIMARY'"
+              [isDesabilitado]="descricaoContatoForm.invalid"
+              (click)="salvarEdicaoContato(contato)"
+            ></ds-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

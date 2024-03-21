@@ -17,7 +17,12 @@ const routes: Routes = [
         path: 'cliente',
         canActivate: [AuthService],
         loadChildren: () => import('../../pages/cliente/cliente.module').then((m) => m.ClienteModule),
-      }
+      },
+      {
+        path: 'contatos',
+        canActivate: [AuthService],
+        loadChildren: () => import('../../pages/contatos/contatos.module').then((m) => m.ContatosModule),
+      },
     ]
   }
 ];

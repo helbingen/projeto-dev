@@ -14,6 +14,7 @@ export class LogadoLayoutComponent {
     this.menus = [
       new SideNavItemRouterLink('Início', 'ds-icon-home', `/inicio`),
       new SideNavItemRouterLink('Cliente', 'ds-icon-people', `/cliente`),
+      new SideNavItemRouterLink('Contatos', 'ds-icon-file-check', `/contatos`),
     ];
   }
 
