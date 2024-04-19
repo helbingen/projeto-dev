@@ -2,6 +2,7 @@ import { IConta, IContaModel, IContaModelCreate } from '../../../protocols/model
 
 export class Conta implements IConta {
 
+  public idConta: string = '';
   public email: string = '';
   public nome: string = '';
   public senha: string = '';
@@ -10,7 +11,7 @@ export class Conta implements IConta {
 
   constructor(pValores?: IContaModel) {
     if (pValores === undefined) return;
-
+    this.idConta = pValores.idConta ?? this.idConta;
     this.email = pValores.email ?? this.email;
     this.nome = pValores.nome ?? this.nome;
     this.senha = pValores.senha ?? this.senha;
@@ -22,6 +23,7 @@ export class Conta implements IConta {
 
   public gerarObjCriar(): IContaModelCreate {
     return {
+      idConta: this.idConta,
       email: this.email,
       nome: this.nome,
       senha: this.senha,

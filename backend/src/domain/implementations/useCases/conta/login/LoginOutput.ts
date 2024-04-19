@@ -1,10 +1,7 @@
-import { Conta } from '../../../entity/objectValues/Conta';
+export default class LoginOutput {
+  public token: string;
 
-export class LoginOutput {
-  public email: string;
-  public senha: string;
-  constructor(pConta: Conta) {
-    this.email = pConta.email;
-    this.senha = pConta.senha;
+  constructor(pToken: string) {
+    this.token = pToken;
   }
 }

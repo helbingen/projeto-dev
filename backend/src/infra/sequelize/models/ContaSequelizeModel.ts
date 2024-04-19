@@ -11,9 +11,13 @@ export default class ContaSequelizeModel extends Model<IContaModel, IContaModelC
   static initialization(sequelize: Sequelize): void {
     this.init(
       {
+        idConta: {
+          type: DataTypes.UUID,
+          primaryKey: true,
+          allowNull: false,
+        },
         email: {
           type: DataTypes.TEXT,
-          primaryKey: true,
           allowNull: false,
         },
         nome: {
@@ -30,7 +34,6 @@ export default class ContaSequelizeModel extends Model<IContaModel, IContaModelC
         freezeTableName: true,
         tableName: 'conta',
         underscored: false,
-        indexes: [{ fields: ['email'] }],
       },
     );
   }

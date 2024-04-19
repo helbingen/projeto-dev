@@ -1,3 +1,4 @@
+import { uuidv4, uuidv7 } from 'uuidv7';
 import UnitOfWork from '../../../../protocols/models/entity/UnitOfWork';
 import { IContaRepository } from '../../../../protocols/repository/contaRepository';
 import { Conta } from '../../../entity/objectValues/Conta';
@@ -11,6 +12,7 @@ export class CriarConta {
 
   public async execute(pUnitOfWork: UnitOfWork, pInputConta: CriarContaInput): Promise<CriarContaOutput | boolean> {
     const conta = new Conta({
+      idConta: uuidv7(),
       email: pInputConta.email,
       nome: pInputConta.nome,
       senha: senhaUtil.criptografarSenha(pInputConta.senha),

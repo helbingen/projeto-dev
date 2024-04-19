@@ -1,5 +1,8 @@
 
 export interface IConta {
+
+  idConta: string;
+
   /**
    * E-mail do usuário do sistema.
    */

@@ -6,4 +6,5 @@ export enum ErrorCodeEnum {
   informacaoNaoEncontrada = 'INFORMACAONAOENCONTRADA',
   informacaoInvalida = 'INFORMACAOINVALIDA',
   acaoNegada = 'ACAONEGADA',
+  naoAutenticado = 'NAOAUTENTICADO',
 }

@@ -110,6 +110,14 @@ import { ExcluirContatoEntryPoint } from './application/entryPoints/contato/Excl
 import { ListarContato } from './domain/implementations/useCases/tipoContato/listarContato/ListarContato';
 import { ListarContatoController } from './application/controllers/contato/ListarContatoController';
 import { ListarContatoEntryPoint } from './application/entryPoints/contato/ListarContatoEntryPoint';
+import AutenticadoGuard from './application/guards/AutenticadoGuard';
+import JwtServices from './domain/implementations/services/Jwt.service';
+
+
+
+const jwtServices = new JwtServices;
+
+const autenticadoGuard = new AutenticadoGuard(jwtServices)
 
 /* Repositórios */
 const clienteRepository = new ClienteRepository();
@@ -210,15 +218,15 @@ const listarEmailPorIdEntryPoint = new ListarEmailPorIdEntryPoint(listarEmailPor
 
 const criarConta = new CriarConta(contaRepository);
 const criarContaController = new CriarContaController(criarConta);
-const criarContaEntryPoint = new CriarContaEntryPoint(criarContaController);
+const criarContaEntryPoint = new CriarContaEntryPoint(criarContaController, []);
 
-const login = new Login(contaRepository);
+const login = new Login(contaRepository, jwtServices);
 const loginController = new LoginController(login);
-const loginEntryPoint = new LoginEntryPoint(loginController);
+const loginEntryPoint = new LoginEntryPoint(loginController, []);
 
 const editarConta = new EditarConta(contaRepository);
 const editarContaController = new EditarContaController(editarConta);
-const editarContaEntryPoint = new EditarContaEntryPoint(editarContaController);
+const editarContaEntryPoint = new EditarContaEntryPoint(editarContaController, [autenticadoGuard]);
 
 const listarConta = new ListarConta(contaRepository);
 const listarContaController = new ListarContaController(listarConta);

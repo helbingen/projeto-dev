@@ -61,7 +61,6 @@ export class ContatosComponent {
     modalRef.componentInstance.labelBotao = 'Excluir';
     modalRef.componentInstance.tipoBotaoConfirmarAcao = 'DANGER';
     modalRef.componentInstance.confirmarAcao.subscribe(async (response: boolean) => {
-      console.log('teste');
       try {
         await this.contatoService.excluirContato(pIdContato);
         this.toasterService.showSuccess('Contato excluído com sucesso!');

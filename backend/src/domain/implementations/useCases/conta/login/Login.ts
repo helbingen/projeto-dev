@@ -1,11 +1,15 @@
 import { IContaRepository } from '../../../../protocols/repository/contaRepository';
+import { ITokenService } from '../../../../protocols/services/token.service';
 import { Conta } from '../../../entity/objectValues/Conta';
 import senhaUtil from '../../../utils/senhaUtil';
 import { LoginInput } from './LoginInput';
-import { LoginOutput } from './LoginOutput';
+import LoginOutput from './LoginOutput';
 
 export class Login {
-  constructor(private contaRepository: IContaRepository) {
+  constructor(
+    private contaRepository: IContaRepository,
+    private tokenService: ITokenService,
+  ) {
   }
 
   public async execute(pInputConta: LoginInput): Promise<LoginOutput | null> {
@@ -17,7 +21,8 @@ export class Login {
     if (isContaExist) {
       const contaDb = await this.contaRepository.verificaSenhaLogin(conta.email, conta.senha);
       if (contaDb) {
-        return new LoginOutput(contaDb);
+        const token = this.tokenService.criarToken(contaDb);
+        return new LoginOutput(token);
       }
       return null;
     }
